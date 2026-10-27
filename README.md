@@ -23,7 +23,7 @@ serve for the one thing a simulator cannot provide: false alarms and plausibilit
 It is the biogas counterpart of the outage studies in this portfolio
 ([PV outage classification](https://github.com/kwwaleszczynski-del/pv-outage-classifier),
 [wind turbine downtime and availability](https://github.com/kwwaleszczynski-del/wind-downtime-availability));
-a sibling project in preparation, `pl-biogas-flex`, looks at the same kind of plant from the power market
+the sibling project [pl-biogas-flex](https://github.com/kwwaleszczynski-del/pl-biogas-flex) looks at the same kind of plant from the power market
 side.
 
 ## Key results
@@ -342,12 +342,13 @@ so the data can neither confirm nor refute the assumption.
 
 ## Possible version 2 (not built)
 
-Demand-driven feeding for a flexible CHP: when a plant shifts its gas production to the high-price hours
-(the subject of the sibling project `pl-biogas-flex`, in preparation), the feed varies
-day to day by design. Every yield-based detector here assumes a steady recipe; with flexible feeding the
-expected gas must come from a model of the feed response, which is exactly what the EKF twin provides. A
-v2 would replay the flexible feeding schedules from that project through this twin and check which methods
-keep their false-alarm rate.
+Demand-driven feeding for a flexible CHP: the sibling project
+[pl-biogas-flex](https://github.com/kwwaleszczynski-del/pl-biogas-flex) keeps the gas production constant and
+shifts only the power output, with extra engine capacity and gas storage. When a plant also shifts its gas
+production towards the high-price hours, the feed varies day to day by design. Every yield-based detector here
+assumes a steady recipe; with flexible feeding the expected gas must come from a model of the feed response, which
+is exactly what the EKF twin provides. A v2 would derive feeding schedules from that project's dispatch, replay them
+through this twin and check which methods keep their false-alarm rate.
 
 ## Run it
 
