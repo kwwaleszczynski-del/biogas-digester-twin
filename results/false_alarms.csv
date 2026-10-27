@@ -1,0 +1,3433 @@
+method,kind,seed,missing,episodes,days
+FOS/TAC > 0.3,normal,2001,0.1,0,330
+FOS/TAC +30 %,normal,2001,0.1,0,330
+EWMA yield,normal,2001,0.1,3,330
+CUSUM yield,normal,2001,0.1,10,330
+PCA T2/SPE,normal,2001,0.1,1,330
+Expert rules,normal,2001,0.1,3,330
+Gradient boosting,normal,2001,0.1,0,330
+EKF twin,normal,2001,0.1,0,330
+FOS/TAC > 0.3,normal,2002,0.1,0,330
+FOS/TAC +30 %,normal,2002,0.1,0,330
+EWMA yield,normal,2002,0.1,1,330
+CUSUM yield,normal,2002,0.1,2,330
+PCA T2/SPE,normal,2002,0.1,1,330
+Expert rules,normal,2002,0.1,2,330
+Gradient boosting,normal,2002,0.1,0,330
+EKF twin,normal,2002,0.1,0,330
+FOS/TAC > 0.3,normal,2003,0.1,0,330
+FOS/TAC +30 %,normal,2003,0.1,0,330
+EWMA yield,normal,2003,0.1,7,330
+CUSUM yield,normal,2003,0.1,11,330
+PCA T2/SPE,normal,2003,0.1,2,330
+Expert rules,normal,2003,0.1,7,330
+Gradient boosting,normal,2003,0.1,1,330
+EKF twin,normal,2003,0.1,1,330
+FOS/TAC > 0.3,overload,100,0.1,0,56
+FOS/TAC +30 %,overload,100,0.1,1,56
+EWMA yield,overload,100,0.1,2,56
+CUSUM yield,overload,100,0.1,4,56
+PCA T2/SPE,overload,100,0.1,0,56
+Expert rules,overload,100,0.1,1,56
+Gradient boosting,overload,100,0.1,1,56
+EKF twin,overload,100,0.1,1,56
+FOS/TAC > 0.3,overload,101,0.1,0,55
+FOS/TAC +30 %,overload,101,0.1,0,55
+EWMA yield,overload,101,0.1,1,55
+CUSUM yield,overload,101,0.1,1,55
+PCA T2/SPE,overload,101,0.1,0,55
+Expert rules,overload,101,0.1,1,55
+Gradient boosting,overload,101,0.1,1,55
+EKF twin,overload,101,0.1,0,55
+FOS/TAC > 0.3,overload,102,0.1,0,59
+FOS/TAC +30 %,overload,102,0.1,0,59
+EWMA yield,overload,102,0.1,0,59
+CUSUM yield,overload,102,0.1,2,59
+PCA T2/SPE,overload,102,0.1,0,59
+Expert rules,overload,102,0.1,0,59
+Gradient boosting,overload,102,0.1,0,59
+EKF twin,overload,102,0.1,0,59
+FOS/TAC > 0.3,overload,103,0.1,0,57
+FOS/TAC +30 %,overload,103,0.1,0,57
+EWMA yield,overload,103,0.1,2,57
+CUSUM yield,overload,103,0.1,4,57
+PCA T2/SPE,overload,103,0.1,0,57
+Expert rules,overload,103,0.1,2,57
+Gradient boosting,overload,103,0.1,0,57
+EKF twin,overload,103,0.1,0,57
+FOS/TAC > 0.3,overload,104,0.1,0,55
+FOS/TAC +30 %,overload,104,0.1,0,55
+EWMA yield,overload,104,0.1,3,55
+CUSUM yield,overload,104,0.1,4,55
+PCA T2/SPE,overload,104,0.1,0,55
+Expert rules,overload,104,0.1,3,55
+Gradient boosting,overload,104,0.1,0,55
+EKF twin,overload,104,0.1,0,55
+FOS/TAC > 0.3,overload,105,0.1,0,61
+FOS/TAC +30 %,overload,105,0.1,0,61
+EWMA yield,overload,105,0.1,0,61
+CUSUM yield,overload,105,0.1,0,61
+PCA T2/SPE,overload,105,0.1,0,61
+Expert rules,overload,105,0.1,0,61
+Gradient boosting,overload,105,0.1,0,61
+EKF twin,overload,105,0.1,1,61
+FOS/TAC > 0.3,overload,106,0.1,0,60
+FOS/TAC +30 %,overload,106,0.1,0,60
+EWMA yield,overload,106,0.1,1,60
+CUSUM yield,overload,106,0.1,0,60
+PCA T2/SPE,overload,106,0.1,0,60
+Expert rules,overload,106,0.1,1,60
+Gradient boosting,overload,106,0.1,0,60
+EKF twin,overload,106,0.1,0,60
+FOS/TAC > 0.3,overload,107,0.1,0,59
+FOS/TAC +30 %,overload,107,0.1,0,59
+EWMA yield,overload,107,0.1,0,59
+CUSUM yield,overload,107,0.1,1,59
+PCA T2/SPE,overload,107,0.1,0,59
+Expert rules,overload,107,0.1,0,59
+Gradient boosting,overload,107,0.1,0,59
+EKF twin,overload,107,0.1,0,59
+FOS/TAC > 0.3,overload,108,0.1,0,55
+FOS/TAC +30 %,overload,108,0.1,0,55
+EWMA yield,overload,108,0.1,2,55
+CUSUM yield,overload,108,0.1,3,55
+PCA T2/SPE,overload,108,0.1,1,55
+Expert rules,overload,108,0.1,2,55
+Gradient boosting,overload,108,0.1,0,55
+EKF twin,overload,108,0.1,0,55
+FOS/TAC > 0.3,overload,109,0.1,0,56
+FOS/TAC +30 %,overload,109,0.1,0,56
+EWMA yield,overload,109,0.1,2,56
+CUSUM yield,overload,109,0.1,2,56
+PCA T2/SPE,overload,109,0.1,0,56
+Expert rules,overload,109,0.1,2,56
+Gradient boosting,overload,109,0.1,0,56
+EKF twin,overload,109,0.1,0,56
+FOS/TAC > 0.3,overload,110,0.1,0,57
+FOS/TAC +30 %,overload,110,0.1,0,57
+EWMA yield,overload,110,0.1,0,57
+CUSUM yield,overload,110,0.1,2,57
+PCA T2/SPE,overload,110,0.1,2,57
+Expert rules,overload,110,0.1,0,57
+Gradient boosting,overload,110,0.1,0,57
+EKF twin,overload,110,0.1,0,57
+FOS/TAC > 0.3,overload,111,0.1,0,56
+FOS/TAC +30 %,overload,111,0.1,0,56
+EWMA yield,overload,111,0.1,0,56
+CUSUM yield,overload,111,0.1,0,56
+PCA T2/SPE,overload,111,0.1,0,56
+Expert rules,overload,111,0.1,0,56
+Gradient boosting,overload,111,0.1,0,56
+EKF twin,overload,111,0.1,1,56
+FOS/TAC > 0.3,overload,112,0.1,0,55
+FOS/TAC +30 %,overload,112,0.1,0,55
+EWMA yield,overload,112,0.1,1,55
+CUSUM yield,overload,112,0.1,3,55
+PCA T2/SPE,overload,112,0.1,0,55
+Expert rules,overload,112,0.1,1,55
+Gradient boosting,overload,112,0.1,0,55
+EKF twin,overload,112,0.1,1,55
+FOS/TAC > 0.3,overload,113,0.1,0,60
+FOS/TAC +30 %,overload,113,0.1,0,60
+EWMA yield,overload,113,0.1,2,60
+CUSUM yield,overload,113,0.1,2,60
+PCA T2/SPE,overload,113,0.1,0,60
+Expert rules,overload,113,0.1,2,60
+Gradient boosting,overload,113,0.1,0,60
+EKF twin,overload,113,0.1,1,60
+FOS/TAC > 0.3,overload,114,0.1,0,56
+FOS/TAC +30 %,overload,114,0.1,0,56
+EWMA yield,overload,114,0.1,1,56
+CUSUM yield,overload,114,0.1,2,56
+PCA T2/SPE,overload,114,0.1,0,56
+Expert rules,overload,114,0.1,1,56
+Gradient boosting,overload,114,0.1,2,56
+EKF twin,overload,114,0.1,0,56
+FOS/TAC > 0.3,overload,115,0.1,0,61
+FOS/TAC +30 %,overload,115,0.1,0,61
+EWMA yield,overload,115,0.1,1,61
+CUSUM yield,overload,115,0.1,1,61
+PCA T2/SPE,overload,115,0.1,0,61
+Expert rules,overload,115,0.1,1,61
+Gradient boosting,overload,115,0.1,1,61
+EKF twin,overload,115,0.1,1,61
+FOS/TAC > 0.3,overload,116,0.1,0,56
+FOS/TAC +30 %,overload,116,0.1,0,56
+EWMA yield,overload,116,0.1,1,56
+CUSUM yield,overload,116,0.1,2,56
+PCA T2/SPE,overload,116,0.1,0,56
+Expert rules,overload,116,0.1,1,56
+Gradient boosting,overload,116,0.1,0,56
+EKF twin,overload,116,0.1,0,56
+FOS/TAC > 0.3,overload,117,0.1,0,61
+FOS/TAC +30 %,overload,117,0.1,0,61
+EWMA yield,overload,117,0.1,1,61
+CUSUM yield,overload,117,0.1,1,61
+PCA T2/SPE,overload,117,0.1,0,61
+Expert rules,overload,117,0.1,1,61
+Gradient boosting,overload,117,0.1,0,61
+EKF twin,overload,117,0.1,0,61
+FOS/TAC > 0.3,overload,118,0.1,0,61
+FOS/TAC +30 %,overload,118,0.1,0,61
+EWMA yield,overload,118,0.1,0,61
+CUSUM yield,overload,118,0.1,0,61
+PCA T2/SPE,overload,118,0.1,0,61
+Expert rules,overload,118,0.1,0,61
+Gradient boosting,overload,118,0.1,0,61
+EKF twin,overload,118,0.1,1,61
+FOS/TAC > 0.3,overload,119,0.1,0,58
+FOS/TAC +30 %,overload,119,0.1,0,58
+EWMA yield,overload,119,0.1,1,58
+CUSUM yield,overload,119,0.1,1,58
+PCA T2/SPE,overload,119,0.1,0,58
+Expert rules,overload,119,0.1,1,58
+Gradient boosting,overload,119,0.1,0,58
+EKF twin,overload,119,0.1,0,58
+FOS/TAC > 0.3,acidification,100,0.1,0,57
+FOS/TAC +30 %,acidification,100,0.1,1,57
+EWMA yield,acidification,100,0.1,2,57
+CUSUM yield,acidification,100,0.1,4,57
+PCA T2/SPE,acidification,100,0.1,0,57
+Expert rules,acidification,100,0.1,1,57
+Gradient boosting,acidification,100,0.1,0,57
+EKF twin,acidification,100,0.1,1,57
+FOS/TAC > 0.3,acidification,101,0.1,0,61
+FOS/TAC +30 %,acidification,101,0.1,0,61
+EWMA yield,acidification,101,0.1,1,61
+CUSUM yield,acidification,101,0.1,2,61
+PCA T2/SPE,acidification,101,0.1,0,61
+Expert rules,acidification,101,0.1,1,61
+Gradient boosting,acidification,101,0.1,0,61
+EKF twin,acidification,101,0.1,0,61
+FOS/TAC > 0.3,acidification,102,0.1,0,61
+FOS/TAC +30 %,acidification,102,0.1,0,61
+EWMA yield,acidification,102,0.1,0,61
+CUSUM yield,acidification,102,0.1,0,61
+PCA T2/SPE,acidification,102,0.1,0,61
+Expert rules,acidification,102,0.1,0,61
+Gradient boosting,acidification,102,0.1,0,61
+EKF twin,acidification,102,0.1,0,61
+FOS/TAC > 0.3,acidification,103,0.1,0,60
+FOS/TAC +30 %,acidification,103,0.1,0,60
+EWMA yield,acidification,103,0.1,2,60
+CUSUM yield,acidification,103,0.1,4,60
+PCA T2/SPE,acidification,103,0.1,0,60
+Expert rules,acidification,103,0.1,2,60
+Gradient boosting,acidification,103,0.1,0,60
+EKF twin,acidification,103,0.1,0,60
+FOS/TAC > 0.3,acidification,104,0.1,0,55
+FOS/TAC +30 %,acidification,104,0.1,0,55
+EWMA yield,acidification,104,0.1,1,55
+CUSUM yield,acidification,104,0.1,3,55
+PCA T2/SPE,acidification,104,0.1,0,55
+Expert rules,acidification,104,0.1,1,55
+Gradient boosting,acidification,104,0.1,0,55
+EKF twin,acidification,104,0.1,0,55
+FOS/TAC > 0.3,acidification,105,0.1,0,60
+FOS/TAC +30 %,acidification,105,0.1,0,60
+EWMA yield,acidification,105,0.1,2,60
+CUSUM yield,acidification,105,0.1,1,60
+PCA T2/SPE,acidification,105,0.1,1,60
+Expert rules,acidification,105,0.1,2,60
+Gradient boosting,acidification,105,0.1,0,60
+EKF twin,acidification,105,0.1,1,60
+FOS/TAC > 0.3,acidification,106,0.1,0,55
+FOS/TAC +30 %,acidification,106,0.1,0,55
+EWMA yield,acidification,106,0.1,0,55
+CUSUM yield,acidification,106,0.1,0,55
+PCA T2/SPE,acidification,106,0.1,0,55
+Expert rules,acidification,106,0.1,0,55
+Gradient boosting,acidification,106,0.1,0,55
+EKF twin,acidification,106,0.1,0,55
+FOS/TAC > 0.3,acidification,107,0.1,0,55
+FOS/TAC +30 %,acidification,107,0.1,0,55
+EWMA yield,acidification,107,0.1,0,55
+CUSUM yield,acidification,107,0.1,1,55
+PCA T2/SPE,acidification,107,0.1,0,55
+Expert rules,acidification,107,0.1,0,55
+Gradient boosting,acidification,107,0.1,0,55
+EKF twin,acidification,107,0.1,0,55
+FOS/TAC > 0.3,acidification,108,0.1,0,61
+FOS/TAC +30 %,acidification,108,0.1,0,61
+EWMA yield,acidification,108,0.1,1,61
+CUSUM yield,acidification,108,0.1,1,61
+PCA T2/SPE,acidification,108,0.1,0,61
+Expert rules,acidification,108,0.1,1,61
+Gradient boosting,acidification,108,0.1,0,61
+EKF twin,acidification,108,0.1,0,61
+FOS/TAC > 0.3,acidification,109,0.1,0,56
+FOS/TAC +30 %,acidification,109,0.1,0,56
+EWMA yield,acidification,109,0.1,1,56
+CUSUM yield,acidification,109,0.1,3,56
+PCA T2/SPE,acidification,109,0.1,0,56
+Expert rules,acidification,109,0.1,1,56
+Gradient boosting,acidification,109,0.1,2,56
+EKF twin,acidification,109,0.1,1,56
+FOS/TAC > 0.3,acidification,110,0.1,0,56
+FOS/TAC +30 %,acidification,110,0.1,0,56
+EWMA yield,acidification,110,0.1,1,56
+CUSUM yield,acidification,110,0.1,3,56
+PCA T2/SPE,acidification,110,0.1,1,56
+Expert rules,acidification,110,0.1,1,56
+Gradient boosting,acidification,110,0.1,0,56
+EKF twin,acidification,110,0.1,0,56
+FOS/TAC > 0.3,acidification,111,0.1,0,57
+FOS/TAC +30 %,acidification,111,0.1,0,57
+EWMA yield,acidification,111,0.1,1,57
+CUSUM yield,acidification,111,0.1,2,57
+PCA T2/SPE,acidification,111,0.1,0,57
+Expert rules,acidification,111,0.1,1,57
+Gradient boosting,acidification,111,0.1,0,57
+EKF twin,acidification,111,0.1,0,57
+FOS/TAC > 0.3,acidification,112,0.1,0,55
+FOS/TAC +30 %,acidification,112,0.1,0,55
+EWMA yield,acidification,112,0.1,2,55
+CUSUM yield,acidification,112,0.1,3,55
+PCA T2/SPE,acidification,112,0.1,0,55
+Expert rules,acidification,112,0.1,2,55
+Gradient boosting,acidification,112,0.1,0,55
+EKF twin,acidification,112,0.1,1,55
+FOS/TAC > 0.3,acidification,113,0.1,0,57
+FOS/TAC +30 %,acidification,113,0.1,0,57
+EWMA yield,acidification,113,0.1,2,57
+CUSUM yield,acidification,113,0.1,2,57
+PCA T2/SPE,acidification,113,0.1,0,57
+Expert rules,acidification,113,0.1,2,57
+Gradient boosting,acidification,113,0.1,0,57
+EKF twin,acidification,113,0.1,1,57
+FOS/TAC > 0.3,acidification,114,0.1,0,57
+FOS/TAC +30 %,acidification,114,0.1,0,57
+EWMA yield,acidification,114,0.1,1,57
+CUSUM yield,acidification,114,0.1,1,57
+PCA T2/SPE,acidification,114,0.1,0,57
+Expert rules,acidification,114,0.1,1,57
+Gradient boosting,acidification,114,0.1,1,57
+EKF twin,acidification,114,0.1,0,57
+FOS/TAC > 0.3,acidification,115,0.1,0,59
+FOS/TAC +30 %,acidification,115,0.1,0,59
+EWMA yield,acidification,115,0.1,1,59
+CUSUM yield,acidification,115,0.1,3,59
+PCA T2/SPE,acidification,115,0.1,0,59
+Expert rules,acidification,115,0.1,1,59
+Gradient boosting,acidification,115,0.1,0,59
+EKF twin,acidification,115,0.1,0,59
+FOS/TAC > 0.3,acidification,116,0.1,0,60
+FOS/TAC +30 %,acidification,116,0.1,0,60
+EWMA yield,acidification,116,0.1,1,60
+CUSUM yield,acidification,116,0.1,2,60
+PCA T2/SPE,acidification,116,0.1,0,60
+Expert rules,acidification,116,0.1,1,60
+Gradient boosting,acidification,116,0.1,0,60
+EKF twin,acidification,116,0.1,0,60
+FOS/TAC > 0.3,acidification,117,0.1,0,56
+FOS/TAC +30 %,acidification,117,0.1,0,56
+EWMA yield,acidification,117,0.1,3,56
+CUSUM yield,acidification,117,0.1,3,56
+PCA T2/SPE,acidification,117,0.1,0,56
+Expert rules,acidification,117,0.1,3,56
+Gradient boosting,acidification,117,0.1,2,56
+EKF twin,acidification,117,0.1,0,56
+FOS/TAC > 0.3,acidification,118,0.1,0,59
+FOS/TAC +30 %,acidification,118,0.1,0,59
+EWMA yield,acidification,118,0.1,1,59
+CUSUM yield,acidification,118,0.1,1,59
+PCA T2/SPE,acidification,118,0.1,0,59
+Expert rules,acidification,118,0.1,1,59
+Gradient boosting,acidification,118,0.1,0,59
+EKF twin,acidification,118,0.1,0,59
+FOS/TAC > 0.3,acidification,119,0.1,0,59
+FOS/TAC +30 %,acidification,119,0.1,0,59
+EWMA yield,acidification,119,0.1,0,59
+CUSUM yield,acidification,119,0.1,0,59
+PCA T2/SPE,acidification,119,0.1,0,59
+Expert rules,acidification,119,0.1,0,59
+Gradient boosting,acidification,119,0.1,0,59
+EKF twin,acidification,119,0.1,0,59
+FOS/TAC > 0.3,ammonia,100,0.1,0,59
+FOS/TAC +30 %,ammonia,100,0.1,1,59
+EWMA yield,ammonia,100,0.1,1,59
+CUSUM yield,ammonia,100,0.1,2,59
+PCA T2/SPE,ammonia,100,0.1,0,59
+Expert rules,ammonia,100,0.1,0,59
+Gradient boosting,ammonia,100,0.1,1,59
+EKF twin,ammonia,100,0.1,1,59
+FOS/TAC > 0.3,ammonia,101,0.1,0,58
+FOS/TAC +30 %,ammonia,101,0.1,0,58
+EWMA yield,ammonia,101,0.1,1,58
+CUSUM yield,ammonia,101,0.1,2,58
+PCA T2/SPE,ammonia,101,0.1,0,58
+Expert rules,ammonia,101,0.1,1,58
+Gradient boosting,ammonia,101,0.1,0,58
+EKF twin,ammonia,101,0.1,0,58
+FOS/TAC > 0.3,ammonia,102,0.1,0,59
+FOS/TAC +30 %,ammonia,102,0.1,0,59
+EWMA yield,ammonia,102,0.1,1,59
+CUSUM yield,ammonia,102,0.1,2,59
+PCA T2/SPE,ammonia,102,0.1,0,59
+Expert rules,ammonia,102,0.1,1,59
+Gradient boosting,ammonia,102,0.1,0,59
+EKF twin,ammonia,102,0.1,0,59
+FOS/TAC > 0.3,ammonia,103,0.1,0,55
+FOS/TAC +30 %,ammonia,103,0.1,0,55
+EWMA yield,ammonia,103,0.1,1,55
+CUSUM yield,ammonia,103,0.1,1,55
+PCA T2/SPE,ammonia,103,0.1,0,55
+Expert rules,ammonia,103,0.1,1,55
+Gradient boosting,ammonia,103,0.1,0,55
+EKF twin,ammonia,103,0.1,0,55
+FOS/TAC > 0.3,ammonia,104,0.1,0,55
+FOS/TAC +30 %,ammonia,104,0.1,0,55
+EWMA yield,ammonia,104,0.1,1,55
+CUSUM yield,ammonia,104,0.1,3,55
+PCA T2/SPE,ammonia,104,0.1,0,55
+Expert rules,ammonia,104,0.1,1,55
+Gradient boosting,ammonia,104,0.1,0,55
+EKF twin,ammonia,104,0.1,0,55
+FOS/TAC > 0.3,ammonia,105,0.1,0,60
+FOS/TAC +30 %,ammonia,105,0.1,1,60
+EWMA yield,ammonia,105,0.1,1,60
+CUSUM yield,ammonia,105,0.1,2,60
+PCA T2/SPE,ammonia,105,0.1,0,60
+Expert rules,ammonia,105,0.1,1,60
+Gradient boosting,ammonia,105,0.1,0,60
+EKF twin,ammonia,105,0.1,1,60
+FOS/TAC > 0.3,ammonia,106,0.1,0,61
+FOS/TAC +30 %,ammonia,106,0.1,0,61
+EWMA yield,ammonia,106,0.1,1,61
+CUSUM yield,ammonia,106,0.1,2,61
+PCA T2/SPE,ammonia,106,0.1,0,61
+Expert rules,ammonia,106,0.1,1,61
+Gradient boosting,ammonia,106,0.1,0,61
+EKF twin,ammonia,106,0.1,0,61
+FOS/TAC > 0.3,ammonia,107,0.1,0,58
+FOS/TAC +30 %,ammonia,107,0.1,0,58
+EWMA yield,ammonia,107,0.1,1,58
+CUSUM yield,ammonia,107,0.1,2,58
+PCA T2/SPE,ammonia,107,0.1,0,58
+Expert rules,ammonia,107,0.1,1,58
+Gradient boosting,ammonia,107,0.1,0,58
+EKF twin,ammonia,107,0.1,0,58
+FOS/TAC > 0.3,ammonia,108,0.1,0,56
+FOS/TAC +30 %,ammonia,108,0.1,0,56
+EWMA yield,ammonia,108,0.1,0,56
+CUSUM yield,ammonia,108,0.1,2,56
+PCA T2/SPE,ammonia,108,0.1,0,56
+Expert rules,ammonia,108,0.1,0,56
+Gradient boosting,ammonia,108,0.1,0,56
+EKF twin,ammonia,108,0.1,0,56
+FOS/TAC > 0.3,ammonia,109,0.1,0,58
+FOS/TAC +30 %,ammonia,109,0.1,0,58
+EWMA yield,ammonia,109,0.1,2,58
+CUSUM yield,ammonia,109,0.1,2,58
+PCA T2/SPE,ammonia,109,0.1,0,58
+Expert rules,ammonia,109,0.1,2,58
+Gradient boosting,ammonia,109,0.1,0,58
+EKF twin,ammonia,109,0.1,0,58
+FOS/TAC > 0.3,ammonia,110,0.1,0,58
+FOS/TAC +30 %,ammonia,110,0.1,0,58
+EWMA yield,ammonia,110,0.1,0,58
+CUSUM yield,ammonia,110,0.1,3,58
+PCA T2/SPE,ammonia,110,0.1,1,58
+Expert rules,ammonia,110,0.1,0,58
+Gradient boosting,ammonia,110,0.1,0,58
+EKF twin,ammonia,110,0.1,0,58
+FOS/TAC > 0.3,ammonia,111,0.1,0,59
+FOS/TAC +30 %,ammonia,111,0.1,0,59
+EWMA yield,ammonia,111,0.1,0,59
+CUSUM yield,ammonia,111,0.1,0,59
+PCA T2/SPE,ammonia,111,0.1,0,59
+Expert rules,ammonia,111,0.1,0,59
+Gradient boosting,ammonia,111,0.1,0,59
+EKF twin,ammonia,111,0.1,1,59
+FOS/TAC > 0.3,ammonia,112,0.1,0,60
+FOS/TAC +30 %,ammonia,112,0.1,0,60
+EWMA yield,ammonia,112,0.1,2,60
+CUSUM yield,ammonia,112,0.1,2,60
+PCA T2/SPE,ammonia,112,0.1,0,60
+Expert rules,ammonia,112,0.1,2,60
+Gradient boosting,ammonia,112,0.1,0,60
+EKF twin,ammonia,112,0.1,1,60
+FOS/TAC > 0.3,ammonia,113,0.1,0,57
+FOS/TAC +30 %,ammonia,113,0.1,1,57
+EWMA yield,ammonia,113,0.1,2,57
+CUSUM yield,ammonia,113,0.1,2,57
+PCA T2/SPE,ammonia,113,0.1,0,57
+Expert rules,ammonia,113,0.1,2,57
+Gradient boosting,ammonia,113,0.1,0,57
+EKF twin,ammonia,113,0.1,1,57
+FOS/TAC > 0.3,ammonia,114,0.1,0,60
+FOS/TAC +30 %,ammonia,114,0.1,0,60
+EWMA yield,ammonia,114,0.1,1,60
+CUSUM yield,ammonia,114,0.1,1,60
+PCA T2/SPE,ammonia,114,0.1,0,60
+Expert rules,ammonia,114,0.1,1,60
+Gradient boosting,ammonia,114,0.1,1,60
+EKF twin,ammonia,114,0.1,0,60
+FOS/TAC > 0.3,ammonia,115,0.1,0,57
+FOS/TAC +30 %,ammonia,115,0.1,0,57
+EWMA yield,ammonia,115,0.1,2,57
+CUSUM yield,ammonia,115,0.1,1,57
+PCA T2/SPE,ammonia,115,0.1,0,57
+Expert rules,ammonia,115,0.1,2,57
+Gradient boosting,ammonia,115,0.1,0,57
+EKF twin,ammonia,115,0.1,0,57
+FOS/TAC > 0.3,ammonia,116,0.1,0,58
+FOS/TAC +30 %,ammonia,116,0.1,0,58
+EWMA yield,ammonia,116,0.1,1,58
+CUSUM yield,ammonia,116,0.1,2,58
+PCA T2/SPE,ammonia,116,0.1,0,58
+Expert rules,ammonia,116,0.1,1,58
+Gradient boosting,ammonia,116,0.1,0,58
+EKF twin,ammonia,116,0.1,0,58
+FOS/TAC > 0.3,ammonia,117,0.1,0,58
+FOS/TAC +30 %,ammonia,117,0.1,0,58
+EWMA yield,ammonia,117,0.1,1,58
+CUSUM yield,ammonia,117,0.1,1,58
+PCA T2/SPE,ammonia,117,0.1,0,58
+Expert rules,ammonia,117,0.1,1,58
+Gradient boosting,ammonia,117,0.1,1,58
+EKF twin,ammonia,117,0.1,1,58
+FOS/TAC > 0.3,ammonia,118,0.1,0,55
+FOS/TAC +30 %,ammonia,118,0.1,0,55
+EWMA yield,ammonia,118,0.1,0,55
+CUSUM yield,ammonia,118,0.1,0,55
+PCA T2/SPE,ammonia,118,0.1,0,55
+Expert rules,ammonia,118,0.1,0,55
+Gradient boosting,ammonia,118,0.1,0,55
+EKF twin,ammonia,118,0.1,0,55
+FOS/TAC > 0.3,ammonia,119,0.1,0,61
+FOS/TAC +30 %,ammonia,119,0.1,0,61
+EWMA yield,ammonia,119,0.1,0,61
+CUSUM yield,ammonia,119,0.1,0,61
+PCA T2/SPE,ammonia,119,0.1,0,61
+Expert rules,ammonia,119,0.1,0,61
+Gradient boosting,ammonia,119,0.1,0,61
+EKF twin,ammonia,119,0.1,0,61
+FOS/TAC > 0.3,temperature,100,0.1,0,55
+FOS/TAC +30 %,temperature,100,0.1,1,55
+EWMA yield,temperature,100,0.1,1,55
+CUSUM yield,temperature,100,0.1,3,55
+PCA T2/SPE,temperature,100,0.1,0,55
+Expert rules,temperature,100,0.1,1,55
+Gradient boosting,temperature,100,0.1,0,55
+EKF twin,temperature,100,0.1,1,55
+FOS/TAC > 0.3,temperature,101,0.1,0,56
+FOS/TAC +30 %,temperature,101,0.1,0,56
+EWMA yield,temperature,101,0.1,1,56
+CUSUM yield,temperature,101,0.1,2,56
+PCA T2/SPE,temperature,101,0.1,0,56
+Expert rules,temperature,101,0.1,1,56
+Gradient boosting,temperature,101,0.1,0,56
+EKF twin,temperature,101,0.1,0,56
+FOS/TAC > 0.3,temperature,102,0.1,0,60
+FOS/TAC +30 %,temperature,102,0.1,0,60
+EWMA yield,temperature,102,0.1,1,60
+CUSUM yield,temperature,102,0.1,1,60
+PCA T2/SPE,temperature,102,0.1,0,60
+Expert rules,temperature,102,0.1,1,60
+Gradient boosting,temperature,102,0.1,0,60
+EKF twin,temperature,102,0.1,0,60
+FOS/TAC > 0.3,temperature,103,0.1,0,55
+FOS/TAC +30 %,temperature,103,0.1,0,55
+EWMA yield,temperature,103,0.1,1,55
+CUSUM yield,temperature,103,0.1,4,55
+PCA T2/SPE,temperature,103,0.1,0,55
+Expert rules,temperature,103,0.1,1,55
+Gradient boosting,temperature,103,0.1,0,55
+EKF twin,temperature,103,0.1,0,55
+FOS/TAC > 0.3,temperature,104,0.1,0,58
+FOS/TAC +30 %,temperature,104,0.1,0,58
+EWMA yield,temperature,104,0.1,1,58
+CUSUM yield,temperature,104,0.1,3,58
+PCA T2/SPE,temperature,104,0.1,0,58
+Expert rules,temperature,104,0.1,1,58
+Gradient boosting,temperature,104,0.1,0,58
+EKF twin,temperature,104,0.1,0,58
+FOS/TAC > 0.3,temperature,105,0.1,0,61
+FOS/TAC +30 %,temperature,105,0.1,0,61
+EWMA yield,temperature,105,0.1,0,61
+CUSUM yield,temperature,105,0.1,1,61
+PCA T2/SPE,temperature,105,0.1,0,61
+Expert rules,temperature,105,0.1,0,61
+Gradient boosting,temperature,105,0.1,0,61
+EKF twin,temperature,105,0.1,1,61
+FOS/TAC > 0.3,temperature,106,0.1,0,55
+FOS/TAC +30 %,temperature,106,0.1,0,55
+EWMA yield,temperature,106,0.1,1,55
+CUSUM yield,temperature,106,0.1,1,55
+PCA T2/SPE,temperature,106,0.1,0,55
+Expert rules,temperature,106,0.1,1,55
+Gradient boosting,temperature,106,0.1,0,55
+EKF twin,temperature,106,0.1,0,55
+FOS/TAC > 0.3,temperature,107,0.1,0,56
+FOS/TAC +30 %,temperature,107,0.1,0,56
+EWMA yield,temperature,107,0.1,2,56
+CUSUM yield,temperature,107,0.1,2,56
+PCA T2/SPE,temperature,107,0.1,0,56
+Expert rules,temperature,107,0.1,2,56
+Gradient boosting,temperature,107,0.1,0,56
+EKF twin,temperature,107,0.1,0,56
+FOS/TAC > 0.3,temperature,108,0.1,0,59
+FOS/TAC +30 %,temperature,108,0.1,0,59
+EWMA yield,temperature,108,0.1,0,59
+CUSUM yield,temperature,108,0.1,1,59
+PCA T2/SPE,temperature,108,0.1,0,59
+Expert rules,temperature,108,0.1,0,59
+Gradient boosting,temperature,108,0.1,0,59
+EKF twin,temperature,108,0.1,0,59
+FOS/TAC > 0.3,temperature,109,0.1,0,57
+FOS/TAC +30 %,temperature,109,0.1,0,57
+EWMA yield,temperature,109,0.1,1,57
+CUSUM yield,temperature,109,0.1,4,57
+PCA T2/SPE,temperature,109,0.1,0,57
+Expert rules,temperature,109,0.1,1,57
+Gradient boosting,temperature,109,0.1,2,57
+EKF twin,temperature,109,0.1,1,57
+FOS/TAC > 0.3,temperature,110,0.1,0,57
+FOS/TAC +30 %,temperature,110,0.1,0,57
+EWMA yield,temperature,110,0.1,0,57
+CUSUM yield,temperature,110,0.1,2,57
+PCA T2/SPE,temperature,110,0.1,1,57
+Expert rules,temperature,110,0.1,0,57
+Gradient boosting,temperature,110,0.1,0,57
+EKF twin,temperature,110,0.1,0,57
+FOS/TAC > 0.3,temperature,111,0.1,0,56
+FOS/TAC +30 %,temperature,111,0.1,0,56
+EWMA yield,temperature,111,0.1,0,56
+CUSUM yield,temperature,111,0.1,0,56
+PCA T2/SPE,temperature,111,0.1,0,56
+Expert rules,temperature,111,0.1,0,56
+Gradient boosting,temperature,111,0.1,0,56
+EKF twin,temperature,111,0.1,0,56
+FOS/TAC > 0.3,temperature,112,0.1,0,58
+FOS/TAC +30 %,temperature,112,0.1,0,58
+EWMA yield,temperature,112,0.1,1,58
+CUSUM yield,temperature,112,0.1,3,58
+PCA T2/SPE,temperature,112,0.1,0,58
+Expert rules,temperature,112,0.1,1,58
+Gradient boosting,temperature,112,0.1,0,58
+EKF twin,temperature,112,0.1,1,58
+FOS/TAC > 0.3,temperature,113,0.1,0,60
+FOS/TAC +30 %,temperature,113,0.1,1,60
+EWMA yield,temperature,113,0.1,2,60
+CUSUM yield,temperature,113,0.1,2,60
+PCA T2/SPE,temperature,113,0.1,0,60
+Expert rules,temperature,113,0.1,1,60
+Gradient boosting,temperature,113,0.1,0,60
+EKF twin,temperature,113,0.1,1,60
+FOS/TAC > 0.3,temperature,114,0.1,0,56
+FOS/TAC +30 %,temperature,114,0.1,0,56
+EWMA yield,temperature,114,0.1,1,56
+CUSUM yield,temperature,114,0.1,1,56
+PCA T2/SPE,temperature,114,0.1,0,56
+Expert rules,temperature,114,0.1,1,56
+Gradient boosting,temperature,114,0.1,1,56
+EKF twin,temperature,114,0.1,1,56
+FOS/TAC > 0.3,temperature,115,0.1,0,58
+FOS/TAC +30 %,temperature,115,0.1,0,58
+EWMA yield,temperature,115,0.1,3,58
+CUSUM yield,temperature,115,0.1,3,58
+PCA T2/SPE,temperature,115,0.1,0,58
+Expert rules,temperature,115,0.1,3,58
+Gradient boosting,temperature,115,0.1,0,58
+EKF twin,temperature,115,0.1,0,58
+FOS/TAC > 0.3,temperature,116,0.1,0,59
+FOS/TAC +30 %,temperature,116,0.1,0,59
+EWMA yield,temperature,116,0.1,1,59
+CUSUM yield,temperature,116,0.1,2,59
+PCA T2/SPE,temperature,116,0.1,0,59
+Expert rules,temperature,116,0.1,1,59
+Gradient boosting,temperature,116,0.1,0,59
+EKF twin,temperature,116,0.1,0,59
+FOS/TAC > 0.3,temperature,117,0.1,0,58
+FOS/TAC +30 %,temperature,117,0.1,0,58
+EWMA yield,temperature,117,0.1,2,58
+CUSUM yield,temperature,117,0.1,2,58
+PCA T2/SPE,temperature,117,0.1,0,58
+Expert rules,temperature,117,0.1,2,58
+Gradient boosting,temperature,117,0.1,0,58
+EKF twin,temperature,117,0.1,0,58
+FOS/TAC > 0.3,temperature,118,0.1,0,59
+FOS/TAC +30 %,temperature,118,0.1,0,59
+EWMA yield,temperature,118,0.1,1,59
+CUSUM yield,temperature,118,0.1,2,59
+PCA T2/SPE,temperature,118,0.1,0,59
+Expert rules,temperature,118,0.1,1,59
+Gradient boosting,temperature,118,0.1,0,59
+EKF twin,temperature,118,0.1,0,59
+FOS/TAC > 0.3,temperature,119,0.1,0,61
+FOS/TAC +30 %,temperature,119,0.1,0,61
+EWMA yield,temperature,119,0.1,0,61
+CUSUM yield,temperature,119,0.1,0,61
+PCA T2/SPE,temperature,119,0.1,0,61
+Expert rules,temperature,119,0.1,0,61
+Gradient boosting,temperature,119,0.1,0,61
+EKF twin,temperature,119,0.1,0,61
+FOS/TAC > 0.3,substrate,100,0.1,0,60
+FOS/TAC +30 %,substrate,100,0.1,1,60
+EWMA yield,substrate,100,0.1,1,60
+CUSUM yield,substrate,100,0.1,5,60
+PCA T2/SPE,substrate,100,0.1,0,60
+Expert rules,substrate,100,0.1,0,60
+Gradient boosting,substrate,100,0.1,0,60
+EKF twin,substrate,100,0.1,1,60
+FOS/TAC > 0.3,substrate,101,0.1,0,61
+FOS/TAC +30 %,substrate,101,0.1,0,61
+EWMA yield,substrate,101,0.1,1,61
+CUSUM yield,substrate,101,0.1,3,61
+PCA T2/SPE,substrate,101,0.1,0,61
+Expert rules,substrate,101,0.1,1,61
+Gradient boosting,substrate,101,0.1,0,61
+EKF twin,substrate,101,0.1,0,61
+FOS/TAC > 0.3,substrate,102,0.1,0,57
+FOS/TAC +30 %,substrate,102,0.1,0,57
+EWMA yield,substrate,102,0.1,1,57
+CUSUM yield,substrate,102,0.1,1,57
+PCA T2/SPE,substrate,102,0.1,0,57
+Expert rules,substrate,102,0.1,1,57
+Gradient boosting,substrate,102,0.1,0,57
+EKF twin,substrate,102,0.1,0,57
+FOS/TAC > 0.3,substrate,103,0.1,0,57
+FOS/TAC +30 %,substrate,103,0.1,0,57
+EWMA yield,substrate,103,0.1,1,57
+CUSUM yield,substrate,103,0.1,3,57
+PCA T2/SPE,substrate,103,0.1,0,57
+Expert rules,substrate,103,0.1,1,57
+Gradient boosting,substrate,103,0.1,0,57
+EKF twin,substrate,103,0.1,0,57
+FOS/TAC > 0.3,substrate,104,0.1,0,61
+FOS/TAC +30 %,substrate,104,0.1,0,61
+EWMA yield,substrate,104,0.1,2,61
+CUSUM yield,substrate,104,0.1,3,61
+PCA T2/SPE,substrate,104,0.1,0,61
+Expert rules,substrate,104,0.1,2,61
+Gradient boosting,substrate,104,0.1,0,61
+EKF twin,substrate,104,0.1,0,61
+FOS/TAC > 0.3,substrate,105,0.1,0,55
+FOS/TAC +30 %,substrate,105,0.1,0,55
+EWMA yield,substrate,105,0.1,1,55
+CUSUM yield,substrate,105,0.1,1,55
+PCA T2/SPE,substrate,105,0.1,0,55
+Expert rules,substrate,105,0.1,1,55
+Gradient boosting,substrate,105,0.1,0,55
+EKF twin,substrate,105,0.1,1,55
+FOS/TAC > 0.3,substrate,106,0.1,0,59
+FOS/TAC +30 %,substrate,106,0.1,0,59
+EWMA yield,substrate,106,0.1,0,59
+CUSUM yield,substrate,106,0.1,2,59
+PCA T2/SPE,substrate,106,0.1,0,59
+Expert rules,substrate,106,0.1,0,59
+Gradient boosting,substrate,106,0.1,0,59
+EKF twin,substrate,106,0.1,0,59
+FOS/TAC > 0.3,substrate,107,0.1,0,59
+FOS/TAC +30 %,substrate,107,0.1,0,59
+EWMA yield,substrate,107,0.1,2,59
+CUSUM yield,substrate,107,0.1,1,59
+PCA T2/SPE,substrate,107,0.1,0,59
+Expert rules,substrate,107,0.1,2,59
+Gradient boosting,substrate,107,0.1,0,59
+EKF twin,substrate,107,0.1,0,59
+FOS/TAC > 0.3,substrate,108,0.1,0,57
+FOS/TAC +30 %,substrate,108,0.1,0,57
+EWMA yield,substrate,108,0.1,0,57
+CUSUM yield,substrate,108,0.1,0,57
+PCA T2/SPE,substrate,108,0.1,1,57
+Expert rules,substrate,108,0.1,0,57
+Gradient boosting,substrate,108,0.1,0,57
+EKF twin,substrate,108,0.1,1,57
+FOS/TAC > 0.3,substrate,109,0.1,0,57
+FOS/TAC +30 %,substrate,109,0.1,0,57
+EWMA yield,substrate,109,0.1,1,57
+CUSUM yield,substrate,109,0.1,2,57
+PCA T2/SPE,substrate,109,0.1,0,57
+Expert rules,substrate,109,0.1,1,57
+Gradient boosting,substrate,109,0.1,0,57
+EKF twin,substrate,109,0.1,1,57
+FOS/TAC > 0.3,substrate,110,0.1,0,55
+FOS/TAC +30 %,substrate,110,0.1,0,55
+EWMA yield,substrate,110,0.1,0,55
+CUSUM yield,substrate,110,0.1,1,55
+PCA T2/SPE,substrate,110,0.1,1,55
+Expert rules,substrate,110,0.1,0,55
+Gradient boosting,substrate,110,0.1,0,55
+EKF twin,substrate,110,0.1,1,55
+FOS/TAC > 0.3,substrate,111,0.1,0,55
+FOS/TAC +30 %,substrate,111,0.1,0,55
+EWMA yield,substrate,111,0.1,0,55
+CUSUM yield,substrate,111,0.1,0,55
+PCA T2/SPE,substrate,111,0.1,0,55
+Expert rules,substrate,111,0.1,0,55
+Gradient boosting,substrate,111,0.1,0,55
+EKF twin,substrate,111,0.1,0,55
+FOS/TAC > 0.3,substrate,112,0.1,0,59
+FOS/TAC +30 %,substrate,112,0.1,0,59
+EWMA yield,substrate,112,0.1,0,59
+CUSUM yield,substrate,112,0.1,0,59
+PCA T2/SPE,substrate,112,0.1,0,59
+Expert rules,substrate,112,0.1,0,59
+Gradient boosting,substrate,112,0.1,0,59
+EKF twin,substrate,112,0.1,1,59
+FOS/TAC > 0.3,substrate,113,0.1,0,56
+FOS/TAC +30 %,substrate,113,0.1,1,56
+EWMA yield,substrate,113,0.1,2,56
+CUSUM yield,substrate,113,0.1,2,56
+PCA T2/SPE,substrate,113,0.1,0,56
+Expert rules,substrate,113,0.1,1,56
+Gradient boosting,substrate,113,0.1,0,56
+EKF twin,substrate,113,0.1,1,56
+FOS/TAC > 0.3,substrate,114,0.1,0,56
+FOS/TAC +30 %,substrate,114,0.1,0,56
+EWMA yield,substrate,114,0.1,1,56
+CUSUM yield,substrate,114,0.1,2,56
+PCA T2/SPE,substrate,114,0.1,0,56
+Expert rules,substrate,114,0.1,1,56
+Gradient boosting,substrate,114,0.1,2,56
+EKF twin,substrate,114,0.1,0,56
+FOS/TAC > 0.3,substrate,115,0.1,0,60
+FOS/TAC +30 %,substrate,115,0.1,0,60
+EWMA yield,substrate,115,0.1,0,60
+CUSUM yield,substrate,115,0.1,3,60
+PCA T2/SPE,substrate,115,0.1,0,60
+Expert rules,substrate,115,0.1,0,60
+Gradient boosting,substrate,115,0.1,0,60
+EKF twin,substrate,115,0.1,0,60
+FOS/TAC > 0.3,substrate,116,0.1,0,61
+FOS/TAC +30 %,substrate,116,0.1,0,61
+EWMA yield,substrate,116,0.1,1,61
+CUSUM yield,substrate,116,0.1,1,61
+PCA T2/SPE,substrate,116,0.1,0,61
+Expert rules,substrate,116,0.1,1,61
+Gradient boosting,substrate,116,0.1,0,61
+EKF twin,substrate,116,0.1,0,61
+FOS/TAC > 0.3,substrate,117,0.1,0,58
+FOS/TAC +30 %,substrate,117,0.1,0,58
+EWMA yield,substrate,117,0.1,1,58
+CUSUM yield,substrate,117,0.1,1,58
+PCA T2/SPE,substrate,117,0.1,0,58
+Expert rules,substrate,117,0.1,1,58
+Gradient boosting,substrate,117,0.1,0,58
+EKF twin,substrate,117,0.1,0,58
+FOS/TAC > 0.3,substrate,118,0.1,0,59
+FOS/TAC +30 %,substrate,118,0.1,0,59
+EWMA yield,substrate,118,0.1,0,59
+CUSUM yield,substrate,118,0.1,0,59
+PCA T2/SPE,substrate,118,0.1,0,59
+Expert rules,substrate,118,0.1,0,59
+Gradient boosting,substrate,118,0.1,0,59
+EKF twin,substrate,118,0.1,0,59
+FOS/TAC > 0.3,substrate,119,0.1,0,58
+FOS/TAC +30 %,substrate,119,0.1,0,58
+EWMA yield,substrate,119,0.1,0,58
+CUSUM yield,substrate,119,0.1,0,58
+PCA T2/SPE,substrate,119,0.1,0,58
+Expert rules,substrate,119,0.1,0,58
+Gradient boosting,substrate,119,0.1,0,58
+EKF twin,substrate,119,0.1,0,58
+FOS/TAC > 0.3,ch4_drift,100,0.1,0,56
+FOS/TAC +30 %,ch4_drift,100,0.1,1,56
+EWMA yield,ch4_drift,100,0.1,0,56
+CUSUM yield,ch4_drift,100,0.1,0,56
+PCA T2/SPE,ch4_drift,100,0.1,0,56
+Expert rules,ch4_drift,100,0.1,0,56
+Gradient boosting,ch4_drift,100,0.1,1,56
+EKF twin,ch4_drift,100,0.1,2,56
+FOS/TAC > 0.3,ch4_drift,101,0.1,0,61
+FOS/TAC +30 %,ch4_drift,101,0.1,0,61
+EWMA yield,ch4_drift,101,0.1,1,61
+CUSUM yield,ch4_drift,101,0.1,3,61
+PCA T2/SPE,ch4_drift,101,0.1,0,61
+Expert rules,ch4_drift,101,0.1,1,61
+Gradient boosting,ch4_drift,101,0.1,0,61
+EKF twin,ch4_drift,101,0.1,0,61
+FOS/TAC > 0.3,ch4_drift,102,0.1,0,61
+FOS/TAC +30 %,ch4_drift,102,0.1,0,61
+EWMA yield,ch4_drift,102,0.1,0,61
+CUSUM yield,ch4_drift,102,0.1,0,61
+PCA T2/SPE,ch4_drift,102,0.1,0,61
+Expert rules,ch4_drift,102,0.1,0,61
+Gradient boosting,ch4_drift,102,0.1,0,61
+EKF twin,ch4_drift,102,0.1,0,61
+FOS/TAC > 0.3,ch4_drift,103,0.1,0,58
+FOS/TAC +30 %,ch4_drift,103,0.1,0,58
+EWMA yield,ch4_drift,103,0.1,1,58
+CUSUM yield,ch4_drift,103,0.1,3,58
+PCA T2/SPE,ch4_drift,103,0.1,0,58
+Expert rules,ch4_drift,103,0.1,1,58
+Gradient boosting,ch4_drift,103,0.1,0,58
+EKF twin,ch4_drift,103,0.1,0,58
+FOS/TAC > 0.3,ch4_drift,104,0.1,0,59
+FOS/TAC +30 %,ch4_drift,104,0.1,0,59
+EWMA yield,ch4_drift,104,0.1,1,59
+CUSUM yield,ch4_drift,104,0.1,3,59
+PCA T2/SPE,ch4_drift,104,0.1,0,59
+Expert rules,ch4_drift,104,0.1,1,59
+Gradient boosting,ch4_drift,104,0.1,0,59
+EKF twin,ch4_drift,104,0.1,0,59
+FOS/TAC > 0.3,ch4_drift,105,0.1,0,59
+FOS/TAC +30 %,ch4_drift,105,0.1,0,59
+EWMA yield,ch4_drift,105,0.1,1,59
+CUSUM yield,ch4_drift,105,0.1,2,59
+PCA T2/SPE,ch4_drift,105,0.1,0,59
+Expert rules,ch4_drift,105,0.1,1,59
+Gradient boosting,ch4_drift,105,0.1,0,59
+EKF twin,ch4_drift,105,0.1,1,59
+FOS/TAC > 0.3,ch4_drift,106,0.1,0,59
+FOS/TAC +30 %,ch4_drift,106,0.1,0,59
+EWMA yield,ch4_drift,106,0.1,0,59
+CUSUM yield,ch4_drift,106,0.1,0,59
+PCA T2/SPE,ch4_drift,106,0.1,0,59
+Expert rules,ch4_drift,106,0.1,0,59
+Gradient boosting,ch4_drift,106,0.1,0,59
+EKF twin,ch4_drift,106,0.1,0,59
+FOS/TAC > 0.3,ch4_drift,107,0.1,0,56
+FOS/TAC +30 %,ch4_drift,107,0.1,0,56
+EWMA yield,ch4_drift,107,0.1,1,56
+CUSUM yield,ch4_drift,107,0.1,1,56
+PCA T2/SPE,ch4_drift,107,0.1,0,56
+Expert rules,ch4_drift,107,0.1,1,56
+Gradient boosting,ch4_drift,107,0.1,0,56
+EKF twin,ch4_drift,107,0.1,0,56
+FOS/TAC > 0.3,ch4_drift,108,0.1,0,60
+FOS/TAC +30 %,ch4_drift,108,0.1,0,60
+EWMA yield,ch4_drift,108,0.1,1,60
+CUSUM yield,ch4_drift,108,0.1,2,60
+PCA T2/SPE,ch4_drift,108,0.1,0,60
+Expert rules,ch4_drift,108,0.1,1,60
+Gradient boosting,ch4_drift,108,0.1,0,60
+EKF twin,ch4_drift,108,0.1,0,60
+FOS/TAC > 0.3,ch4_drift,109,0.1,0,60
+FOS/TAC +30 %,ch4_drift,109,0.1,0,60
+EWMA yield,ch4_drift,109,0.1,1,60
+CUSUM yield,ch4_drift,109,0.1,2,60
+PCA T2/SPE,ch4_drift,109,0.1,0,60
+Expert rules,ch4_drift,109,0.1,1,60
+Gradient boosting,ch4_drift,109,0.1,0,60
+EKF twin,ch4_drift,109,0.1,0,60
+FOS/TAC > 0.3,ch4_drift,110,0.1,0,56
+FOS/TAC +30 %,ch4_drift,110,0.1,0,56
+EWMA yield,ch4_drift,110,0.1,0,56
+CUSUM yield,ch4_drift,110,0.1,1,56
+PCA T2/SPE,ch4_drift,110,0.1,2,56
+Expert rules,ch4_drift,110,0.1,0,56
+Gradient boosting,ch4_drift,110,0.1,0,56
+EKF twin,ch4_drift,110,0.1,0,56
+FOS/TAC > 0.3,ch4_drift,111,0.1,0,57
+FOS/TAC +30 %,ch4_drift,111,0.1,0,57
+EWMA yield,ch4_drift,111,0.1,0,57
+CUSUM yield,ch4_drift,111,0.1,0,57
+PCA T2/SPE,ch4_drift,111,0.1,0,57
+Expert rules,ch4_drift,111,0.1,0,57
+Gradient boosting,ch4_drift,111,0.1,0,57
+EKF twin,ch4_drift,111,0.1,0,57
+FOS/TAC > 0.3,ch4_drift,112,0.1,0,58
+FOS/TAC +30 %,ch4_drift,112,0.1,0,58
+EWMA yield,ch4_drift,112,0.1,1,58
+CUSUM yield,ch4_drift,112,0.1,1,58
+PCA T2/SPE,ch4_drift,112,0.1,0,58
+Expert rules,ch4_drift,112,0.1,1,58
+Gradient boosting,ch4_drift,112,0.1,0,58
+EKF twin,ch4_drift,112,0.1,0,58
+FOS/TAC > 0.3,ch4_drift,113,0.1,0,57
+FOS/TAC +30 %,ch4_drift,113,0.1,1,57
+EWMA yield,ch4_drift,113,0.1,2,57
+CUSUM yield,ch4_drift,113,0.1,2,57
+PCA T2/SPE,ch4_drift,113,0.1,0,57
+Expert rules,ch4_drift,113,0.1,2,57
+Gradient boosting,ch4_drift,113,0.1,0,57
+EKF twin,ch4_drift,113,0.1,1,57
+FOS/TAC > 0.3,ch4_drift,114,0.1,0,57
+FOS/TAC +30 %,ch4_drift,114,0.1,0,57
+EWMA yield,ch4_drift,114,0.1,1,57
+CUSUM yield,ch4_drift,114,0.1,3,57
+PCA T2/SPE,ch4_drift,114,0.1,0,57
+Expert rules,ch4_drift,114,0.1,1,57
+Gradient boosting,ch4_drift,114,0.1,1,57
+EKF twin,ch4_drift,114,0.1,0,57
+FOS/TAC > 0.3,ch4_drift,115,0.1,0,57
+FOS/TAC +30 %,ch4_drift,115,0.1,0,57
+EWMA yield,ch4_drift,115,0.1,1,57
+CUSUM yield,ch4_drift,115,0.1,1,57
+PCA T2/SPE,ch4_drift,115,0.1,0,57
+Expert rules,ch4_drift,115,0.1,1,57
+Gradient boosting,ch4_drift,115,0.1,0,57
+EKF twin,ch4_drift,115,0.1,0,57
+FOS/TAC > 0.3,ch4_drift,116,0.1,0,59
+FOS/TAC +30 %,ch4_drift,116,0.1,0,59
+EWMA yield,ch4_drift,116,0.1,1,59
+CUSUM yield,ch4_drift,116,0.1,1,59
+PCA T2/SPE,ch4_drift,116,0.1,0,59
+Expert rules,ch4_drift,116,0.1,1,59
+Gradient boosting,ch4_drift,116,0.1,0,59
+EKF twin,ch4_drift,116,0.1,0,59
+FOS/TAC > 0.3,ch4_drift,117,0.1,0,61
+FOS/TAC +30 %,ch4_drift,117,0.1,0,61
+EWMA yield,ch4_drift,117,0.1,3,61
+CUSUM yield,ch4_drift,117,0.1,3,61
+PCA T2/SPE,ch4_drift,117,0.1,0,61
+Expert rules,ch4_drift,117,0.1,3,61
+Gradient boosting,ch4_drift,117,0.1,2,61
+EKF twin,ch4_drift,117,0.1,2,61
+FOS/TAC > 0.3,ch4_drift,118,0.1,0,59
+FOS/TAC +30 %,ch4_drift,118,0.1,0,59
+EWMA yield,ch4_drift,118,0.1,1,59
+CUSUM yield,ch4_drift,118,0.1,1,59
+PCA T2/SPE,ch4_drift,118,0.1,0,59
+Expert rules,ch4_drift,118,0.1,1,59
+Gradient boosting,ch4_drift,118,0.1,0,59
+EKF twin,ch4_drift,118,0.1,0,59
+FOS/TAC > 0.3,ch4_drift,119,0.1,0,58
+FOS/TAC +30 %,ch4_drift,119,0.1,0,58
+EWMA yield,ch4_drift,119,0.1,0,58
+CUSUM yield,ch4_drift,119,0.1,0,58
+PCA T2/SPE,ch4_drift,119,0.1,0,58
+Expert rules,ch4_drift,119,0.1,0,58
+Gradient boosting,ch4_drift,119,0.1,0,58
+EKF twin,ch4_drift,119,0.1,0,58
+FOS/TAC > 0.3,flow_stuck,100,0.1,0,55
+FOS/TAC +30 %,flow_stuck,100,0.1,1,55
+EWMA yield,flow_stuck,100,0.1,0,55
+CUSUM yield,flow_stuck,100,0.1,0,55
+PCA T2/SPE,flow_stuck,100,0.1,0,55
+Expert rules,flow_stuck,100,0.1,0,55
+Gradient boosting,flow_stuck,100,0.1,2,55
+EKF twin,flow_stuck,100,0.1,1,55
+FOS/TAC > 0.3,flow_stuck,101,0.1,0,58
+FOS/TAC +30 %,flow_stuck,101,0.1,0,58
+EWMA yield,flow_stuck,101,0.1,1,58
+CUSUM yield,flow_stuck,101,0.1,1,58
+PCA T2/SPE,flow_stuck,101,0.1,0,58
+Expert rules,flow_stuck,101,0.1,1,58
+Gradient boosting,flow_stuck,101,0.1,0,58
+EKF twin,flow_stuck,101,0.1,0,58
+FOS/TAC > 0.3,flow_stuck,102,0.1,0,55
+FOS/TAC +30 %,flow_stuck,102,0.1,0,55
+EWMA yield,flow_stuck,102,0.1,0,55
+CUSUM yield,flow_stuck,102,0.1,2,55
+PCA T2/SPE,flow_stuck,102,0.1,0,55
+Expert rules,flow_stuck,102,0.1,0,55
+Gradient boosting,flow_stuck,102,0.1,0,55
+EKF twin,flow_stuck,102,0.1,0,55
+FOS/TAC > 0.3,flow_stuck,103,0.1,0,55
+FOS/TAC +30 %,flow_stuck,103,0.1,0,55
+EWMA yield,flow_stuck,103,0.1,1,55
+CUSUM yield,flow_stuck,103,0.1,3,55
+PCA T2/SPE,flow_stuck,103,0.1,0,55
+Expert rules,flow_stuck,103,0.1,1,55
+Gradient boosting,flow_stuck,103,0.1,0,55
+EKF twin,flow_stuck,103,0.1,0,55
+FOS/TAC > 0.3,flow_stuck,104,0.1,0,58
+FOS/TAC +30 %,flow_stuck,104,0.1,0,58
+EWMA yield,flow_stuck,104,0.1,1,58
+CUSUM yield,flow_stuck,104,0.1,1,58
+PCA T2/SPE,flow_stuck,104,0.1,0,58
+Expert rules,flow_stuck,104,0.1,1,58
+Gradient boosting,flow_stuck,104,0.1,0,58
+EKF twin,flow_stuck,104,0.1,0,58
+FOS/TAC > 0.3,flow_stuck,105,0.1,0,55
+FOS/TAC +30 %,flow_stuck,105,0.1,0,55
+EWMA yield,flow_stuck,105,0.1,1,55
+CUSUM yield,flow_stuck,105,0.1,1,55
+PCA T2/SPE,flow_stuck,105,0.1,0,55
+Expert rules,flow_stuck,105,0.1,1,55
+Gradient boosting,flow_stuck,105,0.1,0,55
+EKF twin,flow_stuck,105,0.1,1,55
+FOS/TAC > 0.3,flow_stuck,106,0.1,0,61
+FOS/TAC +30 %,flow_stuck,106,0.1,0,61
+EWMA yield,flow_stuck,106,0.1,0,61
+CUSUM yield,flow_stuck,106,0.1,3,61
+PCA T2/SPE,flow_stuck,106,0.1,0,61
+Expert rules,flow_stuck,106,0.1,0,61
+Gradient boosting,flow_stuck,106,0.1,0,61
+EKF twin,flow_stuck,106,0.1,0,61
+FOS/TAC > 0.3,flow_stuck,107,0.1,0,60
+FOS/TAC +30 %,flow_stuck,107,0.1,0,60
+EWMA yield,flow_stuck,107,0.1,1,60
+CUSUM yield,flow_stuck,107,0.1,1,60
+PCA T2/SPE,flow_stuck,107,0.1,0,60
+Expert rules,flow_stuck,107,0.1,1,60
+Gradient boosting,flow_stuck,107,0.1,0,60
+EKF twin,flow_stuck,107,0.1,0,60
+FOS/TAC > 0.3,flow_stuck,108,0.1,0,58
+FOS/TAC +30 %,flow_stuck,108,0.1,0,58
+EWMA yield,flow_stuck,108,0.1,1,58
+CUSUM yield,flow_stuck,108,0.1,1,58
+PCA T2/SPE,flow_stuck,108,0.1,0,58
+Expert rules,flow_stuck,108,0.1,1,58
+Gradient boosting,flow_stuck,108,0.1,0,58
+EKF twin,flow_stuck,108,0.1,0,58
+FOS/TAC > 0.3,flow_stuck,109,0.1,0,60
+FOS/TAC +30 %,flow_stuck,109,0.1,0,60
+EWMA yield,flow_stuck,109,0.1,2,60
+CUSUM yield,flow_stuck,109,0.1,2,60
+PCA T2/SPE,flow_stuck,109,0.1,0,60
+Expert rules,flow_stuck,109,0.1,2,60
+Gradient boosting,flow_stuck,109,0.1,0,60
+EKF twin,flow_stuck,109,0.1,0,60
+FOS/TAC > 0.3,flow_stuck,110,0.1,0,60
+FOS/TAC +30 %,flow_stuck,110,0.1,0,60
+EWMA yield,flow_stuck,110,0.1,2,60
+CUSUM yield,flow_stuck,110,0.1,3,60
+PCA T2/SPE,flow_stuck,110,0.1,1,60
+Expert rules,flow_stuck,110,0.1,2,60
+Gradient boosting,flow_stuck,110,0.1,0,60
+EKF twin,flow_stuck,110,0.1,0,60
+FOS/TAC > 0.3,flow_stuck,111,0.1,0,60
+FOS/TAC +30 %,flow_stuck,111,0.1,0,60
+EWMA yield,flow_stuck,111,0.1,2,60
+CUSUM yield,flow_stuck,111,0.1,3,60
+PCA T2/SPE,flow_stuck,111,0.1,0,60
+Expert rules,flow_stuck,111,0.1,2,60
+Gradient boosting,flow_stuck,111,0.1,0,60
+EKF twin,flow_stuck,111,0.1,1,60
+FOS/TAC > 0.3,flow_stuck,112,0.1,0,60
+FOS/TAC +30 %,flow_stuck,112,0.1,0,60
+EWMA yield,flow_stuck,112,0.1,2,60
+CUSUM yield,flow_stuck,112,0.1,4,60
+PCA T2/SPE,flow_stuck,112,0.1,0,60
+Expert rules,flow_stuck,112,0.1,2,60
+Gradient boosting,flow_stuck,112,0.1,0,60
+EKF twin,flow_stuck,112,0.1,1,60
+FOS/TAC > 0.3,flow_stuck,113,0.1,0,61
+FOS/TAC +30 %,flow_stuck,113,0.1,1,61
+EWMA yield,flow_stuck,113,0.1,2,61
+CUSUM yield,flow_stuck,113,0.1,2,61
+PCA T2/SPE,flow_stuck,113,0.1,0,61
+Expert rules,flow_stuck,113,0.1,2,61
+Gradient boosting,flow_stuck,113,0.1,0,61
+EKF twin,flow_stuck,113,0.1,1,61
+FOS/TAC > 0.3,flow_stuck,114,0.1,0,61
+FOS/TAC +30 %,flow_stuck,114,0.1,0,61
+EWMA yield,flow_stuck,114,0.1,1,61
+CUSUM yield,flow_stuck,114,0.1,2,61
+PCA T2/SPE,flow_stuck,114,0.1,1,61
+Expert rules,flow_stuck,114,0.1,1,61
+Gradient boosting,flow_stuck,114,0.1,2,61
+EKF twin,flow_stuck,114,0.1,1,61
+FOS/TAC > 0.3,flow_stuck,115,0.1,0,61
+FOS/TAC +30 %,flow_stuck,115,0.1,0,61
+EWMA yield,flow_stuck,115,0.1,2,61
+CUSUM yield,flow_stuck,115,0.1,2,61
+PCA T2/SPE,flow_stuck,115,0.1,0,61
+Expert rules,flow_stuck,115,0.1,2,61
+Gradient boosting,flow_stuck,115,0.1,1,61
+EKF twin,flow_stuck,115,0.1,0,61
+FOS/TAC > 0.3,flow_stuck,116,0.1,0,61
+FOS/TAC +30 %,flow_stuck,116,0.1,0,61
+EWMA yield,flow_stuck,116,0.1,1,61
+CUSUM yield,flow_stuck,116,0.1,1,61
+PCA T2/SPE,flow_stuck,116,0.1,0,61
+Expert rules,flow_stuck,116,0.1,1,61
+Gradient boosting,flow_stuck,116,0.1,0,61
+EKF twin,flow_stuck,116,0.1,0,61
+FOS/TAC > 0.3,flow_stuck,117,0.1,0,58
+FOS/TAC +30 %,flow_stuck,117,0.1,0,58
+EWMA yield,flow_stuck,117,0.1,0,58
+CUSUM yield,flow_stuck,117,0.1,3,58
+PCA T2/SPE,flow_stuck,117,0.1,0,58
+Expert rules,flow_stuck,117,0.1,0,58
+Gradient boosting,flow_stuck,117,0.1,3,58
+EKF twin,flow_stuck,117,0.1,1,58
+FOS/TAC > 0.3,flow_stuck,118,0.1,0,60
+FOS/TAC +30 %,flow_stuck,118,0.1,0,60
+EWMA yield,flow_stuck,118,0.1,1,60
+CUSUM yield,flow_stuck,118,0.1,2,60
+PCA T2/SPE,flow_stuck,118,0.1,0,60
+Expert rules,flow_stuck,118,0.1,1,60
+Gradient boosting,flow_stuck,118,0.1,0,60
+EKF twin,flow_stuck,118,0.1,0,60
+FOS/TAC > 0.3,flow_stuck,119,0.1,0,59
+FOS/TAC +30 %,flow_stuck,119,0.1,0,59
+EWMA yield,flow_stuck,119,0.1,0,59
+CUSUM yield,flow_stuck,119,0.1,0,59
+PCA T2/SPE,flow_stuck,119,0.1,0,59
+Expert rules,flow_stuck,119,0.1,0,59
+Gradient boosting,flow_stuck,119,0.1,0,59
+EKF twin,flow_stuck,119,0.1,1,59
+FOS/TAC > 0.3,normal,2001,0.5,0,330
+FOS/TAC +30 %,normal,2001,0.5,0,330
+EWMA yield,normal,2001,0.5,3,330
+CUSUM yield,normal,2001,0.5,10,330
+PCA T2/SPE,normal,2001,0.5,1,330
+Expert rules,normal,2001,0.5,3,330
+Gradient boosting,normal,2001,0.5,0,330
+EKF twin,normal,2001,0.5,0,330
+FOS/TAC > 0.3,normal,2002,0.5,0,330
+FOS/TAC +30 %,normal,2002,0.5,0,330
+EWMA yield,normal,2002,0.5,1,330
+CUSUM yield,normal,2002,0.5,2,330
+PCA T2/SPE,normal,2002,0.5,1,330
+Expert rules,normal,2002,0.5,2,330
+Gradient boosting,normal,2002,0.5,0,330
+EKF twin,normal,2002,0.5,1,330
+FOS/TAC > 0.3,normal,2003,0.5,0,330
+FOS/TAC +30 %,normal,2003,0.5,0,330
+EWMA yield,normal,2003,0.5,7,330
+CUSUM yield,normal,2003,0.5,11,330
+PCA T2/SPE,normal,2003,0.5,2,330
+Expert rules,normal,2003,0.5,7,330
+Gradient boosting,normal,2003,0.5,1,330
+EKF twin,normal,2003,0.5,1,330
+FOS/TAC > 0.3,overload,100,0.5,0,56
+FOS/TAC +30 %,overload,100,0.5,1,56
+EWMA yield,overload,100,0.5,2,56
+CUSUM yield,overload,100,0.5,4,56
+PCA T2/SPE,overload,100,0.5,0,56
+Expert rules,overload,100,0.5,1,56
+Gradient boosting,overload,100,0.5,1,56
+EKF twin,overload,100,0.5,2,56
+FOS/TAC > 0.3,overload,101,0.5,0,55
+FOS/TAC +30 %,overload,101,0.5,0,55
+EWMA yield,overload,101,0.5,1,55
+CUSUM yield,overload,101,0.5,1,55
+PCA T2/SPE,overload,101,0.5,0,55
+Expert rules,overload,101,0.5,1,55
+Gradient boosting,overload,101,0.5,1,55
+EKF twin,overload,101,0.5,0,55
+FOS/TAC > 0.3,overload,102,0.5,0,59
+FOS/TAC +30 %,overload,102,0.5,0,59
+EWMA yield,overload,102,0.5,0,59
+CUSUM yield,overload,102,0.5,2,59
+PCA T2/SPE,overload,102,0.5,0,59
+Expert rules,overload,102,0.5,0,59
+Gradient boosting,overload,102,0.5,0,59
+EKF twin,overload,102,0.5,1,59
+FOS/TAC > 0.3,overload,103,0.5,0,57
+FOS/TAC +30 %,overload,103,0.5,0,57
+EWMA yield,overload,103,0.5,2,57
+CUSUM yield,overload,103,0.5,4,57
+PCA T2/SPE,overload,103,0.5,0,57
+Expert rules,overload,103,0.5,2,57
+Gradient boosting,overload,103,0.5,0,57
+EKF twin,overload,103,0.5,0,57
+FOS/TAC > 0.3,overload,104,0.5,0,55
+FOS/TAC +30 %,overload,104,0.5,0,55
+EWMA yield,overload,104,0.5,3,55
+CUSUM yield,overload,104,0.5,4,55
+PCA T2/SPE,overload,104,0.5,0,55
+Expert rules,overload,104,0.5,3,55
+Gradient boosting,overload,104,0.5,0,55
+EKF twin,overload,104,0.5,0,55
+FOS/TAC > 0.3,overload,105,0.5,0,61
+FOS/TAC +30 %,overload,105,0.5,0,61
+EWMA yield,overload,105,0.5,0,61
+CUSUM yield,overload,105,0.5,0,61
+PCA T2/SPE,overload,105,0.5,0,61
+Expert rules,overload,105,0.5,0,61
+Gradient boosting,overload,105,0.5,0,61
+EKF twin,overload,105,0.5,1,61
+FOS/TAC > 0.3,overload,106,0.5,0,60
+FOS/TAC +30 %,overload,106,0.5,0,60
+EWMA yield,overload,106,0.5,1,60
+CUSUM yield,overload,106,0.5,0,60
+PCA T2/SPE,overload,106,0.5,0,60
+Expert rules,overload,106,0.5,1,60
+Gradient boosting,overload,106,0.5,0,60
+EKF twin,overload,106,0.5,1,60
+FOS/TAC > 0.3,overload,107,0.5,0,59
+FOS/TAC +30 %,overload,107,0.5,0,59
+EWMA yield,overload,107,0.5,0,59
+CUSUM yield,overload,107,0.5,1,59
+PCA T2/SPE,overload,107,0.5,0,59
+Expert rules,overload,107,0.5,0,59
+Gradient boosting,overload,107,0.5,0,59
+EKF twin,overload,107,0.5,1,59
+FOS/TAC > 0.3,overload,108,0.5,0,55
+FOS/TAC +30 %,overload,108,0.5,0,55
+EWMA yield,overload,108,0.5,2,55
+CUSUM yield,overload,108,0.5,3,55
+PCA T2/SPE,overload,108,0.5,1,55
+Expert rules,overload,108,0.5,2,55
+Gradient boosting,overload,108,0.5,0,55
+EKF twin,overload,108,0.5,0,55
+FOS/TAC > 0.3,overload,109,0.5,0,56
+FOS/TAC +30 %,overload,109,0.5,0,56
+EWMA yield,overload,109,0.5,2,56
+CUSUM yield,overload,109,0.5,2,56
+PCA T2/SPE,overload,109,0.5,0,56
+Expert rules,overload,109,0.5,2,56
+Gradient boosting,overload,109,0.5,0,56
+EKF twin,overload,109,0.5,0,56
+FOS/TAC > 0.3,overload,110,0.5,0,57
+FOS/TAC +30 %,overload,110,0.5,0,57
+EWMA yield,overload,110,0.5,0,57
+CUSUM yield,overload,110,0.5,2,57
+PCA T2/SPE,overload,110,0.5,2,57
+Expert rules,overload,110,0.5,0,57
+Gradient boosting,overload,110,0.5,0,57
+EKF twin,overload,110,0.5,0,57
+FOS/TAC > 0.3,overload,111,0.5,0,56
+FOS/TAC +30 %,overload,111,0.5,0,56
+EWMA yield,overload,111,0.5,0,56
+CUSUM yield,overload,111,0.5,0,56
+PCA T2/SPE,overload,111,0.5,0,56
+Expert rules,overload,111,0.5,0,56
+Gradient boosting,overload,111,0.5,0,56
+EKF twin,overload,111,0.5,1,56
+FOS/TAC > 0.3,overload,112,0.5,0,55
+FOS/TAC +30 %,overload,112,0.5,0,55
+EWMA yield,overload,112,0.5,1,55
+CUSUM yield,overload,112,0.5,3,55
+PCA T2/SPE,overload,112,0.5,0,55
+Expert rules,overload,112,0.5,1,55
+Gradient boosting,overload,112,0.5,0,55
+EKF twin,overload,112,0.5,1,55
+FOS/TAC > 0.3,overload,113,0.5,0,60
+FOS/TAC +30 %,overload,113,0.5,1,60
+EWMA yield,overload,113,0.5,2,60
+CUSUM yield,overload,113,0.5,2,60
+PCA T2/SPE,overload,113,0.5,0,60
+Expert rules,overload,113,0.5,1,60
+Gradient boosting,overload,113,0.5,0,60
+EKF twin,overload,113,0.5,1,60
+FOS/TAC > 0.3,overload,114,0.5,0,56
+FOS/TAC +30 %,overload,114,0.5,0,56
+EWMA yield,overload,114,0.5,1,56
+CUSUM yield,overload,114,0.5,2,56
+PCA T2/SPE,overload,114,0.5,0,56
+Expert rules,overload,114,0.5,1,56
+Gradient boosting,overload,114,0.5,2,56
+EKF twin,overload,114,0.5,0,56
+FOS/TAC > 0.3,overload,115,0.5,0,61
+FOS/TAC +30 %,overload,115,0.5,0,61
+EWMA yield,overload,115,0.5,1,61
+CUSUM yield,overload,115,0.5,1,61
+PCA T2/SPE,overload,115,0.5,0,61
+Expert rules,overload,115,0.5,1,61
+Gradient boosting,overload,115,0.5,1,61
+EKF twin,overload,115,0.5,1,61
+FOS/TAC > 0.3,overload,116,0.5,0,56
+FOS/TAC +30 %,overload,116,0.5,0,56
+EWMA yield,overload,116,0.5,1,56
+CUSUM yield,overload,116,0.5,2,56
+PCA T2/SPE,overload,116,0.5,0,56
+Expert rules,overload,116,0.5,1,56
+Gradient boosting,overload,116,0.5,0,56
+EKF twin,overload,116,0.5,0,56
+FOS/TAC > 0.3,overload,117,0.5,0,61
+FOS/TAC +30 %,overload,117,0.5,0,61
+EWMA yield,overload,117,0.5,1,61
+CUSUM yield,overload,117,0.5,1,61
+PCA T2/SPE,overload,117,0.5,0,61
+Expert rules,overload,117,0.5,1,61
+Gradient boosting,overload,117,0.5,0,61
+EKF twin,overload,117,0.5,2,61
+FOS/TAC > 0.3,overload,118,0.5,0,61
+FOS/TAC +30 %,overload,118,0.5,0,61
+EWMA yield,overload,118,0.5,0,61
+CUSUM yield,overload,118,0.5,0,61
+PCA T2/SPE,overload,118,0.5,0,61
+Expert rules,overload,118,0.5,0,61
+Gradient boosting,overload,118,0.5,0,61
+EKF twin,overload,118,0.5,1,61
+FOS/TAC > 0.3,overload,119,0.5,0,58
+FOS/TAC +30 %,overload,119,0.5,0,58
+EWMA yield,overload,119,0.5,1,58
+CUSUM yield,overload,119,0.5,1,58
+PCA T2/SPE,overload,119,0.5,0,58
+Expert rules,overload,119,0.5,1,58
+Gradient boosting,overload,119,0.5,0,58
+EKF twin,overload,119,0.5,0,58
+FOS/TAC > 0.3,acidification,100,0.5,0,57
+FOS/TAC +30 %,acidification,100,0.5,1,57
+EWMA yield,acidification,100,0.5,2,57
+CUSUM yield,acidification,100,0.5,4,57
+PCA T2/SPE,acidification,100,0.5,0,57
+Expert rules,acidification,100,0.5,1,57
+Gradient boosting,acidification,100,0.5,0,57
+EKF twin,acidification,100,0.5,1,57
+FOS/TAC > 0.3,acidification,101,0.5,0,61
+FOS/TAC +30 %,acidification,101,0.5,0,61
+EWMA yield,acidification,101,0.5,1,61
+CUSUM yield,acidification,101,0.5,2,61
+PCA T2/SPE,acidification,101,0.5,0,61
+Expert rules,acidification,101,0.5,1,61
+Gradient boosting,acidification,101,0.5,0,61
+EKF twin,acidification,101,0.5,0,61
+FOS/TAC > 0.3,acidification,102,0.5,0,61
+FOS/TAC +30 %,acidification,102,0.5,0,61
+EWMA yield,acidification,102,0.5,0,61
+CUSUM yield,acidification,102,0.5,0,61
+PCA T2/SPE,acidification,102,0.5,0,61
+Expert rules,acidification,102,0.5,0,61
+Gradient boosting,acidification,102,0.5,0,61
+EKF twin,acidification,102,0.5,0,61
+FOS/TAC > 0.3,acidification,103,0.5,0,60
+FOS/TAC +30 %,acidification,103,0.5,0,60
+EWMA yield,acidification,103,0.5,2,60
+CUSUM yield,acidification,103,0.5,4,60
+PCA T2/SPE,acidification,103,0.5,0,60
+Expert rules,acidification,103,0.5,2,60
+Gradient boosting,acidification,103,0.5,0,60
+EKF twin,acidification,103,0.5,0,60
+FOS/TAC > 0.3,acidification,104,0.5,0,55
+FOS/TAC +30 %,acidification,104,0.5,0,55
+EWMA yield,acidification,104,0.5,1,55
+CUSUM yield,acidification,104,0.5,3,55
+PCA T2/SPE,acidification,104,0.5,0,55
+Expert rules,acidification,104,0.5,1,55
+Gradient boosting,acidification,104,0.5,0,55
+EKF twin,acidification,104,0.5,0,55
+FOS/TAC > 0.3,acidification,105,0.5,0,60
+FOS/TAC +30 %,acidification,105,0.5,1,60
+EWMA yield,acidification,105,0.5,2,60
+CUSUM yield,acidification,105,0.5,1,60
+PCA T2/SPE,acidification,105,0.5,1,60
+Expert rules,acidification,105,0.5,1,60
+Gradient boosting,acidification,105,0.5,0,60
+EKF twin,acidification,105,0.5,0,60
+FOS/TAC > 0.3,acidification,106,0.5,0,55
+FOS/TAC +30 %,acidification,106,0.5,0,55
+EWMA yield,acidification,106,0.5,0,55
+CUSUM yield,acidification,106,0.5,0,55
+PCA T2/SPE,acidification,106,0.5,0,55
+Expert rules,acidification,106,0.5,0,55
+Gradient boosting,acidification,106,0.5,0,55
+EKF twin,acidification,106,0.5,0,55
+FOS/TAC > 0.3,acidification,107,0.5,0,55
+FOS/TAC +30 %,acidification,107,0.5,0,55
+EWMA yield,acidification,107,0.5,0,55
+CUSUM yield,acidification,107,0.5,1,55
+PCA T2/SPE,acidification,107,0.5,0,55
+Expert rules,acidification,107,0.5,0,55
+Gradient boosting,acidification,107,0.5,0,55
+EKF twin,acidification,107,0.5,0,55
+FOS/TAC > 0.3,acidification,108,0.5,0,61
+FOS/TAC +30 %,acidification,108,0.5,0,61
+EWMA yield,acidification,108,0.5,1,61
+CUSUM yield,acidification,108,0.5,1,61
+PCA T2/SPE,acidification,108,0.5,0,61
+Expert rules,acidification,108,0.5,1,61
+Gradient boosting,acidification,108,0.5,0,61
+EKF twin,acidification,108,0.5,0,61
+FOS/TAC > 0.3,acidification,109,0.5,0,56
+FOS/TAC +30 %,acidification,109,0.5,0,56
+EWMA yield,acidification,109,0.5,1,56
+CUSUM yield,acidification,109,0.5,3,56
+PCA T2/SPE,acidification,109,0.5,0,56
+Expert rules,acidification,109,0.5,1,56
+Gradient boosting,acidification,109,0.5,1,56
+EKF twin,acidification,109,0.5,1,56
+FOS/TAC > 0.3,acidification,110,0.5,0,56
+FOS/TAC +30 %,acidification,110,0.5,0,56
+EWMA yield,acidification,110,0.5,1,56
+CUSUM yield,acidification,110,0.5,3,56
+PCA T2/SPE,acidification,110,0.5,1,56
+Expert rules,acidification,110,0.5,1,56
+Gradient boosting,acidification,110,0.5,0,56
+EKF twin,acidification,110,0.5,0,56
+FOS/TAC > 0.3,acidification,111,0.5,0,57
+FOS/TAC +30 %,acidification,111,0.5,0,57
+EWMA yield,acidification,111,0.5,1,57
+CUSUM yield,acidification,111,0.5,2,57
+PCA T2/SPE,acidification,111,0.5,0,57
+Expert rules,acidification,111,0.5,1,57
+Gradient boosting,acidification,111,0.5,0,57
+EKF twin,acidification,111,0.5,0,57
+FOS/TAC > 0.3,acidification,112,0.5,0,55
+FOS/TAC +30 %,acidification,112,0.5,0,55
+EWMA yield,acidification,112,0.5,2,55
+CUSUM yield,acidification,112,0.5,3,55
+PCA T2/SPE,acidification,112,0.5,0,55
+Expert rules,acidification,112,0.5,2,55
+Gradient boosting,acidification,112,0.5,0,55
+EKF twin,acidification,112,0.5,1,55
+FOS/TAC > 0.3,acidification,113,0.5,0,57
+FOS/TAC +30 %,acidification,113,0.5,1,57
+EWMA yield,acidification,113,0.5,2,57
+CUSUM yield,acidification,113,0.5,2,57
+PCA T2/SPE,acidification,113,0.5,0,57
+Expert rules,acidification,113,0.5,1,57
+Gradient boosting,acidification,113,0.5,1,57
+EKF twin,acidification,113,0.5,1,57
+FOS/TAC > 0.3,acidification,114,0.5,0,57
+FOS/TAC +30 %,acidification,114,0.5,0,57
+EWMA yield,acidification,114,0.5,1,57
+CUSUM yield,acidification,114,0.5,1,57
+PCA T2/SPE,acidification,114,0.5,0,57
+Expert rules,acidification,114,0.5,1,57
+Gradient boosting,acidification,114,0.5,1,57
+EKF twin,acidification,114,0.5,0,57
+FOS/TAC > 0.3,acidification,115,0.5,0,59
+FOS/TAC +30 %,acidification,115,0.5,0,59
+EWMA yield,acidification,115,0.5,1,59
+CUSUM yield,acidification,115,0.5,3,59
+PCA T2/SPE,acidification,115,0.5,0,59
+Expert rules,acidification,115,0.5,1,59
+Gradient boosting,acidification,115,0.5,0,59
+EKF twin,acidification,115,0.5,0,59
+FOS/TAC > 0.3,acidification,116,0.5,0,60
+FOS/TAC +30 %,acidification,116,0.5,0,60
+EWMA yield,acidification,116,0.5,1,60
+CUSUM yield,acidification,116,0.5,2,60
+PCA T2/SPE,acidification,116,0.5,0,60
+Expert rules,acidification,116,0.5,1,60
+Gradient boosting,acidification,116,0.5,0,60
+EKF twin,acidification,116,0.5,0,60
+FOS/TAC > 0.3,acidification,117,0.5,0,56
+FOS/TAC +30 %,acidification,117,0.5,0,56
+EWMA yield,acidification,117,0.5,3,56
+CUSUM yield,acidification,117,0.5,3,56
+PCA T2/SPE,acidification,117,0.5,0,56
+Expert rules,acidification,117,0.5,3,56
+Gradient boosting,acidification,117,0.5,2,56
+EKF twin,acidification,117,0.5,0,56
+FOS/TAC > 0.3,acidification,118,0.5,0,59
+FOS/TAC +30 %,acidification,118,0.5,0,59
+EWMA yield,acidification,118,0.5,1,59
+CUSUM yield,acidification,118,0.5,1,59
+PCA T2/SPE,acidification,118,0.5,0,59
+Expert rules,acidification,118,0.5,1,59
+Gradient boosting,acidification,118,0.5,0,59
+EKF twin,acidification,118,0.5,0,59
+FOS/TAC > 0.3,acidification,119,0.5,0,59
+FOS/TAC +30 %,acidification,119,0.5,0,59
+EWMA yield,acidification,119,0.5,0,59
+CUSUM yield,acidification,119,0.5,0,59
+PCA T2/SPE,acidification,119,0.5,0,59
+Expert rules,acidification,119,0.5,0,59
+Gradient boosting,acidification,119,0.5,0,59
+EKF twin,acidification,119,0.5,0,59
+FOS/TAC > 0.3,ammonia,100,0.5,0,59
+FOS/TAC +30 %,ammonia,100,0.5,1,59
+EWMA yield,ammonia,100,0.5,1,59
+CUSUM yield,ammonia,100,0.5,2,59
+PCA T2/SPE,ammonia,100,0.5,0,59
+Expert rules,ammonia,100,0.5,0,59
+Gradient boosting,ammonia,100,0.5,1,59
+EKF twin,ammonia,100,0.5,1,59
+FOS/TAC > 0.3,ammonia,101,0.5,0,58
+FOS/TAC +30 %,ammonia,101,0.5,0,58
+EWMA yield,ammonia,101,0.5,1,58
+CUSUM yield,ammonia,101,0.5,2,58
+PCA T2/SPE,ammonia,101,0.5,0,58
+Expert rules,ammonia,101,0.5,1,58
+Gradient boosting,ammonia,101,0.5,0,58
+EKF twin,ammonia,101,0.5,0,58
+FOS/TAC > 0.3,ammonia,102,0.5,0,59
+FOS/TAC +30 %,ammonia,102,0.5,0,59
+EWMA yield,ammonia,102,0.5,1,59
+CUSUM yield,ammonia,102,0.5,2,59
+PCA T2/SPE,ammonia,102,0.5,0,59
+Expert rules,ammonia,102,0.5,1,59
+Gradient boosting,ammonia,102,0.5,0,59
+EKF twin,ammonia,102,0.5,0,59
+FOS/TAC > 0.3,ammonia,103,0.5,0,55
+FOS/TAC +30 %,ammonia,103,0.5,0,55
+EWMA yield,ammonia,103,0.5,1,55
+CUSUM yield,ammonia,103,0.5,1,55
+PCA T2/SPE,ammonia,103,0.5,0,55
+Expert rules,ammonia,103,0.5,1,55
+Gradient boosting,ammonia,103,0.5,0,55
+EKF twin,ammonia,103,0.5,0,55
+FOS/TAC > 0.3,ammonia,104,0.5,0,55
+FOS/TAC +30 %,ammonia,104,0.5,0,55
+EWMA yield,ammonia,104,0.5,1,55
+CUSUM yield,ammonia,104,0.5,3,55
+PCA T2/SPE,ammonia,104,0.5,0,55
+Expert rules,ammonia,104,0.5,1,55
+Gradient boosting,ammonia,104,0.5,0,55
+EKF twin,ammonia,104,0.5,0,55
+FOS/TAC > 0.3,ammonia,105,0.5,0,60
+FOS/TAC +30 %,ammonia,105,0.5,1,60
+EWMA yield,ammonia,105,0.5,1,60
+CUSUM yield,ammonia,105,0.5,2,60
+PCA T2/SPE,ammonia,105,0.5,0,60
+Expert rules,ammonia,105,0.5,1,60
+Gradient boosting,ammonia,105,0.5,0,60
+EKF twin,ammonia,105,0.5,1,60
+FOS/TAC > 0.3,ammonia,106,0.5,0,61
+FOS/TAC +30 %,ammonia,106,0.5,0,61
+EWMA yield,ammonia,106,0.5,1,61
+CUSUM yield,ammonia,106,0.5,2,61
+PCA T2/SPE,ammonia,106,0.5,0,61
+Expert rules,ammonia,106,0.5,1,61
+Gradient boosting,ammonia,106,0.5,0,61
+EKF twin,ammonia,106,0.5,0,61
+FOS/TAC > 0.3,ammonia,107,0.5,0,58
+FOS/TAC +30 %,ammonia,107,0.5,0,58
+EWMA yield,ammonia,107,0.5,1,58
+CUSUM yield,ammonia,107,0.5,2,58
+PCA T2/SPE,ammonia,107,0.5,0,58
+Expert rules,ammonia,107,0.5,1,58
+Gradient boosting,ammonia,107,0.5,0,58
+EKF twin,ammonia,107,0.5,0,58
+FOS/TAC > 0.3,ammonia,108,0.5,0,56
+FOS/TAC +30 %,ammonia,108,0.5,0,56
+EWMA yield,ammonia,108,0.5,0,56
+CUSUM yield,ammonia,108,0.5,2,56
+PCA T2/SPE,ammonia,108,0.5,0,56
+Expert rules,ammonia,108,0.5,0,56
+Gradient boosting,ammonia,108,0.5,0,56
+EKF twin,ammonia,108,0.5,0,56
+FOS/TAC > 0.3,ammonia,109,0.5,0,58
+FOS/TAC +30 %,ammonia,109,0.5,0,58
+EWMA yield,ammonia,109,0.5,2,58
+CUSUM yield,ammonia,109,0.5,2,58
+PCA T2/SPE,ammonia,109,0.5,0,58
+Expert rules,ammonia,109,0.5,2,58
+Gradient boosting,ammonia,109,0.5,0,58
+EKF twin,ammonia,109,0.5,0,58
+FOS/TAC > 0.3,ammonia,110,0.5,0,58
+FOS/TAC +30 %,ammonia,110,0.5,0,58
+EWMA yield,ammonia,110,0.5,0,58
+CUSUM yield,ammonia,110,0.5,3,58
+PCA T2/SPE,ammonia,110,0.5,1,58
+Expert rules,ammonia,110,0.5,0,58
+Gradient boosting,ammonia,110,0.5,0,58
+EKF twin,ammonia,110,0.5,0,58
+FOS/TAC > 0.3,ammonia,111,0.5,0,59
+FOS/TAC +30 %,ammonia,111,0.5,0,59
+EWMA yield,ammonia,111,0.5,0,59
+CUSUM yield,ammonia,111,0.5,0,59
+PCA T2/SPE,ammonia,111,0.5,0,59
+Expert rules,ammonia,111,0.5,0,59
+Gradient boosting,ammonia,111,0.5,0,59
+EKF twin,ammonia,111,0.5,1,59
+FOS/TAC > 0.3,ammonia,112,0.5,0,60
+FOS/TAC +30 %,ammonia,112,0.5,0,60
+EWMA yield,ammonia,112,0.5,2,60
+CUSUM yield,ammonia,112,0.5,2,60
+PCA T2/SPE,ammonia,112,0.5,0,60
+Expert rules,ammonia,112,0.5,2,60
+Gradient boosting,ammonia,112,0.5,0,60
+EKF twin,ammonia,112,0.5,1,60
+FOS/TAC > 0.3,ammonia,113,0.5,0,57
+FOS/TAC +30 %,ammonia,113,0.5,1,57
+EWMA yield,ammonia,113,0.5,2,57
+CUSUM yield,ammonia,113,0.5,2,57
+PCA T2/SPE,ammonia,113,0.5,0,57
+Expert rules,ammonia,113,0.5,1,57
+Gradient boosting,ammonia,113,0.5,0,57
+EKF twin,ammonia,113,0.5,1,57
+FOS/TAC > 0.3,ammonia,114,0.5,0,60
+FOS/TAC +30 %,ammonia,114,0.5,0,60
+EWMA yield,ammonia,114,0.5,1,60
+CUSUM yield,ammonia,114,0.5,1,60
+PCA T2/SPE,ammonia,114,0.5,0,60
+Expert rules,ammonia,114,0.5,1,60
+Gradient boosting,ammonia,114,0.5,1,60
+EKF twin,ammonia,114,0.5,0,60
+FOS/TAC > 0.3,ammonia,115,0.5,0,57
+FOS/TAC +30 %,ammonia,115,0.5,0,57
+EWMA yield,ammonia,115,0.5,2,57
+CUSUM yield,ammonia,115,0.5,1,57
+PCA T2/SPE,ammonia,115,0.5,0,57
+Expert rules,ammonia,115,0.5,2,57
+Gradient boosting,ammonia,115,0.5,0,57
+EKF twin,ammonia,115,0.5,0,57
+FOS/TAC > 0.3,ammonia,116,0.5,0,58
+FOS/TAC +30 %,ammonia,116,0.5,0,58
+EWMA yield,ammonia,116,0.5,1,58
+CUSUM yield,ammonia,116,0.5,2,58
+PCA T2/SPE,ammonia,116,0.5,0,58
+Expert rules,ammonia,116,0.5,1,58
+Gradient boosting,ammonia,116,0.5,0,58
+EKF twin,ammonia,116,0.5,0,58
+FOS/TAC > 0.3,ammonia,117,0.5,0,58
+FOS/TAC +30 %,ammonia,117,0.5,0,58
+EWMA yield,ammonia,117,0.5,1,58
+CUSUM yield,ammonia,117,0.5,1,58
+PCA T2/SPE,ammonia,117,0.5,0,58
+Expert rules,ammonia,117,0.5,1,58
+Gradient boosting,ammonia,117,0.5,0,58
+EKF twin,ammonia,117,0.5,1,58
+FOS/TAC > 0.3,ammonia,118,0.5,0,55
+FOS/TAC +30 %,ammonia,118,0.5,0,55
+EWMA yield,ammonia,118,0.5,0,55
+CUSUM yield,ammonia,118,0.5,0,55
+PCA T2/SPE,ammonia,118,0.5,0,55
+Expert rules,ammonia,118,0.5,0,55
+Gradient boosting,ammonia,118,0.5,0,55
+EKF twin,ammonia,118,0.5,0,55
+FOS/TAC > 0.3,ammonia,119,0.5,0,61
+FOS/TAC +30 %,ammonia,119,0.5,0,61
+EWMA yield,ammonia,119,0.5,0,61
+CUSUM yield,ammonia,119,0.5,0,61
+PCA T2/SPE,ammonia,119,0.5,0,61
+Expert rules,ammonia,119,0.5,0,61
+Gradient boosting,ammonia,119,0.5,0,61
+EKF twin,ammonia,119,0.5,0,61
+FOS/TAC > 0.3,temperature,100,0.5,0,55
+FOS/TAC +30 %,temperature,100,0.5,1,55
+EWMA yield,temperature,100,0.5,1,55
+CUSUM yield,temperature,100,0.5,3,55
+PCA T2/SPE,temperature,100,0.5,0,55
+Expert rules,temperature,100,0.5,1,55
+Gradient boosting,temperature,100,0.5,0,55
+EKF twin,temperature,100,0.5,1,55
+FOS/TAC > 0.3,temperature,101,0.5,0,56
+FOS/TAC +30 %,temperature,101,0.5,0,56
+EWMA yield,temperature,101,0.5,1,56
+CUSUM yield,temperature,101,0.5,2,56
+PCA T2/SPE,temperature,101,0.5,0,56
+Expert rules,temperature,101,0.5,1,56
+Gradient boosting,temperature,101,0.5,0,56
+EKF twin,temperature,101,0.5,0,56
+FOS/TAC > 0.3,temperature,102,0.5,0,60
+FOS/TAC +30 %,temperature,102,0.5,0,60
+EWMA yield,temperature,102,0.5,1,60
+CUSUM yield,temperature,102,0.5,1,60
+PCA T2/SPE,temperature,102,0.5,0,60
+Expert rules,temperature,102,0.5,1,60
+Gradient boosting,temperature,102,0.5,0,60
+EKF twin,temperature,102,0.5,0,60
+FOS/TAC > 0.3,temperature,103,0.5,0,55
+FOS/TAC +30 %,temperature,103,0.5,0,55
+EWMA yield,temperature,103,0.5,1,55
+CUSUM yield,temperature,103,0.5,4,55
+PCA T2/SPE,temperature,103,0.5,0,55
+Expert rules,temperature,103,0.5,1,55
+Gradient boosting,temperature,103,0.5,0,55
+EKF twin,temperature,103,0.5,0,55
+FOS/TAC > 0.3,temperature,104,0.5,0,58
+FOS/TAC +30 %,temperature,104,0.5,0,58
+EWMA yield,temperature,104,0.5,1,58
+CUSUM yield,temperature,104,0.5,3,58
+PCA T2/SPE,temperature,104,0.5,0,58
+Expert rules,temperature,104,0.5,1,58
+Gradient boosting,temperature,104,0.5,0,58
+EKF twin,temperature,104,0.5,0,58
+FOS/TAC > 0.3,temperature,105,0.5,0,61
+FOS/TAC +30 %,temperature,105,0.5,0,61
+EWMA yield,temperature,105,0.5,0,61
+CUSUM yield,temperature,105,0.5,1,61
+PCA T2/SPE,temperature,105,0.5,0,61
+Expert rules,temperature,105,0.5,0,61
+Gradient boosting,temperature,105,0.5,0,61
+EKF twin,temperature,105,0.5,1,61
+FOS/TAC > 0.3,temperature,106,0.5,0,55
+FOS/TAC +30 %,temperature,106,0.5,0,55
+EWMA yield,temperature,106,0.5,1,55
+CUSUM yield,temperature,106,0.5,1,55
+PCA T2/SPE,temperature,106,0.5,0,55
+Expert rules,temperature,106,0.5,1,55
+Gradient boosting,temperature,106,0.5,0,55
+EKF twin,temperature,106,0.5,1,55
+FOS/TAC > 0.3,temperature,107,0.5,0,56
+FOS/TAC +30 %,temperature,107,0.5,0,56
+EWMA yield,temperature,107,0.5,2,56
+CUSUM yield,temperature,107,0.5,2,56
+PCA T2/SPE,temperature,107,0.5,0,56
+Expert rules,temperature,107,0.5,2,56
+Gradient boosting,temperature,107,0.5,0,56
+EKF twin,temperature,107,0.5,0,56
+FOS/TAC > 0.3,temperature,108,0.5,0,59
+FOS/TAC +30 %,temperature,108,0.5,0,59
+EWMA yield,temperature,108,0.5,0,59
+CUSUM yield,temperature,108,0.5,1,59
+PCA T2/SPE,temperature,108,0.5,0,59
+Expert rules,temperature,108,0.5,0,59
+Gradient boosting,temperature,108,0.5,0,59
+EKF twin,temperature,108,0.5,0,59
+FOS/TAC > 0.3,temperature,109,0.5,0,57
+FOS/TAC +30 %,temperature,109,0.5,0,57
+EWMA yield,temperature,109,0.5,1,57
+CUSUM yield,temperature,109,0.5,4,57
+PCA T2/SPE,temperature,109,0.5,0,57
+Expert rules,temperature,109,0.5,1,57
+Gradient boosting,temperature,109,0.5,2,57
+EKF twin,temperature,109,0.5,1,57
+FOS/TAC > 0.3,temperature,110,0.5,0,57
+FOS/TAC +30 %,temperature,110,0.5,0,57
+EWMA yield,temperature,110,0.5,0,57
+CUSUM yield,temperature,110,0.5,2,57
+PCA T2/SPE,temperature,110,0.5,1,57
+Expert rules,temperature,110,0.5,0,57
+Gradient boosting,temperature,110,0.5,0,57
+EKF twin,temperature,110,0.5,0,57
+FOS/TAC > 0.3,temperature,111,0.5,0,56
+FOS/TAC +30 %,temperature,111,0.5,0,56
+EWMA yield,temperature,111,0.5,0,56
+CUSUM yield,temperature,111,0.5,0,56
+PCA T2/SPE,temperature,111,0.5,0,56
+Expert rules,temperature,111,0.5,0,56
+Gradient boosting,temperature,111,0.5,0,56
+EKF twin,temperature,111,0.5,0,56
+FOS/TAC > 0.3,temperature,112,0.5,0,58
+FOS/TAC +30 %,temperature,112,0.5,0,58
+EWMA yield,temperature,112,0.5,1,58
+CUSUM yield,temperature,112,0.5,3,58
+PCA T2/SPE,temperature,112,0.5,0,58
+Expert rules,temperature,112,0.5,1,58
+Gradient boosting,temperature,112,0.5,0,58
+EKF twin,temperature,112,0.5,1,58
+FOS/TAC > 0.3,temperature,113,0.5,0,60
+FOS/TAC +30 %,temperature,113,0.5,1,60
+EWMA yield,temperature,113,0.5,2,60
+CUSUM yield,temperature,113,0.5,2,60
+PCA T2/SPE,temperature,113,0.5,0,60
+Expert rules,temperature,113,0.5,1,60
+Gradient boosting,temperature,113,0.5,0,60
+EKF twin,temperature,113,0.5,1,60
+FOS/TAC > 0.3,temperature,114,0.5,0,56
+FOS/TAC +30 %,temperature,114,0.5,0,56
+EWMA yield,temperature,114,0.5,1,56
+CUSUM yield,temperature,114,0.5,1,56
+PCA T2/SPE,temperature,114,0.5,0,56
+Expert rules,temperature,114,0.5,1,56
+Gradient boosting,temperature,114,0.5,1,56
+EKF twin,temperature,114,0.5,1,56
+FOS/TAC > 0.3,temperature,115,0.5,0,58
+FOS/TAC +30 %,temperature,115,0.5,0,58
+EWMA yield,temperature,115,0.5,3,58
+CUSUM yield,temperature,115,0.5,3,58
+PCA T2/SPE,temperature,115,0.5,0,58
+Expert rules,temperature,115,0.5,3,58
+Gradient boosting,temperature,115,0.5,0,58
+EKF twin,temperature,115,0.5,0,58
+FOS/TAC > 0.3,temperature,116,0.5,0,59
+FOS/TAC +30 %,temperature,116,0.5,0,59
+EWMA yield,temperature,116,0.5,1,59
+CUSUM yield,temperature,116,0.5,2,59
+PCA T2/SPE,temperature,116,0.5,0,59
+Expert rules,temperature,116,0.5,1,59
+Gradient boosting,temperature,116,0.5,0,59
+EKF twin,temperature,116,0.5,0,59
+FOS/TAC > 0.3,temperature,117,0.5,0,58
+FOS/TAC +30 %,temperature,117,0.5,0,58
+EWMA yield,temperature,117,0.5,2,58
+CUSUM yield,temperature,117,0.5,2,58
+PCA T2/SPE,temperature,117,0.5,0,58
+Expert rules,temperature,117,0.5,2,58
+Gradient boosting,temperature,117,0.5,0,58
+EKF twin,temperature,117,0.5,0,58
+FOS/TAC > 0.3,temperature,118,0.5,0,59
+FOS/TAC +30 %,temperature,118,0.5,0,59
+EWMA yield,temperature,118,0.5,1,59
+CUSUM yield,temperature,118,0.5,2,59
+PCA T2/SPE,temperature,118,0.5,0,59
+Expert rules,temperature,118,0.5,1,59
+Gradient boosting,temperature,118,0.5,0,59
+EKF twin,temperature,118,0.5,0,59
+FOS/TAC > 0.3,temperature,119,0.5,0,61
+FOS/TAC +30 %,temperature,119,0.5,0,61
+EWMA yield,temperature,119,0.5,0,61
+CUSUM yield,temperature,119,0.5,0,61
+PCA T2/SPE,temperature,119,0.5,0,61
+Expert rules,temperature,119,0.5,0,61
+Gradient boosting,temperature,119,0.5,0,61
+EKF twin,temperature,119,0.5,1,61
+FOS/TAC > 0.3,substrate,100,0.5,0,60
+FOS/TAC +30 %,substrate,100,0.5,1,60
+EWMA yield,substrate,100,0.5,1,60
+CUSUM yield,substrate,100,0.5,5,60
+PCA T2/SPE,substrate,100,0.5,0,60
+Expert rules,substrate,100,0.5,0,60
+Gradient boosting,substrate,100,0.5,0,60
+EKF twin,substrate,100,0.5,1,60
+FOS/TAC > 0.3,substrate,101,0.5,0,61
+FOS/TAC +30 %,substrate,101,0.5,0,61
+EWMA yield,substrate,101,0.5,1,61
+CUSUM yield,substrate,101,0.5,3,61
+PCA T2/SPE,substrate,101,0.5,0,61
+Expert rules,substrate,101,0.5,1,61
+Gradient boosting,substrate,101,0.5,0,61
+EKF twin,substrate,101,0.5,0,61
+FOS/TAC > 0.3,substrate,102,0.5,0,57
+FOS/TAC +30 %,substrate,102,0.5,0,57
+EWMA yield,substrate,102,0.5,1,57
+CUSUM yield,substrate,102,0.5,1,57
+PCA T2/SPE,substrate,102,0.5,0,57
+Expert rules,substrate,102,0.5,1,57
+Gradient boosting,substrate,102,0.5,0,57
+EKF twin,substrate,102,0.5,0,57
+FOS/TAC > 0.3,substrate,103,0.5,0,57
+FOS/TAC +30 %,substrate,103,0.5,0,57
+EWMA yield,substrate,103,0.5,1,57
+CUSUM yield,substrate,103,0.5,3,57
+PCA T2/SPE,substrate,103,0.5,0,57
+Expert rules,substrate,103,0.5,1,57
+Gradient boosting,substrate,103,0.5,0,57
+EKF twin,substrate,103,0.5,0,57
+FOS/TAC > 0.3,substrate,104,0.5,0,61
+FOS/TAC +30 %,substrate,104,0.5,0,61
+EWMA yield,substrate,104,0.5,2,61
+CUSUM yield,substrate,104,0.5,3,61
+PCA T2/SPE,substrate,104,0.5,0,61
+Expert rules,substrate,104,0.5,2,61
+Gradient boosting,substrate,104,0.5,0,61
+EKF twin,substrate,104,0.5,0,61
+FOS/TAC > 0.3,substrate,105,0.5,0,55
+FOS/TAC +30 %,substrate,105,0.5,1,55
+EWMA yield,substrate,105,0.5,1,55
+CUSUM yield,substrate,105,0.5,1,55
+PCA T2/SPE,substrate,105,0.5,0,55
+Expert rules,substrate,105,0.5,1,55
+Gradient boosting,substrate,105,0.5,0,55
+EKF twin,substrate,105,0.5,1,55
+FOS/TAC > 0.3,substrate,106,0.5,0,59
+FOS/TAC +30 %,substrate,106,0.5,0,59
+EWMA yield,substrate,106,0.5,0,59
+CUSUM yield,substrate,106,0.5,2,59
+PCA T2/SPE,substrate,106,0.5,0,59
+Expert rules,substrate,106,0.5,0,59
+Gradient boosting,substrate,106,0.5,0,59
+EKF twin,substrate,106,0.5,0,59
+FOS/TAC > 0.3,substrate,107,0.5,0,59
+FOS/TAC +30 %,substrate,107,0.5,0,59
+EWMA yield,substrate,107,0.5,2,59
+CUSUM yield,substrate,107,0.5,1,59
+PCA T2/SPE,substrate,107,0.5,0,59
+Expert rules,substrate,107,0.5,2,59
+Gradient boosting,substrate,107,0.5,0,59
+EKF twin,substrate,107,0.5,0,59
+FOS/TAC > 0.3,substrate,108,0.5,0,57
+FOS/TAC +30 %,substrate,108,0.5,0,57
+EWMA yield,substrate,108,0.5,0,57
+CUSUM yield,substrate,108,0.5,0,57
+PCA T2/SPE,substrate,108,0.5,1,57
+Expert rules,substrate,108,0.5,0,57
+Gradient boosting,substrate,108,0.5,0,57
+EKF twin,substrate,108,0.5,1,57
+FOS/TAC > 0.3,substrate,109,0.5,0,57
+FOS/TAC +30 %,substrate,109,0.5,0,57
+EWMA yield,substrate,109,0.5,1,57
+CUSUM yield,substrate,109,0.5,2,57
+PCA T2/SPE,substrate,109,0.5,0,57
+Expert rules,substrate,109,0.5,1,57
+Gradient boosting,substrate,109,0.5,0,57
+EKF twin,substrate,109,0.5,1,57
+FOS/TAC > 0.3,substrate,110,0.5,0,55
+FOS/TAC +30 %,substrate,110,0.5,0,55
+EWMA yield,substrate,110,0.5,0,55
+CUSUM yield,substrate,110,0.5,1,55
+PCA T2/SPE,substrate,110,0.5,1,55
+Expert rules,substrate,110,0.5,0,55
+Gradient boosting,substrate,110,0.5,0,55
+EKF twin,substrate,110,0.5,1,55
+FOS/TAC > 0.3,substrate,111,0.5,0,55
+FOS/TAC +30 %,substrate,111,0.5,0,55
+EWMA yield,substrate,111,0.5,0,55
+CUSUM yield,substrate,111,0.5,0,55
+PCA T2/SPE,substrate,111,0.5,0,55
+Expert rules,substrate,111,0.5,0,55
+Gradient boosting,substrate,111,0.5,0,55
+EKF twin,substrate,111,0.5,0,55
+FOS/TAC > 0.3,substrate,112,0.5,0,59
+FOS/TAC +30 %,substrate,112,0.5,0,59
+EWMA yield,substrate,112,0.5,0,59
+CUSUM yield,substrate,112,0.5,0,59
+PCA T2/SPE,substrate,112,0.5,0,59
+Expert rules,substrate,112,0.5,0,59
+Gradient boosting,substrate,112,0.5,0,59
+EKF twin,substrate,112,0.5,3,59
+FOS/TAC > 0.3,substrate,113,0.5,0,56
+FOS/TAC +30 %,substrate,113,0.5,1,56
+EWMA yield,substrate,113,0.5,2,56
+CUSUM yield,substrate,113,0.5,2,56
+PCA T2/SPE,substrate,113,0.5,0,56
+Expert rules,substrate,113,0.5,2,56
+Gradient boosting,substrate,113,0.5,0,56
+EKF twin,substrate,113,0.5,1,56
+FOS/TAC > 0.3,substrate,114,0.5,0,56
+FOS/TAC +30 %,substrate,114,0.5,0,56
+EWMA yield,substrate,114,0.5,1,56
+CUSUM yield,substrate,114,0.5,2,56
+PCA T2/SPE,substrate,114,0.5,0,56
+Expert rules,substrate,114,0.5,1,56
+Gradient boosting,substrate,114,0.5,1,56
+EKF twin,substrate,114,0.5,0,56
+FOS/TAC > 0.3,substrate,115,0.5,0,60
+FOS/TAC +30 %,substrate,115,0.5,0,60
+EWMA yield,substrate,115,0.5,0,60
+CUSUM yield,substrate,115,0.5,3,60
+PCA T2/SPE,substrate,115,0.5,0,60
+Expert rules,substrate,115,0.5,0,60
+Gradient boosting,substrate,115,0.5,0,60
+EKF twin,substrate,115,0.5,0,60
+FOS/TAC > 0.3,substrate,116,0.5,0,61
+FOS/TAC +30 %,substrate,116,0.5,0,61
+EWMA yield,substrate,116,0.5,1,61
+CUSUM yield,substrate,116,0.5,1,61
+PCA T2/SPE,substrate,116,0.5,0,61
+Expert rules,substrate,116,0.5,1,61
+Gradient boosting,substrate,116,0.5,0,61
+EKF twin,substrate,116,0.5,0,61
+FOS/TAC > 0.3,substrate,117,0.5,0,58
+FOS/TAC +30 %,substrate,117,0.5,0,58
+EWMA yield,substrate,117,0.5,1,58
+CUSUM yield,substrate,117,0.5,1,58
+PCA T2/SPE,substrate,117,0.5,0,58
+Expert rules,substrate,117,0.5,1,58
+Gradient boosting,substrate,117,0.5,0,58
+EKF twin,substrate,117,0.5,0,58
+FOS/TAC > 0.3,substrate,118,0.5,0,59
+FOS/TAC +30 %,substrate,118,0.5,0,59
+EWMA yield,substrate,118,0.5,0,59
+CUSUM yield,substrate,118,0.5,0,59
+PCA T2/SPE,substrate,118,0.5,0,59
+Expert rules,substrate,118,0.5,0,59
+Gradient boosting,substrate,118,0.5,0,59
+EKF twin,substrate,118,0.5,0,59
+FOS/TAC > 0.3,substrate,119,0.5,0,58
+FOS/TAC +30 %,substrate,119,0.5,0,58
+EWMA yield,substrate,119,0.5,0,58
+CUSUM yield,substrate,119,0.5,0,58
+PCA T2/SPE,substrate,119,0.5,0,58
+Expert rules,substrate,119,0.5,0,58
+Gradient boosting,substrate,119,0.5,0,58
+EKF twin,substrate,119,0.5,0,58
+FOS/TAC > 0.3,ch4_drift,100,0.5,0,56
+FOS/TAC +30 %,ch4_drift,100,0.5,1,56
+EWMA yield,ch4_drift,100,0.5,0,56
+CUSUM yield,ch4_drift,100,0.5,0,56
+PCA T2/SPE,ch4_drift,100,0.5,0,56
+Expert rules,ch4_drift,100,0.5,0,56
+Gradient boosting,ch4_drift,100,0.5,1,56
+EKF twin,ch4_drift,100,0.5,2,56
+FOS/TAC > 0.3,ch4_drift,101,0.5,0,61
+FOS/TAC +30 %,ch4_drift,101,0.5,0,61
+EWMA yield,ch4_drift,101,0.5,1,61
+CUSUM yield,ch4_drift,101,0.5,3,61
+PCA T2/SPE,ch4_drift,101,0.5,0,61
+Expert rules,ch4_drift,101,0.5,1,61
+Gradient boosting,ch4_drift,101,0.5,0,61
+EKF twin,ch4_drift,101,0.5,0,61
+FOS/TAC > 0.3,ch4_drift,102,0.5,0,61
+FOS/TAC +30 %,ch4_drift,102,0.5,0,61
+EWMA yield,ch4_drift,102,0.5,0,61
+CUSUM yield,ch4_drift,102,0.5,0,61
+PCA T2/SPE,ch4_drift,102,0.5,0,61
+Expert rules,ch4_drift,102,0.5,0,61
+Gradient boosting,ch4_drift,102,0.5,0,61
+EKF twin,ch4_drift,102,0.5,0,61
+FOS/TAC > 0.3,ch4_drift,103,0.5,0,58
+FOS/TAC +30 %,ch4_drift,103,0.5,0,58
+EWMA yield,ch4_drift,103,0.5,1,58
+CUSUM yield,ch4_drift,103,0.5,3,58
+PCA T2/SPE,ch4_drift,103,0.5,0,58
+Expert rules,ch4_drift,103,0.5,1,58
+Gradient boosting,ch4_drift,103,0.5,0,58
+EKF twin,ch4_drift,103,0.5,0,58
+FOS/TAC > 0.3,ch4_drift,104,0.5,0,59
+FOS/TAC +30 %,ch4_drift,104,0.5,0,59
+EWMA yield,ch4_drift,104,0.5,1,59
+CUSUM yield,ch4_drift,104,0.5,3,59
+PCA T2/SPE,ch4_drift,104,0.5,0,59
+Expert rules,ch4_drift,104,0.5,1,59
+Gradient boosting,ch4_drift,104,0.5,0,59
+EKF twin,ch4_drift,104,0.5,0,59
+FOS/TAC > 0.3,ch4_drift,105,0.5,0,59
+FOS/TAC +30 %,ch4_drift,105,0.5,1,59
+EWMA yield,ch4_drift,105,0.5,1,59
+CUSUM yield,ch4_drift,105,0.5,2,59
+PCA T2/SPE,ch4_drift,105,0.5,0,59
+Expert rules,ch4_drift,105,0.5,1,59
+Gradient boosting,ch4_drift,105,0.5,0,59
+EKF twin,ch4_drift,105,0.5,1,59
+FOS/TAC > 0.3,ch4_drift,106,0.5,0,59
+FOS/TAC +30 %,ch4_drift,106,0.5,0,59
+EWMA yield,ch4_drift,106,0.5,0,59
+CUSUM yield,ch4_drift,106,0.5,0,59
+PCA T2/SPE,ch4_drift,106,0.5,0,59
+Expert rules,ch4_drift,106,0.5,0,59
+Gradient boosting,ch4_drift,106,0.5,0,59
+EKF twin,ch4_drift,106,0.5,0,59
+FOS/TAC > 0.3,ch4_drift,107,0.5,0,56
+FOS/TAC +30 %,ch4_drift,107,0.5,0,56
+EWMA yield,ch4_drift,107,0.5,1,56
+CUSUM yield,ch4_drift,107,0.5,1,56
+PCA T2/SPE,ch4_drift,107,0.5,0,56
+Expert rules,ch4_drift,107,0.5,1,56
+Gradient boosting,ch4_drift,107,0.5,0,56
+EKF twin,ch4_drift,107,0.5,0,56
+FOS/TAC > 0.3,ch4_drift,108,0.5,0,60
+FOS/TAC +30 %,ch4_drift,108,0.5,0,60
+EWMA yield,ch4_drift,108,0.5,1,60
+CUSUM yield,ch4_drift,108,0.5,2,60
+PCA T2/SPE,ch4_drift,108,0.5,0,60
+Expert rules,ch4_drift,108,0.5,1,60
+Gradient boosting,ch4_drift,108,0.5,0,60
+EKF twin,ch4_drift,108,0.5,0,60
+FOS/TAC > 0.3,ch4_drift,109,0.5,0,60
+FOS/TAC +30 %,ch4_drift,109,0.5,0,60
+EWMA yield,ch4_drift,109,0.5,1,60
+CUSUM yield,ch4_drift,109,0.5,2,60
+PCA T2/SPE,ch4_drift,109,0.5,0,60
+Expert rules,ch4_drift,109,0.5,1,60
+Gradient boosting,ch4_drift,109,0.5,0,60
+EKF twin,ch4_drift,109,0.5,0,60
+FOS/TAC > 0.3,ch4_drift,110,0.5,0,56
+FOS/TAC +30 %,ch4_drift,110,0.5,0,56
+EWMA yield,ch4_drift,110,0.5,0,56
+CUSUM yield,ch4_drift,110,0.5,1,56
+PCA T2/SPE,ch4_drift,110,0.5,2,56
+Expert rules,ch4_drift,110,0.5,0,56
+Gradient boosting,ch4_drift,110,0.5,0,56
+EKF twin,ch4_drift,110,0.5,0,56
+FOS/TAC > 0.3,ch4_drift,111,0.5,0,57
+FOS/TAC +30 %,ch4_drift,111,0.5,0,57
+EWMA yield,ch4_drift,111,0.5,0,57
+CUSUM yield,ch4_drift,111,0.5,0,57
+PCA T2/SPE,ch4_drift,111,0.5,0,57
+Expert rules,ch4_drift,111,0.5,0,57
+Gradient boosting,ch4_drift,111,0.5,0,57
+EKF twin,ch4_drift,111,0.5,0,57
+FOS/TAC > 0.3,ch4_drift,112,0.5,0,58
+FOS/TAC +30 %,ch4_drift,112,0.5,0,58
+EWMA yield,ch4_drift,112,0.5,1,58
+CUSUM yield,ch4_drift,112,0.5,1,58
+PCA T2/SPE,ch4_drift,112,0.5,0,58
+Expert rules,ch4_drift,112,0.5,1,58
+Gradient boosting,ch4_drift,112,0.5,0,58
+EKF twin,ch4_drift,112,0.5,0,58
+FOS/TAC > 0.3,ch4_drift,113,0.5,0,57
+FOS/TAC +30 %,ch4_drift,113,0.5,1,57
+EWMA yield,ch4_drift,113,0.5,2,57
+CUSUM yield,ch4_drift,113,0.5,2,57
+PCA T2/SPE,ch4_drift,113,0.5,0,57
+Expert rules,ch4_drift,113,0.5,2,57
+Gradient boosting,ch4_drift,113,0.5,0,57
+EKF twin,ch4_drift,113,0.5,1,57
+FOS/TAC > 0.3,ch4_drift,114,0.5,0,57
+FOS/TAC +30 %,ch4_drift,114,0.5,0,57
+EWMA yield,ch4_drift,114,0.5,1,57
+CUSUM yield,ch4_drift,114,0.5,3,57
+PCA T2/SPE,ch4_drift,114,0.5,0,57
+Expert rules,ch4_drift,114,0.5,1,57
+Gradient boosting,ch4_drift,114,0.5,1,57
+EKF twin,ch4_drift,114,0.5,1,57
+FOS/TAC > 0.3,ch4_drift,115,0.5,0,57
+FOS/TAC +30 %,ch4_drift,115,0.5,0,57
+EWMA yield,ch4_drift,115,0.5,1,57
+CUSUM yield,ch4_drift,115,0.5,1,57
+PCA T2/SPE,ch4_drift,115,0.5,0,57
+Expert rules,ch4_drift,115,0.5,1,57
+Gradient boosting,ch4_drift,115,0.5,0,57
+EKF twin,ch4_drift,115,0.5,0,57
+FOS/TAC > 0.3,ch4_drift,116,0.5,0,59
+FOS/TAC +30 %,ch4_drift,116,0.5,0,59
+EWMA yield,ch4_drift,116,0.5,1,59
+CUSUM yield,ch4_drift,116,0.5,1,59
+PCA T2/SPE,ch4_drift,116,0.5,0,59
+Expert rules,ch4_drift,116,0.5,1,59
+Gradient boosting,ch4_drift,116,0.5,0,59
+EKF twin,ch4_drift,116,0.5,0,59
+FOS/TAC > 0.3,ch4_drift,117,0.5,0,61
+FOS/TAC +30 %,ch4_drift,117,0.5,0,61
+EWMA yield,ch4_drift,117,0.5,3,61
+CUSUM yield,ch4_drift,117,0.5,3,61
+PCA T2/SPE,ch4_drift,117,0.5,0,61
+Expert rules,ch4_drift,117,0.5,3,61
+Gradient boosting,ch4_drift,117,0.5,2,61
+EKF twin,ch4_drift,117,0.5,2,61
+FOS/TAC > 0.3,ch4_drift,118,0.5,0,59
+FOS/TAC +30 %,ch4_drift,118,0.5,0,59
+EWMA yield,ch4_drift,118,0.5,1,59
+CUSUM yield,ch4_drift,118,0.5,1,59
+PCA T2/SPE,ch4_drift,118,0.5,0,59
+Expert rules,ch4_drift,118,0.5,1,59
+Gradient boosting,ch4_drift,118,0.5,0,59
+EKF twin,ch4_drift,118,0.5,0,59
+FOS/TAC > 0.3,ch4_drift,119,0.5,0,58
+FOS/TAC +30 %,ch4_drift,119,0.5,0,58
+EWMA yield,ch4_drift,119,0.5,0,58
+CUSUM yield,ch4_drift,119,0.5,0,58
+PCA T2/SPE,ch4_drift,119,0.5,0,58
+Expert rules,ch4_drift,119,0.5,0,58
+Gradient boosting,ch4_drift,119,0.5,0,58
+EKF twin,ch4_drift,119,0.5,0,58
+FOS/TAC > 0.3,flow_stuck,100,0.5,0,55
+FOS/TAC +30 %,flow_stuck,100,0.5,1,55
+EWMA yield,flow_stuck,100,0.5,0,55
+CUSUM yield,flow_stuck,100,0.5,0,55
+PCA T2/SPE,flow_stuck,100,0.5,0,55
+Expert rules,flow_stuck,100,0.5,0,55
+Gradient boosting,flow_stuck,100,0.5,2,55
+EKF twin,flow_stuck,100,0.5,1,55
+FOS/TAC > 0.3,flow_stuck,101,0.5,0,58
+FOS/TAC +30 %,flow_stuck,101,0.5,0,58
+EWMA yield,flow_stuck,101,0.5,1,58
+CUSUM yield,flow_stuck,101,0.5,1,58
+PCA T2/SPE,flow_stuck,101,0.5,0,58
+Expert rules,flow_stuck,101,0.5,1,58
+Gradient boosting,flow_stuck,101,0.5,0,58
+EKF twin,flow_stuck,101,0.5,0,58
+FOS/TAC > 0.3,flow_stuck,102,0.5,0,55
+FOS/TAC +30 %,flow_stuck,102,0.5,0,55
+EWMA yield,flow_stuck,102,0.5,0,55
+CUSUM yield,flow_stuck,102,0.5,2,55
+PCA T2/SPE,flow_stuck,102,0.5,0,55
+Expert rules,flow_stuck,102,0.5,0,55
+Gradient boosting,flow_stuck,102,0.5,0,55
+EKF twin,flow_stuck,102,0.5,0,55
+FOS/TAC > 0.3,flow_stuck,103,0.5,0,55
+FOS/TAC +30 %,flow_stuck,103,0.5,0,55
+EWMA yield,flow_stuck,103,0.5,1,55
+CUSUM yield,flow_stuck,103,0.5,3,55
+PCA T2/SPE,flow_stuck,103,0.5,0,55
+Expert rules,flow_stuck,103,0.5,1,55
+Gradient boosting,flow_stuck,103,0.5,0,55
+EKF twin,flow_stuck,103,0.5,0,55
+FOS/TAC > 0.3,flow_stuck,104,0.5,0,58
+FOS/TAC +30 %,flow_stuck,104,0.5,0,58
+EWMA yield,flow_stuck,104,0.5,1,58
+CUSUM yield,flow_stuck,104,0.5,1,58
+PCA T2/SPE,flow_stuck,104,0.5,0,58
+Expert rules,flow_stuck,104,0.5,1,58
+Gradient boosting,flow_stuck,104,0.5,0,58
+EKF twin,flow_stuck,104,0.5,0,58
+FOS/TAC > 0.3,flow_stuck,105,0.5,0,55
+FOS/TAC +30 %,flow_stuck,105,0.5,0,55
+EWMA yield,flow_stuck,105,0.5,1,55
+CUSUM yield,flow_stuck,105,0.5,1,55
+PCA T2/SPE,flow_stuck,105,0.5,0,55
+Expert rules,flow_stuck,105,0.5,1,55
+Gradient boosting,flow_stuck,105,0.5,0,55
+EKF twin,flow_stuck,105,0.5,1,55
+FOS/TAC > 0.3,flow_stuck,106,0.5,0,61
+FOS/TAC +30 %,flow_stuck,106,0.5,0,61
+EWMA yield,flow_stuck,106,0.5,0,61
+CUSUM yield,flow_stuck,106,0.5,3,61
+PCA T2/SPE,flow_stuck,106,0.5,0,61
+Expert rules,flow_stuck,106,0.5,0,61
+Gradient boosting,flow_stuck,106,0.5,0,61
+EKF twin,flow_stuck,106,0.5,0,61
+FOS/TAC > 0.3,flow_stuck,107,0.5,0,60
+FOS/TAC +30 %,flow_stuck,107,0.5,0,60
+EWMA yield,flow_stuck,107,0.5,1,60
+CUSUM yield,flow_stuck,107,0.5,1,60
+PCA T2/SPE,flow_stuck,107,0.5,0,60
+Expert rules,flow_stuck,107,0.5,1,60
+Gradient boosting,flow_stuck,107,0.5,0,60
+EKF twin,flow_stuck,107,0.5,0,60
+FOS/TAC > 0.3,flow_stuck,108,0.5,0,58
+FOS/TAC +30 %,flow_stuck,108,0.5,0,58
+EWMA yield,flow_stuck,108,0.5,1,58
+CUSUM yield,flow_stuck,108,0.5,1,58
+PCA T2/SPE,flow_stuck,108,0.5,0,58
+Expert rules,flow_stuck,108,0.5,1,58
+Gradient boosting,flow_stuck,108,0.5,0,58
+EKF twin,flow_stuck,108,0.5,0,58
+FOS/TAC > 0.3,flow_stuck,109,0.5,0,60
+FOS/TAC +30 %,flow_stuck,109,0.5,0,60
+EWMA yield,flow_stuck,109,0.5,2,60
+CUSUM yield,flow_stuck,109,0.5,2,60
+PCA T2/SPE,flow_stuck,109,0.5,0,60
+Expert rules,flow_stuck,109,0.5,2,60
+Gradient boosting,flow_stuck,109,0.5,0,60
+EKF twin,flow_stuck,109,0.5,0,60
+FOS/TAC > 0.3,flow_stuck,110,0.5,0,60
+FOS/TAC +30 %,flow_stuck,110,0.5,0,60
+EWMA yield,flow_stuck,110,0.5,2,60
+CUSUM yield,flow_stuck,110,0.5,3,60
+PCA T2/SPE,flow_stuck,110,0.5,1,60
+Expert rules,flow_stuck,110,0.5,2,60
+Gradient boosting,flow_stuck,110,0.5,0,60
+EKF twin,flow_stuck,110,0.5,0,60
+FOS/TAC > 0.3,flow_stuck,111,0.5,0,60
+FOS/TAC +30 %,flow_stuck,111,0.5,0,60
+EWMA yield,flow_stuck,111,0.5,2,60
+CUSUM yield,flow_stuck,111,0.5,3,60
+PCA T2/SPE,flow_stuck,111,0.5,0,60
+Expert rules,flow_stuck,111,0.5,2,60
+Gradient boosting,flow_stuck,111,0.5,0,60
+EKF twin,flow_stuck,111,0.5,1,60
+FOS/TAC > 0.3,flow_stuck,112,0.5,0,60
+FOS/TAC +30 %,flow_stuck,112,0.5,0,60
+EWMA yield,flow_stuck,112,0.5,2,60
+CUSUM yield,flow_stuck,112,0.5,4,60
+PCA T2/SPE,flow_stuck,112,0.5,0,60
+Expert rules,flow_stuck,112,0.5,2,60
+Gradient boosting,flow_stuck,112,0.5,0,60
+EKF twin,flow_stuck,112,0.5,1,60
+FOS/TAC > 0.3,flow_stuck,113,0.5,0,61
+FOS/TAC +30 %,flow_stuck,113,0.5,1,61
+EWMA yield,flow_stuck,113,0.5,2,61
+CUSUM yield,flow_stuck,113,0.5,2,61
+PCA T2/SPE,flow_stuck,113,0.5,0,61
+Expert rules,flow_stuck,113,0.5,1,61
+Gradient boosting,flow_stuck,113,0.5,0,61
+EKF twin,flow_stuck,113,0.5,1,61
+FOS/TAC > 0.3,flow_stuck,114,0.5,0,61
+FOS/TAC +30 %,flow_stuck,114,0.5,0,61
+EWMA yield,flow_stuck,114,0.5,1,61
+CUSUM yield,flow_stuck,114,0.5,2,61
+PCA T2/SPE,flow_stuck,114,0.5,1,61
+Expert rules,flow_stuck,114,0.5,1,61
+Gradient boosting,flow_stuck,114,0.5,2,61
+EKF twin,flow_stuck,114,0.5,1,61
+FOS/TAC > 0.3,flow_stuck,115,0.5,0,61
+FOS/TAC +30 %,flow_stuck,115,0.5,0,61
+EWMA yield,flow_stuck,115,0.5,2,61
+CUSUM yield,flow_stuck,115,0.5,2,61
+PCA T2/SPE,flow_stuck,115,0.5,0,61
+Expert rules,flow_stuck,115,0.5,2,61
+Gradient boosting,flow_stuck,115,0.5,1,61
+EKF twin,flow_stuck,115,0.5,0,61
+FOS/TAC > 0.3,flow_stuck,116,0.5,0,61
+FOS/TAC +30 %,flow_stuck,116,0.5,0,61
+EWMA yield,flow_stuck,116,0.5,1,61
+CUSUM yield,flow_stuck,116,0.5,1,61
+PCA T2/SPE,flow_stuck,116,0.5,0,61
+Expert rules,flow_stuck,116,0.5,1,61
+Gradient boosting,flow_stuck,116,0.5,0,61
+EKF twin,flow_stuck,116,0.5,0,61
+FOS/TAC > 0.3,flow_stuck,117,0.5,0,58
+FOS/TAC +30 %,flow_stuck,117,0.5,0,58
+EWMA yield,flow_stuck,117,0.5,0,58
+CUSUM yield,flow_stuck,117,0.5,3,58
+PCA T2/SPE,flow_stuck,117,0.5,0,58
+Expert rules,flow_stuck,117,0.5,0,58
+Gradient boosting,flow_stuck,117,0.5,3,58
+EKF twin,flow_stuck,117,0.5,1,58
+FOS/TAC > 0.3,flow_stuck,118,0.5,0,60
+FOS/TAC +30 %,flow_stuck,118,0.5,0,60
+EWMA yield,flow_stuck,118,0.5,1,60
+CUSUM yield,flow_stuck,118,0.5,2,60
+PCA T2/SPE,flow_stuck,118,0.5,0,60
+Expert rules,flow_stuck,118,0.5,1,60
+Gradient boosting,flow_stuck,118,0.5,0,60
+EKF twin,flow_stuck,118,0.5,0,60
+FOS/TAC > 0.3,flow_stuck,119,0.5,0,59
+FOS/TAC +30 %,flow_stuck,119,0.5,0,59
+EWMA yield,flow_stuck,119,0.5,0,59
+CUSUM yield,flow_stuck,119,0.5,0,59
+PCA T2/SPE,flow_stuck,119,0.5,0,59
+Expert rules,flow_stuck,119,0.5,0,59
+Gradient boosting,flow_stuck,119,0.5,0,59
+EKF twin,flow_stuck,119,0.5,1,59
+FOS/TAC > 0.3,normal,2001,1.0,0,330
+FOS/TAC +30 %,normal,2001,1.0,0,330
+EWMA yield,normal,2001,1.0,3,330
+CUSUM yield,normal,2001,1.0,10,330
+PCA T2/SPE,normal,2001,1.0,1,330
+Expert rules,normal,2001,1.0,3,330
+Gradient boosting,normal,2001,1.0,1,330
+EKF twin,normal,2001,1.0,0,330
+FOS/TAC > 0.3,normal,2002,1.0,0,330
+FOS/TAC +30 %,normal,2002,1.0,0,330
+EWMA yield,normal,2002,1.0,1,330
+CUSUM yield,normal,2002,1.0,2,330
+PCA T2/SPE,normal,2002,1.0,1,330
+Expert rules,normal,2002,1.0,2,330
+Gradient boosting,normal,2002,1.0,0,330
+EKF twin,normal,2002,1.0,2,330
+FOS/TAC > 0.3,normal,2003,1.0,0,330
+FOS/TAC +30 %,normal,2003,1.0,0,330
+EWMA yield,normal,2003,1.0,7,330
+CUSUM yield,normal,2003,1.0,11,330
+PCA T2/SPE,normal,2003,1.0,2,330
+Expert rules,normal,2003,1.0,7,330
+Gradient boosting,normal,2003,1.0,1,330
+EKF twin,normal,2003,1.0,2,330
+FOS/TAC > 0.3,overload,100,1.0,0,56
+FOS/TAC +30 %,overload,100,1.0,0,56
+EWMA yield,overload,100,1.0,2,56
+CUSUM yield,overload,100,1.0,4,56
+PCA T2/SPE,overload,100,1.0,0,56
+Expert rules,overload,100,1.0,2,56
+Gradient boosting,overload,100,1.0,0,56
+EKF twin,overload,100,1.0,2,56
+FOS/TAC > 0.3,overload,101,1.0,0,55
+FOS/TAC +30 %,overload,101,1.0,0,55
+EWMA yield,overload,101,1.0,1,55
+CUSUM yield,overload,101,1.0,1,55
+PCA T2/SPE,overload,101,1.0,0,55
+Expert rules,overload,101,1.0,1,55
+Gradient boosting,overload,101,1.0,0,55
+EKF twin,overload,101,1.0,1,55
+FOS/TAC > 0.3,overload,102,1.0,0,59
+FOS/TAC +30 %,overload,102,1.0,0,59
+EWMA yield,overload,102,1.0,0,59
+CUSUM yield,overload,102,1.0,2,59
+PCA T2/SPE,overload,102,1.0,0,59
+Expert rules,overload,102,1.0,0,59
+Gradient boosting,overload,102,1.0,0,59
+EKF twin,overload,102,1.0,1,59
+FOS/TAC > 0.3,overload,103,1.0,0,57
+FOS/TAC +30 %,overload,103,1.0,0,57
+EWMA yield,overload,103,1.0,2,57
+CUSUM yield,overload,103,1.0,4,57
+PCA T2/SPE,overload,103,1.0,0,57
+Expert rules,overload,103,1.0,2,57
+Gradient boosting,overload,103,1.0,0,57
+EKF twin,overload,103,1.0,0,57
+FOS/TAC > 0.3,overload,104,1.0,0,55
+FOS/TAC +30 %,overload,104,1.0,0,55
+EWMA yield,overload,104,1.0,3,55
+CUSUM yield,overload,104,1.0,4,55
+PCA T2/SPE,overload,104,1.0,0,55
+Expert rules,overload,104,1.0,3,55
+Gradient boosting,overload,104,1.0,0,55
+EKF twin,overload,104,1.0,0,55
+FOS/TAC > 0.3,overload,105,1.0,0,61
+FOS/TAC +30 %,overload,105,1.0,0,61
+EWMA yield,overload,105,1.0,0,61
+CUSUM yield,overload,105,1.0,0,61
+PCA T2/SPE,overload,105,1.0,0,61
+Expert rules,overload,105,1.0,0,61
+Gradient boosting,overload,105,1.0,0,61
+EKF twin,overload,105,1.0,0,61
+FOS/TAC > 0.3,overload,106,1.0,0,60
+FOS/TAC +30 %,overload,106,1.0,0,60
+EWMA yield,overload,106,1.0,1,60
+CUSUM yield,overload,106,1.0,0,60
+PCA T2/SPE,overload,106,1.0,0,60
+Expert rules,overload,106,1.0,1,60
+Gradient boosting,overload,106,1.0,0,60
+EKF twin,overload,106,1.0,1,60
+FOS/TAC > 0.3,overload,107,1.0,0,59
+FOS/TAC +30 %,overload,107,1.0,0,59
+EWMA yield,overload,107,1.0,0,59
+CUSUM yield,overload,107,1.0,1,59
+PCA T2/SPE,overload,107,1.0,0,59
+Expert rules,overload,107,1.0,0,59
+Gradient boosting,overload,107,1.0,0,59
+EKF twin,overload,107,1.0,1,59
+FOS/TAC > 0.3,overload,108,1.0,0,55
+FOS/TAC +30 %,overload,108,1.0,0,55
+EWMA yield,overload,108,1.0,2,55
+CUSUM yield,overload,108,1.0,3,55
+PCA T2/SPE,overload,108,1.0,1,55
+Expert rules,overload,108,1.0,2,55
+Gradient boosting,overload,108,1.0,0,55
+EKF twin,overload,108,1.0,0,55
+FOS/TAC > 0.3,overload,109,1.0,0,56
+FOS/TAC +30 %,overload,109,1.0,0,56
+EWMA yield,overload,109,1.0,2,56
+CUSUM yield,overload,109,1.0,2,56
+PCA T2/SPE,overload,109,1.0,0,56
+Expert rules,overload,109,1.0,2,56
+Gradient boosting,overload,109,1.0,0,56
+EKF twin,overload,109,1.0,0,56
+FOS/TAC > 0.3,overload,110,1.0,0,57
+FOS/TAC +30 %,overload,110,1.0,0,57
+EWMA yield,overload,110,1.0,0,57
+CUSUM yield,overload,110,1.0,2,57
+PCA T2/SPE,overload,110,1.0,2,57
+Expert rules,overload,110,1.0,0,57
+Gradient boosting,overload,110,1.0,0,57
+EKF twin,overload,110,1.0,0,57
+FOS/TAC > 0.3,overload,111,1.0,0,56
+FOS/TAC +30 %,overload,111,1.0,0,56
+EWMA yield,overload,111,1.0,0,56
+CUSUM yield,overload,111,1.0,0,56
+PCA T2/SPE,overload,111,1.0,0,56
+Expert rules,overload,111,1.0,0,56
+Gradient boosting,overload,111,1.0,0,56
+EKF twin,overload,111,1.0,0,56
+FOS/TAC > 0.3,overload,112,1.0,0,55
+FOS/TAC +30 %,overload,112,1.0,0,55
+EWMA yield,overload,112,1.0,1,55
+CUSUM yield,overload,112,1.0,3,55
+PCA T2/SPE,overload,112,1.0,0,55
+Expert rules,overload,112,1.0,1,55
+Gradient boosting,overload,112,1.0,0,55
+EKF twin,overload,112,1.0,1,55
+FOS/TAC > 0.3,overload,113,1.0,0,60
+FOS/TAC +30 %,overload,113,1.0,0,60
+EWMA yield,overload,113,1.0,2,60
+CUSUM yield,overload,113,1.0,2,60
+PCA T2/SPE,overload,113,1.0,0,60
+Expert rules,overload,113,1.0,2,60
+Gradient boosting,overload,113,1.0,0,60
+EKF twin,overload,113,1.0,1,60
+FOS/TAC > 0.3,overload,114,1.0,0,56
+FOS/TAC +30 %,overload,114,1.0,0,56
+EWMA yield,overload,114,1.0,1,56
+CUSUM yield,overload,114,1.0,2,56
+PCA T2/SPE,overload,114,1.0,0,56
+Expert rules,overload,114,1.0,1,56
+Gradient boosting,overload,114,1.0,1,56
+EKF twin,overload,114,1.0,0,56
+FOS/TAC > 0.3,overload,115,1.0,0,61
+FOS/TAC +30 %,overload,115,1.0,0,61
+EWMA yield,overload,115,1.0,1,61
+CUSUM yield,overload,115,1.0,1,61
+PCA T2/SPE,overload,115,1.0,0,61
+Expert rules,overload,115,1.0,1,61
+Gradient boosting,overload,115,1.0,1,61
+EKF twin,overload,115,1.0,1,61
+FOS/TAC > 0.3,overload,116,1.0,0,56
+FOS/TAC +30 %,overload,116,1.0,0,56
+EWMA yield,overload,116,1.0,1,56
+CUSUM yield,overload,116,1.0,2,56
+PCA T2/SPE,overload,116,1.0,0,56
+Expert rules,overload,116,1.0,1,56
+Gradient boosting,overload,116,1.0,0,56
+EKF twin,overload,116,1.0,0,56
+FOS/TAC > 0.3,overload,117,1.0,0,61
+FOS/TAC +30 %,overload,117,1.0,0,61
+EWMA yield,overload,117,1.0,1,61
+CUSUM yield,overload,117,1.0,1,61
+PCA T2/SPE,overload,117,1.0,0,61
+Expert rules,overload,117,1.0,1,61
+Gradient boosting,overload,117,1.0,0,61
+EKF twin,overload,117,1.0,1,61
+FOS/TAC > 0.3,overload,118,1.0,0,61
+FOS/TAC +30 %,overload,118,1.0,0,61
+EWMA yield,overload,118,1.0,0,61
+CUSUM yield,overload,118,1.0,0,61
+PCA T2/SPE,overload,118,1.0,0,61
+Expert rules,overload,118,1.0,0,61
+Gradient boosting,overload,118,1.0,0,61
+EKF twin,overload,118,1.0,0,61
+FOS/TAC > 0.3,overload,119,1.0,0,58
+FOS/TAC +30 %,overload,119,1.0,0,58
+EWMA yield,overload,119,1.0,1,58
+CUSUM yield,overload,119,1.0,1,58
+PCA T2/SPE,overload,119,1.0,0,58
+Expert rules,overload,119,1.0,1,58
+Gradient boosting,overload,119,1.0,0,58
+EKF twin,overload,119,1.0,0,58
+FOS/TAC > 0.3,acidification,100,1.0,0,57
+FOS/TAC +30 %,acidification,100,1.0,0,57
+EWMA yield,acidification,100,1.0,2,57
+CUSUM yield,acidification,100,1.0,4,57
+PCA T2/SPE,acidification,100,1.0,0,57
+Expert rules,acidification,100,1.0,2,57
+Gradient boosting,acidification,100,1.0,0,57
+EKF twin,acidification,100,1.0,1,57
+FOS/TAC > 0.3,acidification,101,1.0,0,61
+FOS/TAC +30 %,acidification,101,1.0,0,61
+EWMA yield,acidification,101,1.0,1,61
+CUSUM yield,acidification,101,1.0,2,61
+PCA T2/SPE,acidification,101,1.0,0,61
+Expert rules,acidification,101,1.0,1,61
+Gradient boosting,acidification,101,1.0,0,61
+EKF twin,acidification,101,1.0,0,61
+FOS/TAC > 0.3,acidification,102,1.0,0,61
+FOS/TAC +30 %,acidification,102,1.0,0,61
+EWMA yield,acidification,102,1.0,0,61
+CUSUM yield,acidification,102,1.0,0,61
+PCA T2/SPE,acidification,102,1.0,0,61
+Expert rules,acidification,102,1.0,0,61
+Gradient boosting,acidification,102,1.0,0,61
+EKF twin,acidification,102,1.0,0,61
+FOS/TAC > 0.3,acidification,103,1.0,0,60
+FOS/TAC +30 %,acidification,103,1.0,0,60
+EWMA yield,acidification,103,1.0,2,60
+CUSUM yield,acidification,103,1.0,4,60
+PCA T2/SPE,acidification,103,1.0,0,60
+Expert rules,acidification,103,1.0,2,60
+Gradient boosting,acidification,103,1.0,0,60
+EKF twin,acidification,103,1.0,0,60
+FOS/TAC > 0.3,acidification,104,1.0,0,55
+FOS/TAC +30 %,acidification,104,1.0,0,55
+EWMA yield,acidification,104,1.0,1,55
+CUSUM yield,acidification,104,1.0,3,55
+PCA T2/SPE,acidification,104,1.0,0,55
+Expert rules,acidification,104,1.0,1,55
+Gradient boosting,acidification,104,1.0,0,55
+EKF twin,acidification,104,1.0,0,55
+FOS/TAC > 0.3,acidification,105,1.0,0,60
+FOS/TAC +30 %,acidification,105,1.0,0,60
+EWMA yield,acidification,105,1.0,2,60
+CUSUM yield,acidification,105,1.0,1,60
+PCA T2/SPE,acidification,105,1.0,1,60
+Expert rules,acidification,105,1.0,2,60
+Gradient boosting,acidification,105,1.0,0,60
+EKF twin,acidification,105,1.0,1,60
+FOS/TAC > 0.3,acidification,106,1.0,0,55
+FOS/TAC +30 %,acidification,106,1.0,0,55
+EWMA yield,acidification,106,1.0,0,55
+CUSUM yield,acidification,106,1.0,0,55
+PCA T2/SPE,acidification,106,1.0,0,55
+Expert rules,acidification,106,1.0,0,55
+Gradient boosting,acidification,106,1.0,0,55
+EKF twin,acidification,106,1.0,0,55
+FOS/TAC > 0.3,acidification,107,1.0,0,55
+FOS/TAC +30 %,acidification,107,1.0,0,55
+EWMA yield,acidification,107,1.0,0,55
+CUSUM yield,acidification,107,1.0,1,55
+PCA T2/SPE,acidification,107,1.0,0,55
+Expert rules,acidification,107,1.0,0,55
+Gradient boosting,acidification,107,1.0,0,55
+EKF twin,acidification,107,1.0,0,55
+FOS/TAC > 0.3,acidification,108,1.0,0,61
+FOS/TAC +30 %,acidification,108,1.0,0,61
+EWMA yield,acidification,108,1.0,1,61
+CUSUM yield,acidification,108,1.0,1,61
+PCA T2/SPE,acidification,108,1.0,0,61
+Expert rules,acidification,108,1.0,1,61
+Gradient boosting,acidification,108,1.0,0,61
+EKF twin,acidification,108,1.0,1,61
+FOS/TAC > 0.3,acidification,109,1.0,0,56
+FOS/TAC +30 %,acidification,109,1.0,0,56
+EWMA yield,acidification,109,1.0,1,56
+CUSUM yield,acidification,109,1.0,3,56
+PCA T2/SPE,acidification,109,1.0,0,56
+Expert rules,acidification,109,1.0,1,56
+Gradient boosting,acidification,109,1.0,0,56
+EKF twin,acidification,109,1.0,0,56
+FOS/TAC > 0.3,acidification,110,1.0,0,56
+FOS/TAC +30 %,acidification,110,1.0,0,56
+EWMA yield,acidification,110,1.0,1,56
+CUSUM yield,acidification,110,1.0,3,56
+PCA T2/SPE,acidification,110,1.0,1,56
+Expert rules,acidification,110,1.0,1,56
+Gradient boosting,acidification,110,1.0,0,56
+EKF twin,acidification,110,1.0,0,56
+FOS/TAC > 0.3,acidification,111,1.0,0,57
+FOS/TAC +30 %,acidification,111,1.0,0,57
+EWMA yield,acidification,111,1.0,1,57
+CUSUM yield,acidification,111,1.0,2,57
+PCA T2/SPE,acidification,111,1.0,0,57
+Expert rules,acidification,111,1.0,1,57
+Gradient boosting,acidification,111,1.0,0,57
+EKF twin,acidification,111,1.0,0,57
+FOS/TAC > 0.3,acidification,112,1.0,0,55
+FOS/TAC +30 %,acidification,112,1.0,0,55
+EWMA yield,acidification,112,1.0,2,55
+CUSUM yield,acidification,112,1.0,3,55
+PCA T2/SPE,acidification,112,1.0,0,55
+Expert rules,acidification,112,1.0,2,55
+Gradient boosting,acidification,112,1.0,0,55
+EKF twin,acidification,112,1.0,0,55
+FOS/TAC > 0.3,acidification,113,1.0,0,57
+FOS/TAC +30 %,acidification,113,1.0,0,57
+EWMA yield,acidification,113,1.0,2,57
+CUSUM yield,acidification,113,1.0,2,57
+PCA T2/SPE,acidification,113,1.0,0,57
+Expert rules,acidification,113,1.0,2,57
+Gradient boosting,acidification,113,1.0,1,57
+EKF twin,acidification,113,1.0,1,57
+FOS/TAC > 0.3,acidification,114,1.0,0,57
+FOS/TAC +30 %,acidification,114,1.0,0,57
+EWMA yield,acidification,114,1.0,1,57
+CUSUM yield,acidification,114,1.0,1,57
+PCA T2/SPE,acidification,114,1.0,0,57
+Expert rules,acidification,114,1.0,1,57
+Gradient boosting,acidification,114,1.0,1,57
+EKF twin,acidification,114,1.0,1,57
+FOS/TAC > 0.3,acidification,115,1.0,0,59
+FOS/TAC +30 %,acidification,115,1.0,0,59
+EWMA yield,acidification,115,1.0,1,59
+CUSUM yield,acidification,115,1.0,3,59
+PCA T2/SPE,acidification,115,1.0,0,59
+Expert rules,acidification,115,1.0,1,59
+Gradient boosting,acidification,115,1.0,0,59
+EKF twin,acidification,115,1.0,1,59
+FOS/TAC > 0.3,acidification,116,1.0,0,60
+FOS/TAC +30 %,acidification,116,1.0,0,60
+EWMA yield,acidification,116,1.0,1,60
+CUSUM yield,acidification,116,1.0,2,60
+PCA T2/SPE,acidification,116,1.0,0,60
+Expert rules,acidification,116,1.0,1,60
+Gradient boosting,acidification,116,1.0,0,60
+EKF twin,acidification,116,1.0,0,60
+FOS/TAC > 0.3,acidification,117,1.0,0,56
+FOS/TAC +30 %,acidification,117,1.0,0,56
+EWMA yield,acidification,117,1.0,3,56
+CUSUM yield,acidification,117,1.0,3,56
+PCA T2/SPE,acidification,117,1.0,0,56
+Expert rules,acidification,117,1.0,3,56
+Gradient boosting,acidification,117,1.0,0,56
+EKF twin,acidification,117,1.0,0,56
+FOS/TAC > 0.3,acidification,118,1.0,0,59
+FOS/TAC +30 %,acidification,118,1.0,0,59
+EWMA yield,acidification,118,1.0,1,59
+CUSUM yield,acidification,118,1.0,1,59
+PCA T2/SPE,acidification,118,1.0,0,59
+Expert rules,acidification,118,1.0,1,59
+Gradient boosting,acidification,118,1.0,0,59
+EKF twin,acidification,118,1.0,0,59
+FOS/TAC > 0.3,acidification,119,1.0,0,59
+FOS/TAC +30 %,acidification,119,1.0,0,59
+EWMA yield,acidification,119,1.0,0,59
+CUSUM yield,acidification,119,1.0,0,59
+PCA T2/SPE,acidification,119,1.0,0,59
+Expert rules,acidification,119,1.0,0,59
+Gradient boosting,acidification,119,1.0,1,59
+EKF twin,acidification,119,1.0,1,59
+FOS/TAC > 0.3,ammonia,100,1.0,0,59
+FOS/TAC +30 %,ammonia,100,1.0,0,59
+EWMA yield,ammonia,100,1.0,1,59
+CUSUM yield,ammonia,100,1.0,2,59
+PCA T2/SPE,ammonia,100,1.0,0,59
+Expert rules,ammonia,100,1.0,1,59
+Gradient boosting,ammonia,100,1.0,0,59
+EKF twin,ammonia,100,1.0,0,59
+FOS/TAC > 0.3,ammonia,101,1.0,0,58
+FOS/TAC +30 %,ammonia,101,1.0,0,58
+EWMA yield,ammonia,101,1.0,1,58
+CUSUM yield,ammonia,101,1.0,2,58
+PCA T2/SPE,ammonia,101,1.0,0,58
+Expert rules,ammonia,101,1.0,1,58
+Gradient boosting,ammonia,101,1.0,0,58
+EKF twin,ammonia,101,1.0,0,58
+FOS/TAC > 0.3,ammonia,102,1.0,0,59
+FOS/TAC +30 %,ammonia,102,1.0,0,59
+EWMA yield,ammonia,102,1.0,1,59
+CUSUM yield,ammonia,102,1.0,2,59
+PCA T2/SPE,ammonia,102,1.0,0,59
+Expert rules,ammonia,102,1.0,1,59
+Gradient boosting,ammonia,102,1.0,0,59
+EKF twin,ammonia,102,1.0,0,59
+FOS/TAC > 0.3,ammonia,103,1.0,0,55
+FOS/TAC +30 %,ammonia,103,1.0,0,55
+EWMA yield,ammonia,103,1.0,1,55
+CUSUM yield,ammonia,103,1.0,1,55
+PCA T2/SPE,ammonia,103,1.0,0,55
+Expert rules,ammonia,103,1.0,1,55
+Gradient boosting,ammonia,103,1.0,0,55
+EKF twin,ammonia,103,1.0,1,55
+FOS/TAC > 0.3,ammonia,104,1.0,0,55
+FOS/TAC +30 %,ammonia,104,1.0,0,55
+EWMA yield,ammonia,104,1.0,1,55
+CUSUM yield,ammonia,104,1.0,3,55
+PCA T2/SPE,ammonia,104,1.0,0,55
+Expert rules,ammonia,104,1.0,1,55
+Gradient boosting,ammonia,104,1.0,0,55
+EKF twin,ammonia,104,1.0,0,55
+FOS/TAC > 0.3,ammonia,105,1.0,0,60
+FOS/TAC +30 %,ammonia,105,1.0,0,60
+EWMA yield,ammonia,105,1.0,1,60
+CUSUM yield,ammonia,105,1.0,2,60
+PCA T2/SPE,ammonia,105,1.0,0,60
+Expert rules,ammonia,105,1.0,1,60
+Gradient boosting,ammonia,105,1.0,0,60
+EKF twin,ammonia,105,1.0,1,60
+FOS/TAC > 0.3,ammonia,106,1.0,0,61
+FOS/TAC +30 %,ammonia,106,1.0,0,61
+EWMA yield,ammonia,106,1.0,1,61
+CUSUM yield,ammonia,106,1.0,2,61
+PCA T2/SPE,ammonia,106,1.0,0,61
+Expert rules,ammonia,106,1.0,1,61
+Gradient boosting,ammonia,106,1.0,0,61
+EKF twin,ammonia,106,1.0,0,61
+FOS/TAC > 0.3,ammonia,107,1.0,0,58
+FOS/TAC +30 %,ammonia,107,1.0,0,58
+EWMA yield,ammonia,107,1.0,1,58
+CUSUM yield,ammonia,107,1.0,2,58
+PCA T2/SPE,ammonia,107,1.0,0,58
+Expert rules,ammonia,107,1.0,1,58
+Gradient boosting,ammonia,107,1.0,0,58
+EKF twin,ammonia,107,1.0,0,58
+FOS/TAC > 0.3,ammonia,108,1.0,0,56
+FOS/TAC +30 %,ammonia,108,1.0,0,56
+EWMA yield,ammonia,108,1.0,0,56
+CUSUM yield,ammonia,108,1.0,2,56
+PCA T2/SPE,ammonia,108,1.0,0,56
+Expert rules,ammonia,108,1.0,0,56
+Gradient boosting,ammonia,108,1.0,0,56
+EKF twin,ammonia,108,1.0,0,56
+FOS/TAC > 0.3,ammonia,109,1.0,0,58
+FOS/TAC +30 %,ammonia,109,1.0,0,58
+EWMA yield,ammonia,109,1.0,2,58
+CUSUM yield,ammonia,109,1.0,2,58
+PCA T2/SPE,ammonia,109,1.0,0,58
+Expert rules,ammonia,109,1.0,2,58
+Gradient boosting,ammonia,109,1.0,0,58
+EKF twin,ammonia,109,1.0,0,58
+FOS/TAC > 0.3,ammonia,110,1.0,0,58
+FOS/TAC +30 %,ammonia,110,1.0,0,58
+EWMA yield,ammonia,110,1.0,0,58
+CUSUM yield,ammonia,110,1.0,3,58
+PCA T2/SPE,ammonia,110,1.0,1,58
+Expert rules,ammonia,110,1.0,0,58
+Gradient boosting,ammonia,110,1.0,0,58
+EKF twin,ammonia,110,1.0,0,58
+FOS/TAC > 0.3,ammonia,111,1.0,0,59
+FOS/TAC +30 %,ammonia,111,1.0,0,59
+EWMA yield,ammonia,111,1.0,0,59
+CUSUM yield,ammonia,111,1.0,0,59
+PCA T2/SPE,ammonia,111,1.0,0,59
+Expert rules,ammonia,111,1.0,0,59
+Gradient boosting,ammonia,111,1.0,0,59
+EKF twin,ammonia,111,1.0,2,59
+FOS/TAC > 0.3,ammonia,112,1.0,0,60
+FOS/TAC +30 %,ammonia,112,1.0,0,60
+EWMA yield,ammonia,112,1.0,2,60
+CUSUM yield,ammonia,112,1.0,2,60
+PCA T2/SPE,ammonia,112,1.0,0,60
+Expert rules,ammonia,112,1.0,2,60
+Gradient boosting,ammonia,112,1.0,0,60
+EKF twin,ammonia,112,1.0,0,60
+FOS/TAC > 0.3,ammonia,113,1.0,0,57
+FOS/TAC +30 %,ammonia,113,1.0,0,57
+EWMA yield,ammonia,113,1.0,2,57
+CUSUM yield,ammonia,113,1.0,2,57
+PCA T2/SPE,ammonia,113,1.0,0,57
+Expert rules,ammonia,113,1.0,2,57
+Gradient boosting,ammonia,113,1.0,0,57
+EKF twin,ammonia,113,1.0,1,57
+FOS/TAC > 0.3,ammonia,114,1.0,0,60
+FOS/TAC +30 %,ammonia,114,1.0,0,60
+EWMA yield,ammonia,114,1.0,1,60
+CUSUM yield,ammonia,114,1.0,1,60
+PCA T2/SPE,ammonia,114,1.0,0,60
+Expert rules,ammonia,114,1.0,1,60
+Gradient boosting,ammonia,114,1.0,2,60
+EKF twin,ammonia,114,1.0,0,60
+FOS/TAC > 0.3,ammonia,115,1.0,0,57
+FOS/TAC +30 %,ammonia,115,1.0,0,57
+EWMA yield,ammonia,115,1.0,2,57
+CUSUM yield,ammonia,115,1.0,1,57
+PCA T2/SPE,ammonia,115,1.0,0,57
+Expert rules,ammonia,115,1.0,2,57
+Gradient boosting,ammonia,115,1.0,0,57
+EKF twin,ammonia,115,1.0,0,57
+FOS/TAC > 0.3,ammonia,116,1.0,0,58
+FOS/TAC +30 %,ammonia,116,1.0,0,58
+EWMA yield,ammonia,116,1.0,1,58
+CUSUM yield,ammonia,116,1.0,2,58
+PCA T2/SPE,ammonia,116,1.0,0,58
+Expert rules,ammonia,116,1.0,1,58
+Gradient boosting,ammonia,116,1.0,0,58
+EKF twin,ammonia,116,1.0,0,58
+FOS/TAC > 0.3,ammonia,117,1.0,0,58
+FOS/TAC +30 %,ammonia,117,1.0,0,58
+EWMA yield,ammonia,117,1.0,1,58
+CUSUM yield,ammonia,117,1.0,1,58
+PCA T2/SPE,ammonia,117,1.0,0,58
+Expert rules,ammonia,117,1.0,1,58
+Gradient boosting,ammonia,117,1.0,0,58
+EKF twin,ammonia,117,1.0,1,58
+FOS/TAC > 0.3,ammonia,118,1.0,0,55
+FOS/TAC +30 %,ammonia,118,1.0,0,55
+EWMA yield,ammonia,118,1.0,0,55
+CUSUM yield,ammonia,118,1.0,0,55
+PCA T2/SPE,ammonia,118,1.0,0,55
+Expert rules,ammonia,118,1.0,0,55
+Gradient boosting,ammonia,118,1.0,0,55
+EKF twin,ammonia,118,1.0,0,55
+FOS/TAC > 0.3,ammonia,119,1.0,0,61
+FOS/TAC +30 %,ammonia,119,1.0,0,61
+EWMA yield,ammonia,119,1.0,0,61
+CUSUM yield,ammonia,119,1.0,0,61
+PCA T2/SPE,ammonia,119,1.0,0,61
+Expert rules,ammonia,119,1.0,0,61
+Gradient boosting,ammonia,119,1.0,0,61
+EKF twin,ammonia,119,1.0,0,61
+FOS/TAC > 0.3,temperature,100,1.0,0,55
+FOS/TAC +30 %,temperature,100,1.0,0,55
+EWMA yield,temperature,100,1.0,1,55
+CUSUM yield,temperature,100,1.0,3,55
+PCA T2/SPE,temperature,100,1.0,0,55
+Expert rules,temperature,100,1.0,1,55
+Gradient boosting,temperature,100,1.0,0,55
+EKF twin,temperature,100,1.0,1,55
+FOS/TAC > 0.3,temperature,101,1.0,0,56
+FOS/TAC +30 %,temperature,101,1.0,0,56
+EWMA yield,temperature,101,1.0,1,56
+CUSUM yield,temperature,101,1.0,2,56
+PCA T2/SPE,temperature,101,1.0,0,56
+Expert rules,temperature,101,1.0,1,56
+Gradient boosting,temperature,101,1.0,0,56
+EKF twin,temperature,101,1.0,0,56
+FOS/TAC > 0.3,temperature,102,1.0,0,60
+FOS/TAC +30 %,temperature,102,1.0,0,60
+EWMA yield,temperature,102,1.0,1,60
+CUSUM yield,temperature,102,1.0,1,60
+PCA T2/SPE,temperature,102,1.0,0,60
+Expert rules,temperature,102,1.0,1,60
+Gradient boosting,temperature,102,1.0,0,60
+EKF twin,temperature,102,1.0,0,60
+FOS/TAC > 0.3,temperature,103,1.0,0,55
+FOS/TAC +30 %,temperature,103,1.0,0,55
+EWMA yield,temperature,103,1.0,1,55
+CUSUM yield,temperature,103,1.0,4,55
+PCA T2/SPE,temperature,103,1.0,0,55
+Expert rules,temperature,103,1.0,1,55
+Gradient boosting,temperature,103,1.0,0,55
+EKF twin,temperature,103,1.0,0,55
+FOS/TAC > 0.3,temperature,104,1.0,0,58
+FOS/TAC +30 %,temperature,104,1.0,0,58
+EWMA yield,temperature,104,1.0,1,58
+CUSUM yield,temperature,104,1.0,3,58
+PCA T2/SPE,temperature,104,1.0,0,58
+Expert rules,temperature,104,1.0,1,58
+Gradient boosting,temperature,104,1.0,0,58
+EKF twin,temperature,104,1.0,0,58
+FOS/TAC > 0.3,temperature,105,1.0,0,61
+FOS/TAC +30 %,temperature,105,1.0,0,61
+EWMA yield,temperature,105,1.0,0,61
+CUSUM yield,temperature,105,1.0,1,61
+PCA T2/SPE,temperature,105,1.0,0,61
+Expert rules,temperature,105,1.0,0,61
+Gradient boosting,temperature,105,1.0,0,61
+EKF twin,temperature,105,1.0,0,61
+FOS/TAC > 0.3,temperature,106,1.0,0,55
+FOS/TAC +30 %,temperature,106,1.0,0,55
+EWMA yield,temperature,106,1.0,1,55
+CUSUM yield,temperature,106,1.0,1,55
+PCA T2/SPE,temperature,106,1.0,0,55
+Expert rules,temperature,106,1.0,1,55
+Gradient boosting,temperature,106,1.0,0,55
+EKF twin,temperature,106,1.0,1,55
+FOS/TAC > 0.3,temperature,107,1.0,0,56
+FOS/TAC +30 %,temperature,107,1.0,0,56
+EWMA yield,temperature,107,1.0,2,56
+CUSUM yield,temperature,107,1.0,2,56
+PCA T2/SPE,temperature,107,1.0,0,56
+Expert rules,temperature,107,1.0,2,56
+Gradient boosting,temperature,107,1.0,0,56
+EKF twin,temperature,107,1.0,0,56
+FOS/TAC > 0.3,temperature,108,1.0,0,59
+FOS/TAC +30 %,temperature,108,1.0,0,59
+EWMA yield,temperature,108,1.0,0,59
+CUSUM yield,temperature,108,1.0,1,59
+PCA T2/SPE,temperature,108,1.0,0,59
+Expert rules,temperature,108,1.0,0,59
+Gradient boosting,temperature,108,1.0,0,59
+EKF twin,temperature,108,1.0,0,59
+FOS/TAC > 0.3,temperature,109,1.0,0,57
+FOS/TAC +30 %,temperature,109,1.0,0,57
+EWMA yield,temperature,109,1.0,1,57
+CUSUM yield,temperature,109,1.0,4,57
+PCA T2/SPE,temperature,109,1.0,0,57
+Expert rules,temperature,109,1.0,1,57
+Gradient boosting,temperature,109,1.0,0,57
+EKF twin,temperature,109,1.0,1,57
+FOS/TAC > 0.3,temperature,110,1.0,0,57
+FOS/TAC +30 %,temperature,110,1.0,0,57
+EWMA yield,temperature,110,1.0,0,57
+CUSUM yield,temperature,110,1.0,2,57
+PCA T2/SPE,temperature,110,1.0,1,57
+Expert rules,temperature,110,1.0,0,57
+Gradient boosting,temperature,110,1.0,0,57
+EKF twin,temperature,110,1.0,0,57
+FOS/TAC > 0.3,temperature,111,1.0,0,56
+FOS/TAC +30 %,temperature,111,1.0,0,56
+EWMA yield,temperature,111,1.0,0,56
+CUSUM yield,temperature,111,1.0,0,56
+PCA T2/SPE,temperature,111,1.0,0,56
+Expert rules,temperature,111,1.0,0,56
+Gradient boosting,temperature,111,1.0,0,56
+EKF twin,temperature,111,1.0,0,56
+FOS/TAC > 0.3,temperature,112,1.0,0,58
+FOS/TAC +30 %,temperature,112,1.0,0,58
+EWMA yield,temperature,112,1.0,1,58
+CUSUM yield,temperature,112,1.0,3,58
+PCA T2/SPE,temperature,112,1.0,0,58
+Expert rules,temperature,112,1.0,1,58
+Gradient boosting,temperature,112,1.0,0,58
+EKF twin,temperature,112,1.0,1,58
+FOS/TAC > 0.3,temperature,113,1.0,0,60
+FOS/TAC +30 %,temperature,113,1.0,0,60
+EWMA yield,temperature,113,1.0,2,60
+CUSUM yield,temperature,113,1.0,2,60
+PCA T2/SPE,temperature,113,1.0,0,60
+Expert rules,temperature,113,1.0,2,60
+Gradient boosting,temperature,113,1.0,0,60
+EKF twin,temperature,113,1.0,1,60
+FOS/TAC > 0.3,temperature,114,1.0,0,56
+FOS/TAC +30 %,temperature,114,1.0,0,56
+EWMA yield,temperature,114,1.0,1,56
+CUSUM yield,temperature,114,1.0,1,56
+PCA T2/SPE,temperature,114,1.0,0,56
+Expert rules,temperature,114,1.0,1,56
+Gradient boosting,temperature,114,1.0,2,56
+EKF twin,temperature,114,1.0,1,56
+FOS/TAC > 0.3,temperature,115,1.0,0,58
+FOS/TAC +30 %,temperature,115,1.0,0,58
+EWMA yield,temperature,115,1.0,3,58
+CUSUM yield,temperature,115,1.0,3,58
+PCA T2/SPE,temperature,115,1.0,0,58
+Expert rules,temperature,115,1.0,3,58
+Gradient boosting,temperature,115,1.0,0,58
+EKF twin,temperature,115,1.0,0,58
+FOS/TAC > 0.3,temperature,116,1.0,0,59
+FOS/TAC +30 %,temperature,116,1.0,0,59
+EWMA yield,temperature,116,1.0,1,59
+CUSUM yield,temperature,116,1.0,2,59
+PCA T2/SPE,temperature,116,1.0,0,59
+Expert rules,temperature,116,1.0,1,59
+Gradient boosting,temperature,116,1.0,0,59
+EKF twin,temperature,116,1.0,1,59
+FOS/TAC > 0.3,temperature,117,1.0,0,58
+FOS/TAC +30 %,temperature,117,1.0,0,58
+EWMA yield,temperature,117,1.0,2,58
+CUSUM yield,temperature,117,1.0,2,58
+PCA T2/SPE,temperature,117,1.0,0,58
+Expert rules,temperature,117,1.0,2,58
+Gradient boosting,temperature,117,1.0,0,58
+EKF twin,temperature,117,1.0,0,58
+FOS/TAC > 0.3,temperature,118,1.0,0,59
+FOS/TAC +30 %,temperature,118,1.0,0,59
+EWMA yield,temperature,118,1.0,1,59
+CUSUM yield,temperature,118,1.0,2,59
+PCA T2/SPE,temperature,118,1.0,0,59
+Expert rules,temperature,118,1.0,1,59
+Gradient boosting,temperature,118,1.0,0,59
+EKF twin,temperature,118,1.0,0,59
+FOS/TAC > 0.3,temperature,119,1.0,0,61
+FOS/TAC +30 %,temperature,119,1.0,0,61
+EWMA yield,temperature,119,1.0,0,61
+CUSUM yield,temperature,119,1.0,0,61
+PCA T2/SPE,temperature,119,1.0,0,61
+Expert rules,temperature,119,1.0,0,61
+Gradient boosting,temperature,119,1.0,1,61
+EKF twin,temperature,119,1.0,1,61
+FOS/TAC > 0.3,substrate,100,1.0,0,60
+FOS/TAC +30 %,substrate,100,1.0,0,60
+EWMA yield,substrate,100,1.0,1,60
+CUSUM yield,substrate,100,1.0,5,60
+PCA T2/SPE,substrate,100,1.0,0,60
+Expert rules,substrate,100,1.0,1,60
+Gradient boosting,substrate,100,1.0,0,60
+EKF twin,substrate,100,1.0,0,60
+FOS/TAC > 0.3,substrate,101,1.0,0,61
+FOS/TAC +30 %,substrate,101,1.0,0,61
+EWMA yield,substrate,101,1.0,1,61
+CUSUM yield,substrate,101,1.0,3,61
+PCA T2/SPE,substrate,101,1.0,0,61
+Expert rules,substrate,101,1.0,1,61
+Gradient boosting,substrate,101,1.0,0,61
+EKF twin,substrate,101,1.0,1,61
+FOS/TAC > 0.3,substrate,102,1.0,0,57
+FOS/TAC +30 %,substrate,102,1.0,0,57
+EWMA yield,substrate,102,1.0,1,57
+CUSUM yield,substrate,102,1.0,1,57
+PCA T2/SPE,substrate,102,1.0,0,57
+Expert rules,substrate,102,1.0,1,57
+Gradient boosting,substrate,102,1.0,0,57
+EKF twin,substrate,102,1.0,0,57
+FOS/TAC > 0.3,substrate,103,1.0,0,57
+FOS/TAC +30 %,substrate,103,1.0,0,57
+EWMA yield,substrate,103,1.0,1,57
+CUSUM yield,substrate,103,1.0,3,57
+PCA T2/SPE,substrate,103,1.0,0,57
+Expert rules,substrate,103,1.0,1,57
+Gradient boosting,substrate,103,1.0,0,57
+EKF twin,substrate,103,1.0,0,57
+FOS/TAC > 0.3,substrate,104,1.0,0,61
+FOS/TAC +30 %,substrate,104,1.0,0,61
+EWMA yield,substrate,104,1.0,2,61
+CUSUM yield,substrate,104,1.0,3,61
+PCA T2/SPE,substrate,104,1.0,0,61
+Expert rules,substrate,104,1.0,2,61
+Gradient boosting,substrate,104,1.0,0,61
+EKF twin,substrate,104,1.0,1,61
+FOS/TAC > 0.3,substrate,105,1.0,0,55
+FOS/TAC +30 %,substrate,105,1.0,0,55
+EWMA yield,substrate,105,1.0,1,55
+CUSUM yield,substrate,105,1.0,1,55
+PCA T2/SPE,substrate,105,1.0,0,55
+Expert rules,substrate,105,1.0,1,55
+Gradient boosting,substrate,105,1.0,0,55
+EKF twin,substrate,105,1.0,2,55
+FOS/TAC > 0.3,substrate,106,1.0,0,59
+FOS/TAC +30 %,substrate,106,1.0,0,59
+EWMA yield,substrate,106,1.0,0,59
+CUSUM yield,substrate,106,1.0,2,59
+PCA T2/SPE,substrate,106,1.0,0,59
+Expert rules,substrate,106,1.0,0,59
+Gradient boosting,substrate,106,1.0,0,59
+EKF twin,substrate,106,1.0,0,59
+FOS/TAC > 0.3,substrate,107,1.0,0,59
+FOS/TAC +30 %,substrate,107,1.0,0,59
+EWMA yield,substrate,107,1.0,2,59
+CUSUM yield,substrate,107,1.0,1,59
+PCA T2/SPE,substrate,107,1.0,0,59
+Expert rules,substrate,107,1.0,2,59
+Gradient boosting,substrate,107,1.0,0,59
+EKF twin,substrate,107,1.0,0,59
+FOS/TAC > 0.3,substrate,108,1.0,0,57
+FOS/TAC +30 %,substrate,108,1.0,0,57
+EWMA yield,substrate,108,1.0,0,57
+CUSUM yield,substrate,108,1.0,0,57
+PCA T2/SPE,substrate,108,1.0,1,57
+Expert rules,substrate,108,1.0,0,57
+Gradient boosting,substrate,108,1.0,0,57
+EKF twin,substrate,108,1.0,1,57
+FOS/TAC > 0.3,substrate,109,1.0,0,57
+FOS/TAC +30 %,substrate,109,1.0,0,57
+EWMA yield,substrate,109,1.0,1,57
+CUSUM yield,substrate,109,1.0,2,57
+PCA T2/SPE,substrate,109,1.0,0,57
+Expert rules,substrate,109,1.0,1,57
+Gradient boosting,substrate,109,1.0,0,57
+EKF twin,substrate,109,1.0,1,57
+FOS/TAC > 0.3,substrate,110,1.0,0,55
+FOS/TAC +30 %,substrate,110,1.0,0,55
+EWMA yield,substrate,110,1.0,0,55
+CUSUM yield,substrate,110,1.0,1,55
+PCA T2/SPE,substrate,110,1.0,1,55
+Expert rules,substrate,110,1.0,0,55
+Gradient boosting,substrate,110,1.0,0,55
+EKF twin,substrate,110,1.0,1,55
+FOS/TAC > 0.3,substrate,111,1.0,0,55
+FOS/TAC +30 %,substrate,111,1.0,0,55
+EWMA yield,substrate,111,1.0,0,55
+CUSUM yield,substrate,111,1.0,0,55
+PCA T2/SPE,substrate,111,1.0,0,55
+Expert rules,substrate,111,1.0,0,55
+Gradient boosting,substrate,111,1.0,0,55
+EKF twin,substrate,111,1.0,0,55
+FOS/TAC > 0.3,substrate,112,1.0,0,59
+FOS/TAC +30 %,substrate,112,1.0,0,59
+EWMA yield,substrate,112,1.0,0,59
+CUSUM yield,substrate,112,1.0,0,59
+PCA T2/SPE,substrate,112,1.0,0,59
+Expert rules,substrate,112,1.0,0,59
+Gradient boosting,substrate,112,1.0,0,59
+EKF twin,substrate,112,1.0,2,59
+FOS/TAC > 0.3,substrate,113,1.0,0,56
+FOS/TAC +30 %,substrate,113,1.0,0,56
+EWMA yield,substrate,113,1.0,2,56
+CUSUM yield,substrate,113,1.0,2,56
+PCA T2/SPE,substrate,113,1.0,0,56
+Expert rules,substrate,113,1.0,2,56
+Gradient boosting,substrate,113,1.0,0,56
+EKF twin,substrate,113,1.0,1,56
+FOS/TAC > 0.3,substrate,114,1.0,0,56
+FOS/TAC +30 %,substrate,114,1.0,0,56
+EWMA yield,substrate,114,1.0,1,56
+CUSUM yield,substrate,114,1.0,2,56
+PCA T2/SPE,substrate,114,1.0,0,56
+Expert rules,substrate,114,1.0,1,56
+Gradient boosting,substrate,114,1.0,1,56
+EKF twin,substrate,114,1.0,0,56
+FOS/TAC > 0.3,substrate,115,1.0,0,60
+FOS/TAC +30 %,substrate,115,1.0,0,60
+EWMA yield,substrate,115,1.0,0,60
+CUSUM yield,substrate,115,1.0,3,60
+PCA T2/SPE,substrate,115,1.0,0,60
+Expert rules,substrate,115,1.0,0,60
+Gradient boosting,substrate,115,1.0,0,60
+EKF twin,substrate,115,1.0,1,60
+FOS/TAC > 0.3,substrate,116,1.0,0,61
+FOS/TAC +30 %,substrate,116,1.0,0,61
+EWMA yield,substrate,116,1.0,1,61
+CUSUM yield,substrate,116,1.0,1,61
+PCA T2/SPE,substrate,116,1.0,0,61
+Expert rules,substrate,116,1.0,1,61
+Gradient boosting,substrate,116,1.0,0,61
+EKF twin,substrate,116,1.0,0,61
+FOS/TAC > 0.3,substrate,117,1.0,0,58
+FOS/TAC +30 %,substrate,117,1.0,0,58
+EWMA yield,substrate,117,1.0,1,58
+CUSUM yield,substrate,117,1.0,1,58
+PCA T2/SPE,substrate,117,1.0,0,58
+Expert rules,substrate,117,1.0,1,58
+Gradient boosting,substrate,117,1.0,0,58
+EKF twin,substrate,117,1.0,1,58
+FOS/TAC > 0.3,substrate,118,1.0,0,59
+FOS/TAC +30 %,substrate,118,1.0,0,59
+EWMA yield,substrate,118,1.0,0,59
+CUSUM yield,substrate,118,1.0,0,59
+PCA T2/SPE,substrate,118,1.0,0,59
+Expert rules,substrate,118,1.0,0,59
+Gradient boosting,substrate,118,1.0,0,59
+EKF twin,substrate,118,1.0,0,59
+FOS/TAC > 0.3,substrate,119,1.0,0,58
+FOS/TAC +30 %,substrate,119,1.0,0,58
+EWMA yield,substrate,119,1.0,0,58
+CUSUM yield,substrate,119,1.0,0,58
+PCA T2/SPE,substrate,119,1.0,0,58
+Expert rules,substrate,119,1.0,0,58
+Gradient boosting,substrate,119,1.0,0,58
+EKF twin,substrate,119,1.0,0,58
+FOS/TAC > 0.3,ch4_drift,100,1.0,0,56
+FOS/TAC +30 %,ch4_drift,100,1.0,0,56
+EWMA yield,ch4_drift,100,1.0,0,56
+CUSUM yield,ch4_drift,100,1.0,0,56
+PCA T2/SPE,ch4_drift,100,1.0,0,56
+Expert rules,ch4_drift,100,1.0,0,56
+Gradient boosting,ch4_drift,100,1.0,1,56
+EKF twin,ch4_drift,100,1.0,0,56
+FOS/TAC > 0.3,ch4_drift,101,1.0,0,61
+FOS/TAC +30 %,ch4_drift,101,1.0,0,61
+EWMA yield,ch4_drift,101,1.0,1,61
+CUSUM yield,ch4_drift,101,1.0,3,61
+PCA T2/SPE,ch4_drift,101,1.0,0,61
+Expert rules,ch4_drift,101,1.0,1,61
+Gradient boosting,ch4_drift,101,1.0,0,61
+EKF twin,ch4_drift,101,1.0,0,61
+FOS/TAC > 0.3,ch4_drift,102,1.0,0,61
+FOS/TAC +30 %,ch4_drift,102,1.0,0,61
+EWMA yield,ch4_drift,102,1.0,0,61
+CUSUM yield,ch4_drift,102,1.0,0,61
+PCA T2/SPE,ch4_drift,102,1.0,0,61
+Expert rules,ch4_drift,102,1.0,0,61
+Gradient boosting,ch4_drift,102,1.0,0,61
+EKF twin,ch4_drift,102,1.0,0,61
+FOS/TAC > 0.3,ch4_drift,103,1.0,0,58
+FOS/TAC +30 %,ch4_drift,103,1.0,0,58
+EWMA yield,ch4_drift,103,1.0,1,58
+CUSUM yield,ch4_drift,103,1.0,3,58
+PCA T2/SPE,ch4_drift,103,1.0,0,58
+Expert rules,ch4_drift,103,1.0,1,58
+Gradient boosting,ch4_drift,103,1.0,1,58
+EKF twin,ch4_drift,103,1.0,0,58
+FOS/TAC > 0.3,ch4_drift,104,1.0,0,59
+FOS/TAC +30 %,ch4_drift,104,1.0,0,59
+EWMA yield,ch4_drift,104,1.0,1,59
+CUSUM yield,ch4_drift,104,1.0,3,59
+PCA T2/SPE,ch4_drift,104,1.0,0,59
+Expert rules,ch4_drift,104,1.0,1,59
+Gradient boosting,ch4_drift,104,1.0,0,59
+EKF twin,ch4_drift,104,1.0,0,59
+FOS/TAC > 0.3,ch4_drift,105,1.0,0,59
+FOS/TAC +30 %,ch4_drift,105,1.0,0,59
+EWMA yield,ch4_drift,105,1.0,1,59
+CUSUM yield,ch4_drift,105,1.0,2,59
+PCA T2/SPE,ch4_drift,105,1.0,0,59
+Expert rules,ch4_drift,105,1.0,1,59
+Gradient boosting,ch4_drift,105,1.0,0,59
+EKF twin,ch4_drift,105,1.0,1,59
+FOS/TAC > 0.3,ch4_drift,106,1.0,0,59
+FOS/TAC +30 %,ch4_drift,106,1.0,0,59
+EWMA yield,ch4_drift,106,1.0,0,59
+CUSUM yield,ch4_drift,106,1.0,0,59
+PCA T2/SPE,ch4_drift,106,1.0,0,59
+Expert rules,ch4_drift,106,1.0,0,59
+Gradient boosting,ch4_drift,106,1.0,0,59
+EKF twin,ch4_drift,106,1.0,1,59
+FOS/TAC > 0.3,ch4_drift,107,1.0,0,56
+FOS/TAC +30 %,ch4_drift,107,1.0,0,56
+EWMA yield,ch4_drift,107,1.0,1,56
+CUSUM yield,ch4_drift,107,1.0,1,56
+PCA T2/SPE,ch4_drift,107,1.0,0,56
+Expert rules,ch4_drift,107,1.0,1,56
+Gradient boosting,ch4_drift,107,1.0,0,56
+EKF twin,ch4_drift,107,1.0,0,56
+FOS/TAC > 0.3,ch4_drift,108,1.0,0,60
+FOS/TAC +30 %,ch4_drift,108,1.0,0,60
+EWMA yield,ch4_drift,108,1.0,1,60
+CUSUM yield,ch4_drift,108,1.0,2,60
+PCA T2/SPE,ch4_drift,108,1.0,0,60
+Expert rules,ch4_drift,108,1.0,1,60
+Gradient boosting,ch4_drift,108,1.0,0,60
+EKF twin,ch4_drift,108,1.0,1,60
+FOS/TAC > 0.3,ch4_drift,109,1.0,0,60
+FOS/TAC +30 %,ch4_drift,109,1.0,0,60
+EWMA yield,ch4_drift,109,1.0,1,60
+CUSUM yield,ch4_drift,109,1.0,2,60
+PCA T2/SPE,ch4_drift,109,1.0,0,60
+Expert rules,ch4_drift,109,1.0,1,60
+Gradient boosting,ch4_drift,109,1.0,0,60
+EKF twin,ch4_drift,109,1.0,1,60
+FOS/TAC > 0.3,ch4_drift,110,1.0,0,56
+FOS/TAC +30 %,ch4_drift,110,1.0,0,56
+EWMA yield,ch4_drift,110,1.0,0,56
+CUSUM yield,ch4_drift,110,1.0,1,56
+PCA T2/SPE,ch4_drift,110,1.0,2,56
+Expert rules,ch4_drift,110,1.0,0,56
+Gradient boosting,ch4_drift,110,1.0,0,56
+EKF twin,ch4_drift,110,1.0,0,56
+FOS/TAC > 0.3,ch4_drift,111,1.0,0,57
+FOS/TAC +30 %,ch4_drift,111,1.0,0,57
+EWMA yield,ch4_drift,111,1.0,0,57
+CUSUM yield,ch4_drift,111,1.0,0,57
+PCA T2/SPE,ch4_drift,111,1.0,0,57
+Expert rules,ch4_drift,111,1.0,0,57
+Gradient boosting,ch4_drift,111,1.0,0,57
+EKF twin,ch4_drift,111,1.0,0,57
+FOS/TAC > 0.3,ch4_drift,112,1.0,0,58
+FOS/TAC +30 %,ch4_drift,112,1.0,0,58
+EWMA yield,ch4_drift,112,1.0,1,58
+CUSUM yield,ch4_drift,112,1.0,1,58
+PCA T2/SPE,ch4_drift,112,1.0,0,58
+Expert rules,ch4_drift,112,1.0,1,58
+Gradient boosting,ch4_drift,112,1.0,0,58
+EKF twin,ch4_drift,112,1.0,0,58
+FOS/TAC > 0.3,ch4_drift,113,1.0,0,57
+FOS/TAC +30 %,ch4_drift,113,1.0,0,57
+EWMA yield,ch4_drift,113,1.0,2,57
+CUSUM yield,ch4_drift,113,1.0,2,57
+PCA T2/SPE,ch4_drift,113,1.0,0,57
+Expert rules,ch4_drift,113,1.0,2,57
+Gradient boosting,ch4_drift,113,1.0,0,57
+EKF twin,ch4_drift,113,1.0,1,57
+FOS/TAC > 0.3,ch4_drift,114,1.0,0,57
+FOS/TAC +30 %,ch4_drift,114,1.0,0,57
+EWMA yield,ch4_drift,114,1.0,1,57
+CUSUM yield,ch4_drift,114,1.0,3,57
+PCA T2/SPE,ch4_drift,114,1.0,0,57
+Expert rules,ch4_drift,114,1.0,1,57
+Gradient boosting,ch4_drift,114,1.0,1,57
+EKF twin,ch4_drift,114,1.0,1,57
+FOS/TAC > 0.3,ch4_drift,115,1.0,0,57
+FOS/TAC +30 %,ch4_drift,115,1.0,0,57
+EWMA yield,ch4_drift,115,1.0,1,57
+CUSUM yield,ch4_drift,115,1.0,1,57
+PCA T2/SPE,ch4_drift,115,1.0,0,57
+Expert rules,ch4_drift,115,1.0,1,57
+Gradient boosting,ch4_drift,115,1.0,0,57
+EKF twin,ch4_drift,115,1.0,2,57
+FOS/TAC > 0.3,ch4_drift,116,1.0,0,59
+FOS/TAC +30 %,ch4_drift,116,1.0,0,59
+EWMA yield,ch4_drift,116,1.0,1,59
+CUSUM yield,ch4_drift,116,1.0,1,59
+PCA T2/SPE,ch4_drift,116,1.0,0,59
+Expert rules,ch4_drift,116,1.0,1,59
+Gradient boosting,ch4_drift,116,1.0,0,59
+EKF twin,ch4_drift,116,1.0,0,59
+FOS/TAC > 0.3,ch4_drift,117,1.0,0,61
+FOS/TAC +30 %,ch4_drift,117,1.0,0,61
+EWMA yield,ch4_drift,117,1.0,3,61
+CUSUM yield,ch4_drift,117,1.0,3,61
+PCA T2/SPE,ch4_drift,117,1.0,0,61
+Expert rules,ch4_drift,117,1.0,3,61
+Gradient boosting,ch4_drift,117,1.0,0,61
+EKF twin,ch4_drift,117,1.0,2,61
+FOS/TAC > 0.3,ch4_drift,118,1.0,0,59
+FOS/TAC +30 %,ch4_drift,118,1.0,0,59
+EWMA yield,ch4_drift,118,1.0,1,59
+CUSUM yield,ch4_drift,118,1.0,1,59
+PCA T2/SPE,ch4_drift,118,1.0,0,59
+Expert rules,ch4_drift,118,1.0,1,59
+Gradient boosting,ch4_drift,118,1.0,0,59
+EKF twin,ch4_drift,118,1.0,0,59
+FOS/TAC > 0.3,ch4_drift,119,1.0,0,58
+FOS/TAC +30 %,ch4_drift,119,1.0,0,58
+EWMA yield,ch4_drift,119,1.0,0,58
+CUSUM yield,ch4_drift,119,1.0,0,58
+PCA T2/SPE,ch4_drift,119,1.0,0,58
+Expert rules,ch4_drift,119,1.0,0,58
+Gradient boosting,ch4_drift,119,1.0,0,58
+EKF twin,ch4_drift,119,1.0,0,58
+FOS/TAC > 0.3,flow_stuck,100,1.0,0,55
+FOS/TAC +30 %,flow_stuck,100,1.0,0,55
+EWMA yield,flow_stuck,100,1.0,0,55
+CUSUM yield,flow_stuck,100,1.0,0,55
+PCA T2/SPE,flow_stuck,100,1.0,0,55
+Expert rules,flow_stuck,100,1.0,0,55
+Gradient boosting,flow_stuck,100,1.0,2,55
+EKF twin,flow_stuck,100,1.0,1,55
+FOS/TAC > 0.3,flow_stuck,101,1.0,0,58
+FOS/TAC +30 %,flow_stuck,101,1.0,0,58
+EWMA yield,flow_stuck,101,1.0,1,58
+CUSUM yield,flow_stuck,101,1.0,1,58
+PCA T2/SPE,flow_stuck,101,1.0,0,58
+Expert rules,flow_stuck,101,1.0,1,58
+Gradient boosting,flow_stuck,101,1.0,0,58
+EKF twin,flow_stuck,101,1.0,0,58
+FOS/TAC > 0.3,flow_stuck,102,1.0,0,55
+FOS/TAC +30 %,flow_stuck,102,1.0,0,55
+EWMA yield,flow_stuck,102,1.0,0,55
+CUSUM yield,flow_stuck,102,1.0,2,55
+PCA T2/SPE,flow_stuck,102,1.0,0,55
+Expert rules,flow_stuck,102,1.0,0,55
+Gradient boosting,flow_stuck,102,1.0,0,55
+EKF twin,flow_stuck,102,1.0,1,55
+FOS/TAC > 0.3,flow_stuck,103,1.0,0,55
+FOS/TAC +30 %,flow_stuck,103,1.0,0,55
+EWMA yield,flow_stuck,103,1.0,1,55
+CUSUM yield,flow_stuck,103,1.0,3,55
+PCA T2/SPE,flow_stuck,103,1.0,0,55
+Expert rules,flow_stuck,103,1.0,1,55
+Gradient boosting,flow_stuck,103,1.0,0,55
+EKF twin,flow_stuck,103,1.0,0,55
+FOS/TAC > 0.3,flow_stuck,104,1.0,0,58
+FOS/TAC +30 %,flow_stuck,104,1.0,0,58
+EWMA yield,flow_stuck,104,1.0,1,58
+CUSUM yield,flow_stuck,104,1.0,1,58
+PCA T2/SPE,flow_stuck,104,1.0,0,58
+Expert rules,flow_stuck,104,1.0,1,58
+Gradient boosting,flow_stuck,104,1.0,0,58
+EKF twin,flow_stuck,104,1.0,0,58
+FOS/TAC > 0.3,flow_stuck,105,1.0,0,55
+FOS/TAC +30 %,flow_stuck,105,1.0,0,55
+EWMA yield,flow_stuck,105,1.0,1,55
+CUSUM yield,flow_stuck,105,1.0,1,55
+PCA T2/SPE,flow_stuck,105,1.0,0,55
+Expert rules,flow_stuck,105,1.0,1,55
+Gradient boosting,flow_stuck,105,1.0,0,55
+EKF twin,flow_stuck,105,1.0,0,55
+FOS/TAC > 0.3,flow_stuck,106,1.0,0,61
+FOS/TAC +30 %,flow_stuck,106,1.0,0,61
+EWMA yield,flow_stuck,106,1.0,0,61
+CUSUM yield,flow_stuck,106,1.0,3,61
+PCA T2/SPE,flow_stuck,106,1.0,0,61
+Expert rules,flow_stuck,106,1.0,0,61
+Gradient boosting,flow_stuck,106,1.0,0,61
+EKF twin,flow_stuck,106,1.0,1,61
+FOS/TAC > 0.3,flow_stuck,107,1.0,0,60
+FOS/TAC +30 %,flow_stuck,107,1.0,0,60
+EWMA yield,flow_stuck,107,1.0,1,60
+CUSUM yield,flow_stuck,107,1.0,1,60
+PCA T2/SPE,flow_stuck,107,1.0,0,60
+Expert rules,flow_stuck,107,1.0,1,60
+Gradient boosting,flow_stuck,107,1.0,0,60
+EKF twin,flow_stuck,107,1.0,0,60
+FOS/TAC > 0.3,flow_stuck,108,1.0,0,58
+FOS/TAC +30 %,flow_stuck,108,1.0,0,58
+EWMA yield,flow_stuck,108,1.0,1,58
+CUSUM yield,flow_stuck,108,1.0,1,58
+PCA T2/SPE,flow_stuck,108,1.0,0,58
+Expert rules,flow_stuck,108,1.0,1,58
+Gradient boosting,flow_stuck,108,1.0,0,58
+EKF twin,flow_stuck,108,1.0,1,58
+FOS/TAC > 0.3,flow_stuck,109,1.0,0,60
+FOS/TAC +30 %,flow_stuck,109,1.0,0,60
+EWMA yield,flow_stuck,109,1.0,2,60
+CUSUM yield,flow_stuck,109,1.0,2,60
+PCA T2/SPE,flow_stuck,109,1.0,0,60
+Expert rules,flow_stuck,109,1.0,2,60
+Gradient boosting,flow_stuck,109,1.0,0,60
+EKF twin,flow_stuck,109,1.0,0,60
+FOS/TAC > 0.3,flow_stuck,110,1.0,0,60
+FOS/TAC +30 %,flow_stuck,110,1.0,0,60
+EWMA yield,flow_stuck,110,1.0,2,60
+CUSUM yield,flow_stuck,110,1.0,3,60
+PCA T2/SPE,flow_stuck,110,1.0,1,60
+Expert rules,flow_stuck,110,1.0,2,60
+Gradient boosting,flow_stuck,110,1.0,0,60
+EKF twin,flow_stuck,110,1.0,0,60
+FOS/TAC > 0.3,flow_stuck,111,1.0,0,60
+FOS/TAC +30 %,flow_stuck,111,1.0,0,60
+EWMA yield,flow_stuck,111,1.0,2,60
+CUSUM yield,flow_stuck,111,1.0,3,60
+PCA T2/SPE,flow_stuck,111,1.0,0,60
+Expert rules,flow_stuck,111,1.0,2,60
+Gradient boosting,flow_stuck,111,1.0,0,60
+EKF twin,flow_stuck,111,1.0,1,60
+FOS/TAC > 0.3,flow_stuck,112,1.0,0,60
+FOS/TAC +30 %,flow_stuck,112,1.0,0,60
+EWMA yield,flow_stuck,112,1.0,2,60
+CUSUM yield,flow_stuck,112,1.0,4,60
+PCA T2/SPE,flow_stuck,112,1.0,0,60
+Expert rules,flow_stuck,112,1.0,2,60
+Gradient boosting,flow_stuck,112,1.0,1,60
+EKF twin,flow_stuck,112,1.0,1,60
+FOS/TAC > 0.3,flow_stuck,113,1.0,0,61
+FOS/TAC +30 %,flow_stuck,113,1.0,0,61
+EWMA yield,flow_stuck,113,1.0,2,61
+CUSUM yield,flow_stuck,113,1.0,2,61
+PCA T2/SPE,flow_stuck,113,1.0,0,61
+Expert rules,flow_stuck,113,1.0,2,61
+Gradient boosting,flow_stuck,113,1.0,0,61
+EKF twin,flow_stuck,113,1.0,1,61
+FOS/TAC > 0.3,flow_stuck,114,1.0,0,61
+FOS/TAC +30 %,flow_stuck,114,1.0,0,61
+EWMA yield,flow_stuck,114,1.0,1,61
+CUSUM yield,flow_stuck,114,1.0,2,61
+PCA T2/SPE,flow_stuck,114,1.0,1,61
+Expert rules,flow_stuck,114,1.0,1,61
+Gradient boosting,flow_stuck,114,1.0,2,61
+EKF twin,flow_stuck,114,1.0,1,61
+FOS/TAC > 0.3,flow_stuck,115,1.0,0,61
+FOS/TAC +30 %,flow_stuck,115,1.0,0,61
+EWMA yield,flow_stuck,115,1.0,2,61
+CUSUM yield,flow_stuck,115,1.0,2,61
+PCA T2/SPE,flow_stuck,115,1.0,0,61
+Expert rules,flow_stuck,115,1.0,2,61
+Gradient boosting,flow_stuck,115,1.0,1,61
+EKF twin,flow_stuck,115,1.0,0,61
+FOS/TAC > 0.3,flow_stuck,116,1.0,0,61
+FOS/TAC +30 %,flow_stuck,116,1.0,0,61
+EWMA yield,flow_stuck,116,1.0,1,61
+CUSUM yield,flow_stuck,116,1.0,1,61
+PCA T2/SPE,flow_stuck,116,1.0,0,61
+Expert rules,flow_stuck,116,1.0,1,61
+Gradient boosting,flow_stuck,116,1.0,0,61
+EKF twin,flow_stuck,116,1.0,0,61
+FOS/TAC > 0.3,flow_stuck,117,1.0,0,58
+FOS/TAC +30 %,flow_stuck,117,1.0,0,58
+EWMA yield,flow_stuck,117,1.0,0,58
+CUSUM yield,flow_stuck,117,1.0,3,58
+PCA T2/SPE,flow_stuck,117,1.0,0,58
+Expert rules,flow_stuck,117,1.0,0,58
+Gradient boosting,flow_stuck,117,1.0,2,58
+EKF twin,flow_stuck,117,1.0,1,58
+FOS/TAC > 0.3,flow_stuck,118,1.0,0,60
+FOS/TAC +30 %,flow_stuck,118,1.0,0,60
+EWMA yield,flow_stuck,118,1.0,1,60
+CUSUM yield,flow_stuck,118,1.0,2,60
+PCA T2/SPE,flow_stuck,118,1.0,0,60
+Expert rules,flow_stuck,118,1.0,1,60
+Gradient boosting,flow_stuck,118,1.0,0,60
+EKF twin,flow_stuck,118,1.0,0,60
+FOS/TAC > 0.3,flow_stuck,119,1.0,0,59
+FOS/TAC +30 %,flow_stuck,119,1.0,0,59
+EWMA yield,flow_stuck,119,1.0,0,59
+CUSUM yield,flow_stuck,119,1.0,0,59
+PCA T2/SPE,flow_stuck,119,1.0,0,59
+Expert rules,flow_stuck,119,1.0,0,59
+Gradient boosting,flow_stuck,119,1.0,0,59
+EKF twin,flow_stuck,119,1.0,1,59

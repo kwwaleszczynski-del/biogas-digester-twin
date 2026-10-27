@@ -1,0 +1,57 @@
+method,kind,detected,delay,before_loss,lead,with_loss
+FOS/TAC > 0.3,overload,0.75,8,0.05,-2,0.5
+FOS/TAC +30 %,overload,1,7,0.2,-0.5,0.5
+EWMA yield,overload,0.85,4,0.5,3.5,0.5
+CUSUM yield,overload,1,2,0.5,4.5,0.5
+PCA T2/SPE,overload,1,4,0.5,3,0.5
+Expert rules,overload,1,4,0.5,3.5,0.5
+Gradient boosting,overload,1,3,0.5,4,0.5
+EKF twin,overload,1,5,0.4,2,0.5
+FOS/TAC > 0.3,acidification,0.75,3,0,-1,0.8
+FOS/TAC +30 %,acidification,0.95,2,0.25,0,0.8
+EWMA yield,acidification,1,2,0.2,0,0.8
+CUSUM yield,acidification,1,1,0.65,1,0.8
+PCA T2/SPE,acidification,1,1,0.65,1,0.8
+Expert rules,acidification,1,0,0.8,2,0.8
+Gradient boosting,acidification,1,1,0.65,1,0.8
+EKF twin,acidification,1,1,0.7,1,0.8
+FOS/TAC > 0.3,ammonia,1,18.5,0,-6,1
+FOS/TAC +30 %,ammonia,1,13.5,0.2,-2,1
+EWMA yield,ammonia,0.9,8,0.85,4,1
+CUSUM yield,ammonia,1,7.5,1,4,1
+PCA T2/SPE,ammonia,1,6,1,6,1
+Expert rules,ammonia,1,3.5,1,8,1
+Gradient boosting,ammonia,1,2,1,10,1
+EKF twin,ammonia,1,12.5,0.45,0,1
+FOS/TAC > 0.3,temperature,0,,0,,0.95
+FOS/TAC +30 %,temperature,0.25,22,0,-17,0.95
+EWMA yield,temperature,1,9,0.15,-4,0.95
+CUSUM yield,temperature,1,6,0.4,-1,0.95
+PCA T2/SPE,temperature,1,1,0.95,4,0.95
+Expert rules,temperature,1,1,0.95,4,0.95
+Gradient boosting,temperature,1,1,0.95,4,0.95
+EKF twin,temperature,1,2,0.95,3,0.95
+FOS/TAC > 0.3,substrate,0,,0,,1
+FOS/TAC +30 %,substrate,0.05,35,0,-31,1
+EWMA yield,substrate,0.85,7,0.15,-1,1
+CUSUM yield,substrate,1,5,0.45,0,1
+PCA T2/SPE,substrate,0.85,7,0.1,-3,1
+Expert rules,substrate,0.9,7,0.2,-0.5,1
+Gradient boosting,substrate,1,2,1,3,1
+EKF twin,substrate,1,7.5,0.05,-2.5,1
+FOS/TAC > 0.3,ch4_drift,0,,0,,0
+FOS/TAC +30 %,ch4_drift,0.05,35,0,,0
+EWMA yield,ch4_drift,0.75,14,0,,0
+CUSUM yield,ch4_drift,1,8,0,,0
+PCA T2/SPE,ch4_drift,1,10,0,,0
+Expert rules,ch4_drift,1,8,0,,0
+Gradient boosting,ch4_drift,0.85,5,0,,0
+EKF twin,ch4_drift,1,16.5,0,,0
+FOS/TAC > 0.3,flow_stuck,0,,0,,0
+FOS/TAC +30 %,flow_stuck,0.05,33,0,,0
+EWMA yield,flow_stuck,0.8,15,0,,0
+CUSUM yield,flow_stuck,0.9,5,0,,0
+PCA T2/SPE,flow_stuck,0.25,36,0,,0
+Expert rules,flow_stuck,1,0,0,,0
+Gradient boosting,flow_stuck,1,1,0,,0
+EKF twin,flow_stuck,1,1,0,,0

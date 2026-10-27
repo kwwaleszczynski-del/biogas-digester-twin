@@ -1,0 +1,13 @@
+digester,method,days,episodes,per_year,share_of_days_in_alarm,near_logged_event
+R1 flexible bag,EWMA yield,311,4,4.695,0.5788,1
+R1 flexible bag,CUSUM yield,311,7,8.215,0.1897,2
+R1 flexible bag,Meter rule,311,4,4.695,0.0418,4
+R2 flexible bag,EWMA yield,317,4,4.606,0.8454,1
+R2 flexible bag,CUSUM yield,317,6,6.909,0.3565,3
+R2 flexible bag,Meter rule,317,4,4.606,0.06309,4
+R3 fixed dome,EWMA yield,284,2,2.57,0.8134,0
+R3 fixed dome,CUSUM yield,284,14,17.99,0.1338,0
+R3 fixed dome,Meter rule,284,3,3.856,0.03873,0
+R4 fixed dome,EWMA yield,285,5,6.404,0.3719,0
+R4 fixed dome,CUSUM yield,285,17,21.77,0.06667,0
+R4 fixed dome,Meter rule,285,3,3.842,0.02105,0

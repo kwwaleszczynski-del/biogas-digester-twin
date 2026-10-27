@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Biogas digester upset detection</title>
+<meta name="description" content="Which methods detect and classify anaerobic digester upsets earliest and with the fewest false alarms: FOS/TAC, EWMA/CUSUM, PCA, gradient boosting and an EKF twin on an ADM1 (BSM2) simulated agricultural plant.">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --ring: rgba(11,11,11,0.10); --accent: #2a78d6;
+  --lab: #eb6834; --stat: #2a78d6; --model: #1baf7a; --s4: #6250d6; --bad: #e34948;
+  --seq0: #f2f6fc; --seq1: #2a78d6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --accent: #3987e5;
+    --lab: #d95926; --stat: #3987e5; --model: #199e70; --s4: #9085e9; --bad: #e66767;
+    --seq0: #1f2630; --seq1: #3987e5;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --ink: #f0efec; --ink2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --ring: rgba(255,255,255,0.10); --accent: #3987e5;
+  --lab: #d95926; --stat: #3987e5; --model: #199e70; --s4: #9085e9; --bad: #e66767;
+  --seq0: #1f2630; --seq1: #3987e5;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink);
+       font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 1.7rem; margin: 0 0 6px; }
+h2 { font-size: 1.2rem; margin: 36px 0 6px; }
+p { color: var(--ink2); margin: 6px 0 12px; max-width: 80ch; }
+a { color: var(--accent); }
+.card { background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; padding: 14px 16px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 18px 0; }
+.tile .v { font-size: 1.6rem; font-weight: 650; }
+.tile .l { color: var(--ink2); font-size: 0.86rem; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin: 8px 0 10px; }
+label { font-size: 0.88rem; color: var(--ink2); }
+select { font: inherit; font-size: 0.9rem; padding: 3px 6px; border: 1px solid var(--axis);
+         border-radius: 6px; background: var(--surface); color: var(--ink); max-width: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.84rem; color: var(--ink2); margin: 6px 0; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.86rem; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th { color: var(--ink2); font-weight: 600; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+td.best { font-weight: 700; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 820px) { .grid2 { grid-template-columns: 1fr; } }
+.note { font-size: 0.82rem; color: var(--muted); }
+.truth { font-size: 0.88rem; color: var(--ink2); margin: 4px 0 8px; }
+.plot { width: 100%; }
+footer { margin-top: 40px; font-size: 0.82rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>Which method catches a sick digester first?</h1>
+<p>An agricultural biogas plant (maize silage and cattle slurry, about 0.5 MWel) simulated with
+<b>ADM1 in its BSM2 implementation</b>, verified against the published BSM2 steady state. Seven kinds of
+upset are injected with known ground truth - five process upsets and two sensor faults - and eight
+monitoring methods watch the plant through realistic sensors: online gas flow, CH4, pH and temperature with
+noise, drift and gaps, and a FOS/TAC titration twice a week. Everything below is measured on 140 upsets and
+three normal years that no method saw while it was tuned.
+Code and method: <a href="https://github.com/kwwaleszczynski-del/biogas-digester-twin">github.com/kwwaleszczynski-del/biogas-digester-twin</a>.</p>
+<div class="tiles" id="tiles"></div>
+
+<h2>1. Replay an upset</h2>
+<p>True methane next to the healthy twin (the same feed without the upset): the dashed red line is where
+the yield loss starts. Below, what the operator sees, and when each method raises an alarm. Hover an alarm
+mark for the diagnosis the method gives.</p>
+<div class="controls">
+  <label>Upset <select id="rp-kind"></select></label>
+</div>
+<div class="truth" id="rp-truth"></div>
+<div class="legend" id="rp-legend"></div>
+<div class="card"><div id="rp-plot" class="plot" style="height:1060px"></div></div>
+
+<h2>2. Method comparison</h2>
+<p>Process upsets: overload, shock load, ammonia, heating failure, substrate change. Sensor faults: drifting
+CH4 analyser, frozen gas flow meter. A detection is an alarm that starts within 60 days after the cause;
+false alarms are alarm episodes in normal operation. <i>Before yield loss</i>: share of the process upsets
+that went on to lose yield and were alarmed before the loss began.</p>
+<div class="controls">
+  <label>Lab samples missing <select id="mc-lab">
+    <option value="0.1">10 % (normal)</option><option value="0.5">50 %</option><option value="1">100 % (no lab)</option>
+  </select></label>
+</div>
+<div class="legend" id="fam-legend"></div>
+<div class="card scroll"><table id="mc-table"></table></div>
+<div class="grid2" style="margin-top:14px">
+  <div class="card"><div id="mc-plot" class="plot" style="height:380px"></div></div>
+  <div class="card"><div id="mc-plot2" class="plot" style="height:380px"></div></div>
+</div>
+
+<h2>3. By upset type</h2>
+<div class="controls">
+  <label>Metric <select id="bc-metric">
+    <option value="detected">detected [%]</option>
+    <option value="delay">median delay [days]</option>
+    <option value="before_loss">alarmed before yield loss [%]</option>
+    <option value="lead">median lead before yield loss [days]</option>
+  </select></label>
+</div>
+<div class="card"><div id="bc-plot" class="plot" style="height:430px"></div></div>
+<p class="note" id="bc-note"></p>
+
+<h2>4. Naming the cause</h2>
+<p>Three methods also say <i>what</i> is wrong. Counts of detected test upsets by the class named at the
+first alarm. Process vs sensor is the distinction that decides whether to change the feed or call the
+instrument technician.</p>
+<div class="controls"><label>Classifier <select id="cf-method"></select></label></div>
+<div class="grid2">
+  <div class="card"><div id="cf-plot" class="plot" style="height:430px"></div></div>
+  <div class="card scroll"><p style="margin-top:0">Gradient boosting has seen every upset type in
+  training. Trained without one type, does it still notice it?</p><table id="un-table"></table></div>
+</div>
+
+<h2>5. Real farm data: false alarms</h2>
+<p>Four small manure-fed digesters monitored daily for a year (Mulat, ILRI, Mendeley Data, CC BY 4.0;
+weekly means shown). No pH or FOS/TAC was logged, so only the gas-based detectors apply, each calibrated on
+the digester's own first eight weeks after start-up (shaded). Red triangles are weeks with an operator note about a repair, a
+closed valve or the meter (only the two flexible-bag units carry notes).</p>
+<div class="controls"><label>Digester <select id="rd-name"></select></label></div>
+<div class="grid2">
+  <div class="card"><div id="rd-plot" class="plot" style="height:380px"></div></div>
+  <div class="card scroll"><table id="rd-table"></table><p class="note" id="rd-note"></p></div>
+</div>
+
+<footer>
+Simulation: ADM1 (Batstone et al. 2002) with the BSM2 implementation of Rosen &amp; Jeppsson (2006), own
+Python implementation; plant, substrates and sensors are illustrative assumptions documented in the
+repository. Real data: D. Mulat, <i>Process monitoring and weather datasets on farm-scale biogas
+digesters</i>, Mendeley Data V1 (2025), doi:10.17632/gk3f363sfg.1, CC BY 4.0 (dates repaired, meter
+differenced, weekly means; see repository). Code: MIT.
+</footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"
+        integrity="sha384-cCVCZkAjYNxaYKbM8lsArLznDF/SvMFr1jcZrvOpSTCa0W40ZAdLzHCEulnUa5i7" crossorigin="anonymous"></script>
+<script src="data.js"></script>
+<script>
+const D = window.DATA;
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const narrow = () => window.innerWidth < 640;
+const famColor = m => css("--" + D.family[m]);
+const pct = v => v == null ? "-" : Math.round(100 * v) + " %";
+const num = (v, d = 1) => v == null ? "-" : Number(v).toFixed(d);
+const CFG = () => ({responsive: true, displaylogo: false, displayModeBar: !narrow()});
+function layoutBase(extra) {
+  return Object.assign({paper_bgcolor: css("--surface"), plot_bgcolor: css("--surface"),
+    font: {family: "system-ui, -apple-system, Segoe UI, sans-serif", color: css("--ink2"), size: 12},
+    margin: {l: 60, r: 16, t: 24, b: 50}, hoverlabel: {bgcolor: css("--surface"), font: {color: css("--ink")}}}, extra);
+}
+const axis = extra => Object.assign({gridcolor: css("--grid"), linecolor: css("--axis"), zeroline: false}, extra);
+function fillSelect(id, opts, value) {
+  const s = document.getElementById(id);
+  s.innerHTML = opts.map(([v, l]) => `<option value="${v}">${l}</option>`).join("");
+  if (value != null) s.value = value;
+}
+function famLegend(id) {
+  document.getElementById(id).innerHTML = Object.entries(D.family_label)
+    .map(([k, l]) => `<span><i style="background:${css("--" + k)}"></i>${l}</span>`).join("");
+}
+const rowsAt = lab => D.robustness.filter(r => Math.abs(r.lab_missing - lab) < 1e-9);
+
+function tiles() {
+  const R = rowsAt(0.1);
+  const by = m => R.find(r => r.method === m);
+  const best = R.filter(r => r.before_yield_loss != null).sort((a, b) => b.before_yield_loss - a.before_yield_loss)[0];
+  const fos = by("FOS/TAC +30 %");
+  const ekf = by("EKF twin"), gbm = by("Gradient boosting");
+  const t = [
+    [pct(best.before_yield_loss), `of yield losses alarmed before they began by the best method (${best.method}, ${num(best.false_alarms_per_year)} false alarms/year)`],
+    [pct(fos.before_yield_loss), `the same for the FOS/TAC trend rule, the plant's lab routine`],
+    [pct(gbm.accuracy) + " / " + pct(ekf.accuracy), "upsets named right at the first alarm: gradient boosting / EKF twin"],
+    ["2e-7", "largest relative deviation of the ADM1 implementation from the published BSM2 steady state"],
+  ];
+  document.getElementById("tiles").innerHTML = t.map(([v, l]) =>
+    `<div class="card tile"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+}
+
+function replay() {
+  const kind = document.getElementById("rp-kind").value;
+  const R = D.replays.find(r => r.kind === kind);
+  const n = R.biogas.length, x = [...Array(n).keys()];
+  const sev = {overload: `silage x${num(R.severity, 2)}`, acidification: `${num(R.severity, 0)} t/d sugar beet for ${R.t_end - R.t0} days`,
+    ammonia: `${pct(R.severity)} of the silage oDM replaced by poultry manure`, temperature: `heating off, cooling ${num(R.severity, 2)} K/d for ${R.t_end - R.t0} days`,
+    substrate: `new silage, degradability x${num(R.severity, 2)}`, ch4_drift: `${num(R.severity, 2)} %-points per day`,
+    flow_stuck: `frozen for ${R.t_end - R.t0} days`};
+  document.getElementById("rp-truth").innerHTML = kind === "normal"
+    ? "Normal operation (first half-year of a test year): every alarm here is a false alarm."
+    : `<b>${D.labels[kind]}</b> (${sev[kind]}): cause at day ${R.t0}` +
+      (R.yield_loss_day != null ? `, yield loss from day ${R.yield_loss_day}` : ", no yield loss (true methane unaffected)");
+  const ink2 = css("--ink2"), stat = css("--stat"), muted = css("--muted"), lab = css("--lab"), bad = css("--bad"), model = css("--model");
+  const T = [];
+  T.push({x, y: R.true_ch4, name: "methane, true", line: {color: stat, width: 2}, xaxis: "x", yaxis: "y",
+          hovertemplate: "day %{x}: %{y:.0f} Nm3/d<extra>true</extra>"});
+  T.push({x, y: R.healthy_ch4, name: "healthy twin", line: {color: muted, width: 1.5, dash: "dash"}, xaxis: "x", yaxis: "y",
+          hovertemplate: "day %{x}: %{y:.0f} Nm3/d<extra>healthy twin</extra>"});
+  T.push({x, y: R.biogas, name: "biogas, meter", line: {color: stat, width: 1.5}, xaxis: "x", yaxis: "y2",
+          hovertemplate: "day %{x}: %{y:.0f} Nm3/d<extra>biogas meter</extra>"});
+  T.push({x, y: R.ch4, name: "CH4, analyser", line: {color: stat, width: 1.5}, xaxis: "x", yaxis: "y3",
+          hovertemplate: "day %{x}: %{y:.2f} %<extra>CH4 analyser</extra>"});
+  T.push({x, y: R.pH, name: "pH, probe", line: {color: stat, width: 1.5}, xaxis: "x", yaxis: "y4",
+          hovertemplate: "day %{x}: pH %{y:.2f}<extra>pH probe</extra>"});
+  T.push({x, y: R.temp, name: "temperature", line: {color: stat, width: 1.5}, xaxis: "x", yaxis: "y5",
+          hovertemplate: "day %{x}: %{y:.1f} °C<extra>temperature</extra>"});
+  T.push({x, y: R.true_vfa, name: "VFA, true", line: {color: muted, width: 1.5}, xaxis: "x", yaxis: "y6",
+          hovertemplate: "day %{x}: %{y:.0f} mg/L<extra>VFA true</extra>"});
+  T.push({x, y: R.ekf_vfa, name: "VFA, EKF estimate", line: {color: model, width: 2}, xaxis: "x", yaxis: "y6",
+          hovertemplate: "day %{x}: %{y:.0f} mg/L<extra>EKF estimate</extra>"});
+  const fx = [], fy = [];
+  R.fos_tac.forEach((v, i) => { if (v != null) { fx.push(i); fy.push(v); } });
+  T.push({x: fx, y: fy, name: "FOS/TAC, lab", mode: "markers", marker: {color: lab, size: 7, line: {color: css("--surface"), width: 1.5}},
+          xaxis: "x", yaxis: "y7", hovertemplate: "day %{x}: FOS/TAC %{y:.3f}<extra>lab</extra>"});
+  D.methods.forEach((m, j) => {
+    const days = R.alarms[m] || [];
+    const cl = R.classes[m];
+    T.push({x: days, y: days.map(() => m), mode: "markers", name: m, showlegend: false, xaxis: "x", yaxis: "y8",
+      marker: {symbol: "line-ns-open", size: 11, color: famColor(m), line: {width: 2, color: famColor(m)}},
+      text: days.map(d => cl ? (D.labels[cl[d]] || cl[d]) : "alarm"),
+      hovertemplate: "day %{x}: %{text}<extra>" + m + "</extra>"});
+  });
+  const shapes = [];
+  const vline = (xv, color, dash) => shapes.push({type: "line", xref: "x", yref: "paper", x0: xv, x1: xv, y0: 0, y1: 1,
+    line: {color, width: 1.2, dash}});
+  if (R.t0 != null) vline(R.t0, css("--ink"), "solid");
+  if (R.yield_loss_day != null) vline(R.yield_loss_day, bad, "dash");
+  const dom = [[0.86, 1], [0.74, 0.84], [0.62, 0.72], [0.50, 0.60], [0.40, 0.48], [0.28, 0.38], [0.19, 0.26], [0, 0.17]];
+  const titles = ["methane [Nm3/d]", "biogas [Nm3/d]", "CH4 [%]", "pH", "temperature [°C]", "VFA [mg/L]", "FOS/TAC", ""];
+  const L = layoutBase({showlegend: false, shapes, margin: {l: narrow() ? 110 : 130, r: 12, t: 10, b: 40},
+    xaxis: axis({anchor: "y8", title: {text: "day", font: {size: 12}}})});
+  dom.forEach((d, i) => {
+    const k = i === 0 ? "yaxis" : "yaxis" + (i + 1);
+    L[k] = axis({domain: d, title: {text: titles[i], font: {size: 11}}, anchor: "x"});
+  });
+  L.yaxis8 = axis({domain: dom[7], anchor: "x", type: "category", categoryorder: "array",
+    categoryarray: [...D.methods].reverse(), tickfont: {size: 10}});
+  Plotly.react("rp-plot", T, L, CFG());
+  document.getElementById("rp-legend").innerHTML =
+    `<span><i style="background:${stat}"></i>sensor / true</span><span><i style="background:${muted}"></i>healthy twin, true VFA</span>` +
+    `<span><i style="background:${model}"></i>EKF estimate</span><span><i style="background:${lab}"></i>lab FOS/TAC</span>` +
+    `<span><i style="background:${css("--ink")}"></i>cause</span><span><i style="background:${bad}"></i>yield loss starts</span>`;
+}
+
+function comparison() {
+  const lab = Number(document.getElementById("mc-lab").value);
+  const R = rowsAt(lab);
+  const cols = [["detected_process", "process upsets detected", pct], ["detected_sensor", "sensor faults detected", pct],
+    ["median_delay_d", "median delay [d]", v => num(v, 0)], ["before_yield_loss", "before yield loss", pct],
+    ["median_lead_d", "median lead [d]", v => num(v, 0)], ["false_alarms_per_year", "false alarms / year", v => num(v, 1)],
+    ["accuracy", "named right", pct]];
+  const bestOf = {detected_process: "max", detected_sensor: "max", median_delay_d: "min", before_yield_loss: "max",
+    median_lead_d: "max", false_alarms_per_year: "min", accuracy: "max"};
+  const best = {};
+  cols.forEach(([k]) => { const v = R.map(r => r[k]).filter(v => v != null);
+    best[k] = v.length ? (bestOf[k] === "max" ? Math.max(...v) : Math.min(...v)) : null; });
+  let h = "<tr><th>method</th>" + cols.map(([, l]) => `<th class="n">${l}</th>`).join("") + "</tr>";
+  D.methods.forEach(m => {
+    const r = R.find(x => x.method === m);
+    h += `<tr><td><span class="dot" style="background:${famColor(m)}"></span>${m}</td>` +
+      cols.map(([k, , f]) => `<td class="n${r[k] != null && r[k] === best[k] ? " best" : ""}">${f(r[k])}</td>`).join("") + "</tr>";
+  });
+  document.getElementById("mc-table").innerHTML = h;
+  const pts = (yk, title, ylab, yfmt) => {
+    const T = D.methods.map(m => { const r = R.find(x => x.method === m);
+      return {x: [r.false_alarms_per_year], y: [r[yk]], mode: "markers+text", text: [m], textposition: "top center",
+        textfont: {size: 10, color: css("--ink2")}, marker: {size: 11, color: famColor(m), line: {color: css("--surface"), width: 2}},
+        hovertemplate: m + "<br>%{x:.1f} false alarms/year<br>" + ylab + ": %{y" + yfmt + "}<extra></extra>", showlegend: false}; });
+    return [T, layoutBase({margin: {l: 56, r: 16, t: 30, b: 50}, title: {text: title, font: {size: 13, color: css("--ink")}, x: 0.02},
+      xaxis: axis({title: {text: "false alarms per year", font: {size: 12}}, rangemode: "tozero"}),
+      yaxis: axis({title: {text: ylab, font: {size: 12}}})})];
+  };
+  Plotly.react("mc-plot", ...pts("median_delay_d", "Faster (low) vs fewer false alarms (left)", "median delay [days]", ":.0f"), CFG());
+  const [T2, L2] = pts("before_yield_loss", "Alarmed before yield loss (high)", "share before yield loss", ":.0%");
+  L2.yaxis.tickformat = ".0%"; L2.yaxis.range = [-0.05, 1.08];
+  Plotly.react("mc-plot2", T2, L2, CFG());
+}
+
+function byClass() {
+  const metric = document.getElementById("bc-metric").value;
+  const kinds = D.classes.slice(1);
+  const z = D.methods.map(m => kinds.map(k => { const r = D.by_class.find(x => x.method === m && x.kind === k);
+    if (!r) return null; const v = r[metric]; return v == null ? null : (metric === "detected" || metric === "before_loss" ? 100 * v : v); }));
+  if (metric === "before_loss" || metric === "lead") {
+    kinds.forEach((k, j) => { if (D.sensor.includes(k)) z.forEach(row => row[j] = null); });
+  }
+  const txt = z.map(r => r.map(v => v == null ? "" : (metric === "detected" || metric === "before_loss" ? Math.round(v) + "%" : Math.round(v))));
+  const lowGood = metric === "delay";
+  const T = [{type: "heatmap", z, x: kinds.map(k => D.labels[k]), y: D.methods, text: txt, texttemplate: "%{text}",
+    colorscale: lowGood ? [[0, css("--seq1")], [1, css("--seq0")]] : [[0, css("--seq0")], [1, css("--seq1")]],
+    showscale: false, xgap: 2, ygap: 2, hovertemplate: "%{y} / %{x}: %{text}<extra></extra>",
+    zmin: metric === "lead" ? -20 : 0, zmax: metric === "lead" ? 20 : (metric === "delay" ? 30 : 100)}];
+  Plotly.react("bc-plot", T, layoutBase({margin: {l: 130, r: 10, t: 10, b: 110},
+    xaxis: {tickangle: -30, tickfont: {size: 11}}, yaxis: {autorange: "reversed", tickfont: {size: 11}},
+    font: {family: "system-ui, sans-serif", color: css("--ink2"), size: 11}}), CFG());
+  document.getElementById("bc-note").textContent = "20 test upsets per type. Lead time and before-loss only for upsets that went on to lose yield; sensor faults never do.";
+}
+
+function confusion() {
+  const m = document.getElementById("cf-method").value;
+  const C = D.confusion[m];
+  const kinds = D.classes.slice(1).map(k => D.labels[k]);
+  const share = C.map(r => { const s = r.reduce((a, b) => a + b, 0); return r.map(v => s ? v / s : 0); });
+  const txt = C.map(r => r.map(v => v ? String(v) : ""));
+  Plotly.react("cf-plot", [{type: "heatmap", z: share, x: kinds, y: kinds, text: txt, texttemplate: "%{text}",
+    colorscale: [[0, css("--seq0")], [1, css("--seq1")]], showscale: false, xgap: 2, ygap: 2, zmin: 0, zmax: 1,
+    hovertemplate: "true %{y}<br>named %{x}: %{text}<extra></extra>"}],
+    layoutBase({margin: {l: 150, r: 10, t: 10, b: 130}, xaxis: {tickangle: -35, tickfont: {size: 10}, title: {text: "named at first alarm", font: {size: 11}}},
+      yaxis: {autorange: "reversed", tickfont: {size: 10}}}), CFG());
+  const U = D.unseen;
+  let h = "<tr><th>upset type</th><th class='n'>detected, seen in training</th><th class='n'>detected, unseen</th><th class='n'>median delay unseen [d]</th></tr>";
+  D.classes.slice(1).forEach(k => {
+    const g = U.filter(r => r.kind === k);
+    if (!g.length) return;
+    const mean = a => a.reduce((s, v) => s + (v ? 1 : 0), 0) / a.length;
+    const d = g.filter(r => r.detected_unseen).map(r => r.delay_unseen).sort((a, b) => a - b);
+    const med = d.length ? d[Math.floor((d.length - 1) / 2)] : null;
+    h += `<tr><td>${D.labels[k]}</td><td class="n">${pct(mean(g.map(r => r.detected_seen)))}</td><td class="n">${pct(mean(g.map(r => r.detected_unseen)))}</td><td class="n">${num(med, 0)}</td></tr>`;
+  });
+  document.getElementById("un-table").innerHTML = h;
+}
+
+function realData() {
+  if (!D.real) return;
+  const name = document.getElementById("rd-name").value;
+  const W = D.real.weekly[name];
+  const x = W.week;
+  const top = Math.max(...W.gas.filter(v => v != null));
+  const T = [{x, y: W.gas, name: "gas per day (weekly mean)", line: {color: css("--stat"), width: 2},
+    hovertemplate: "%{x}: %{y:.0f}<extra>gas</extra>"}];
+  const marks = [["EWMA yield", "--stat"], ["CUSUM yield", "--s4"], ["Meter rule", "--lab"]];
+  marks.forEach(([m, c], k) => { const wk = (W.alarm_weeks[m] || []).filter(i => i < x.length);
+    T.push({x: wk.map(i => x[i]), y: wk.map(() => top * (1.08 + 0.08 * k)), mode: "markers", name: m,
+      marker: {symbol: "line-ns-open", size: 12, color: css(c), line: {width: 2, color: css(c)}}, hovertemplate: "%{x}<extra>" + m + "</extra>"}); });
+  const ew = W.event_weeks.filter(i => i < x.length);
+  T.push({x: ew.map(i => x[i]), y: ew.map(() => top * 1.36), mode: "markers", name: "logged repair / valve / meter",
+    marker: {symbol: "triangle-down", size: 9, color: css("--bad")}, hovertemplate: "%{x}<extra>operator note</extra>"});
+  const shapes = W.monitored_from_week ? [{type: "rect", xref: "x", yref: "paper", x0: x[0], x1: x[Math.min(W.monitored_from_week, x.length - 1)],
+    y0: 0, y1: 1, fillcolor: css("--grid"), opacity: 0.5, line: {width: 0}, layer: "below"}] : [];
+  Plotly.react("rd-plot", T, layoutBase({shapes, margin: {l: 50, r: 10, t: 10, b: 40}, legend: {orientation: "h", y: -0.18, font: {size: 10}},
+    xaxis: axis({}), yaxis: axis({title: {text: "meter units per day", font: {size: 11}}, rangemode: "tozero"})}), CFG());
+  const rows = D.real.table.filter(r => r.digester === name);
+  let h = "<tr><th>method</th><th class='n'>alarm episodes</th><th class='n'>per year</th><th class='n'>days in alarm</th><th class='n'>starting within 3 days of an operator note</th></tr>";
+  rows.forEach(r => h += `<tr><td>${r.method}</td><td class="n">${r.episodes}</td><td class="n">${num(r.per_year)}</td><td class="n">${pct(r.share_of_days_in_alarm)}</td><td class="n">${r.near_logged_event}</td></tr>`);
+  document.getElementById("rd-table").innerHTML = h;
+  const s = D.real.sensitivity[name];
+  document.getElementById("rd-note").textContent = s
+    ? `Temperature sensitivity of gas per kg manure, weekly means at ${num(s.temp_range[0])}-${num(s.temp_range[1])} °C: θ = ${num(s.theta, 3)} 1/K (95 % CI ${num(s.lo, 3)} to ${num(s.hi, 3)}); the twin assumes 0.069 for methanogenesis.`
+    : "No digester temperature logged for this unit.";
+}
+
+function init() {
+  fillSelect("rp-kind", D.replays.map(r => [r.kind, D.labels[r.kind]]), "ammonia");
+  fillSelect("cf-method", D.classifiers.map(m => [m, m]), "EKF twin");
+  if (D.real) fillSelect("rd-name", Object.keys(D.real.weekly).map(k => [k, k]), Object.keys(D.real.weekly)[1]);
+  document.getElementById("rp-kind").onchange = replay;
+  document.getElementById("mc-lab").onchange = comparison;
+  document.getElementById("bc-metric").onchange = byClass;
+  document.getElementById("cf-method").onchange = confusion;
+  document.getElementById("rd-name").onchange = realData;
+  famLegend("fam-legend");
+  tiles(); replay(); comparison(); byClass(); confusion(); realData();
+}
+init();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { famLegend("fam-legend"); replay(); comparison(); byClass(); confusion(); realData(); });
+</script>
+</body>
+</html>

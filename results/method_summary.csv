@@ -1,0 +1,9 @@
+method,detected_process,detected_sensor,median_delay_d,before_yield_loss,median_lead_d,false_alarms_per_year,accuracy,process_vs_sensor
+FOS/TAC > 0.3,0.5,0,9,0.01176,-2,0,,
+FOS/TAC +30 %,0.65,0.05,9,0.1529,-1,0.5203,,
+EWMA yield,0.92,0.775,7,0.4353,0,5.883,,
+CUSUM yield,1,0.95,3,0.7059,2,10.61,,
+PCA T2/SPE,0.97,0.625,3,0.7529,3,0.6804,,
+Expert rules,0.98,1,2,0.8118,3,5.683,0.8478,0.9203
+Gradient boosting,1,0.925,1,0.9647,4,1.241,0.9708,0.9781
+EKF twin,1,1,4,0.6,1,1.841,0.9571,0.9929
