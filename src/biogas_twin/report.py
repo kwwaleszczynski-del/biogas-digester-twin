@@ -82,8 +82,11 @@ def fig_tradeoff(summ: pd.DataFrame) -> None:
         for _, r in summ.iterrows():
             c = COLORS[FAMILY[r["method"]]]
             ax.scatter(r["false_alarms_per_year"], r[ycol], s=60, color=c, edgecolor="white", lw=2, zorder=3)
-            ax.annotate(r["method"], (r["false_alarms_per_year"], r[ycol]), xytext=(6, 4),
+            # the two lab rules can sit at the same height next to each other: one label goes below its point
+            below = r["method"] == "FOS/TAC > 0.3" and ycol == "median_delay_d"
+            ax.annotate(r["method"], (r["false_alarms_per_year"], r[ycol]), xytext=(6, -12 if below else 4),
                         textcoords="offset points", fontsize=8.5, color=INK2)
+        ax.margins(y=0.08)
         ax.set_xlabel("false alarm episodes per year of normal operation", color=INK2, fontsize=9)
         ax.set_ylabel(ylab, color=INK2, fontsize=9)
     axes[1].set_ylim(-0.03, 1.05)

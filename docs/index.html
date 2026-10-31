@@ -272,18 +272,21 @@ function comparison() {
       cols.map(([k, , f]) => `<td class="n${r[k] != null && r[k] === best[k] ? " best" : ""}">${f(r[k])}</td>`).join("") + "</tr>";
   });
   document.getElementById("mc-table").innerHTML = h;
-  const pts = (yk, title, ylab, yfmt) => {
+  // the two lab FOS/TAC rules sit next to each other near x = 0: their labels go to the right, apart in height
+  const pts = (yk, title, ylab, yfmt, pos = {}) => {
     const T = D.methods.map(m => { const r = R.find(x => x.method === m);
-      return {x: [r.false_alarms_per_year], y: [r[yk]], mode: "markers+text", text: [m], textposition: "top center",
+      return {x: [r.false_alarms_per_year], y: [r[yk]], mode: "markers+text", text: [m], textposition: pos[m] || "top center",
         textfont: {size: 10, color: css("--ink2")}, marker: {size: 11, color: famColor(m), line: {color: css("--surface"), width: 2}},
         hovertemplate: m + "<br>%{x:.1f} false alarms/year<br>" + ylab + ": %{y" + yfmt + "}<extra></extra>", showlegend: false}; });
     return [T, layoutBase({margin: {l: 56, r: 16, t: 30, b: 50}, title: {text: title, font: {size: 13, color: css("--ink")}, x: 0.02},
       xaxis: axis({title: {text: "false alarms per year", font: {size: 12}}, rangemode: "tozero"}),
       yaxis: axis({title: {text: ylab, font: {size: 12}}})})];
   };
-  Plotly.react("mc-plot", ...pts("median_delay_d", "Faster (low) vs fewer false alarms (left)", "median delay [days]", ":.0f"), CFG());
-  const [T2, L2] = pts("before_yield_loss", "Alarmed before yield loss (high)", "share before yield loss", ":.0%");
-  L2.yaxis.tickformat = ".0%"; L2.yaxis.range = [-0.05, 1.08];
+  Plotly.react("mc-plot", ...pts("median_delay_d", "Faster (low) vs fewer false alarms (left)", "median delay [days]", ":.0f",
+    {"FOS/TAC > 0.3": "bottom right", "FOS/TAC +30 %": "top right"}), CFG());
+  const [T2, L2] = pts("before_yield_loss", "Alarmed before yield loss (high)", "share before yield loss", ":.0%",
+    {"FOS/TAC > 0.3": "bottom right", "FOS/TAC +30 %": "top right"});
+  L2.yaxis.tickformat = ".0%"; L2.yaxis.range = [-0.12, 1.08];
   Plotly.react("mc-plot2", T2, L2, CFG());
 }
 
@@ -301,8 +304,9 @@ function byClass() {
     colorscale: lowGood ? [[0, css("--seq1")], [1, css("--seq0")]] : [[0, css("--seq0")], [1, css("--seq1")]],
     showscale: false, xgap: 2, ygap: 2, hovertemplate: "%{y} / %{x}: %{text}<extra></extra>",
     zmin: metric === "lead" ? -20 : 0, zmax: metric === "lead" ? 20 : (metric === "delay" ? 30 : 100)}];
-  Plotly.react("bc-plot", T, layoutBase({margin: {l: 130, r: 10, t: 10, b: 110},
-    xaxis: {tickangle: -30, tickfont: {size: 11}}, yaxis: {autorange: "reversed", tickfont: {size: 11}},
+  const narrow = window.innerWidth < 600;  // on a phone the angled class names ran into each other
+  Plotly.react("bc-plot", T, layoutBase({margin: {l: 130, r: 10, t: 10, b: narrow ? 170 : 110},
+    xaxis: {tickangle: narrow ? -90 : -30, tickfont: {size: narrow ? 10 : 11}}, yaxis: {autorange: "reversed", tickfont: {size: 11}},
     font: {family: "system-ui, sans-serif", color: css("--ink2"), size: 11}}), CFG());
   document.getElementById("bc-note").textContent = "20 test upsets per type. Lead time and before-loss only for upsets that went on to lose yield; sensor faults never do.";
 }
@@ -316,7 +320,7 @@ function confusion() {
   Plotly.react("cf-plot", [{type: "heatmap", z: share, x: kinds, y: kinds, text: txt, texttemplate: "%{text}",
     colorscale: [[0, css("--seq0")], [1, css("--seq1")]], showscale: false, xgap: 2, ygap: 2, zmin: 0, zmax: 1,
     hovertemplate: "true %{y}<br>named %{x}: %{text}<extra></extra>"}],
-    layoutBase({margin: {l: 150, r: 10, t: 10, b: 130}, xaxis: {tickangle: -35, tickfont: {size: 10}, title: {text: "named at first alarm", font: {size: 11}}},
+    layoutBase({margin: {l: 150, r: 10, t: 10, b: 170}, xaxis: {tickangle: -90, tickfont: {size: 10}, title: {text: "named at first alarm", font: {size: 11}}},
       yaxis: {autorange: "reversed", tickfont: {size: 10}}}), CFG());
   const U = D.unseen;
   let h = "<tr><th>upset type</th><th class='n'>detected, seen in training</th><th class='n'>detected, unseen</th><th class='n'>median delay unseen [d]</th></tr>";
