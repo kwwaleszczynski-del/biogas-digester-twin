@@ -273,9 +273,13 @@ function comparison() {
   });
   document.getElementById("mc-table").innerHTML = h;
   // the two lab FOS/TAC rules sit next to each other near x = 0: their labels go to the right, apart in height
+  // on a phone, labels of points near either end of the x axis open inwards instead of running into the axis
+  const xmax = Math.max(...R.map(r => r.false_alarms_per_year)), narrow = window.innerWidth < 640;
+  const edge = x => !narrow ? "top center" : x < 0.15 * xmax ? "top right" : x > 0.85 * xmax ? "top left" : "top center";
   const pts = (yk, title, ylab, yfmt, pos = {}) => {
     const T = D.methods.map(m => { const r = R.find(x => x.method === m);
-      return {x: [r.false_alarms_per_year], y: [r[yk]], mode: "markers+text", text: [m], textposition: pos[m] || "top center",
+      return {x: [r.false_alarms_per_year], y: [r[yk]], mode: "markers+text", text: [m],
+        textposition: pos[m] || edge(r.false_alarms_per_year),
         textfont: {size: 10, color: css("--ink2")}, marker: {size: 11, color: famColor(m), line: {color: css("--surface"), width: 2}},
         hovertemplate: m + "<br>%{x:.1f} false alarms/year<br>" + ylab + ": %{y" + yfmt + "}<extra></extra>", showlegend: false}; });
     return [T, layoutBase({margin: {l: 56, r: 16, t: 30, b: 50}, title: {text: title, font: {size: 13, color: css("--ink")}, x: 0.02},
@@ -353,7 +357,9 @@ function realData() {
   const shapes = W.monitored_from_week ? [{type: "rect", xref: "x", yref: "paper", x0: x[0], x1: x[Math.min(W.monitored_from_week, x.length - 1)],
     y0: 0, y1: 1, fillcolor: css("--grid"), opacity: 0.5, line: {width: 0}, layer: "below"}] : [];
   Plotly.react("rd-plot", T, layoutBase({shapes, margin: {l: 50, r: 10, t: 10, b: 40}, legend: {orientation: "h", y: -0.18, font: {size: 10}},
-    xaxis: axis({}), yaxis: axis({title: {text: "meter units per day", font: {size: 11}}, rangemode: "tozero"})}), CFG());
+    // on a phone the first date sat on the "0" of the y axis: labels in the middle of each period
+    xaxis: axis(window.innerWidth < 640 ? {ticklabelmode: "period"} : {}),
+    yaxis: axis({title: {text: "meter units per day", font: {size: 11}}, rangemode: "tozero"})}), CFG());
   const rows = D.real.table.filter(r => r.digester === name);
   let h = "<tr><th>method</th><th class='n'>alarm episodes</th><th class='n'>per year</th><th class='n'>days in alarm</th><th class='n'>starting within 3 days of an operator note</th></tr>";
   rows.forEach(r => h += `<tr><td>${r.method}</td><td class="n">${r.episodes}</td><td class="n">${num(r.per_year)}</td><td class="n">${pct(r.share_of_days_in_alarm)}</td><td class="n">${r.near_logged_event}</td></tr>`);
