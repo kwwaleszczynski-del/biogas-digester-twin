@@ -13,7 +13,7 @@ import pandas as pd
 
 from . import evaluate as ev
 from .scenarios import CLASSES, LABELS, PROCESS, SENSOR
-from .study import CLASSIFIERS, DATA, METHODS, MISSING, RESULTS, ROOT
+from .study import CLASSIFIERS, DATA, METHODS, MISSING, RESULTS, ROOT, VARIANTS
 
 DOCS = ROOT / "docs"
 IMG = DOCS / "img"
@@ -21,6 +21,7 @@ FAMILY = {
     "FOS/TAC > 0.3": "lab", "FOS/TAC +30 %": "lab",
     "EWMA yield": "stat", "CUSUM yield": "stat", "PCA T2/SPE": "stat",
     "Expert rules": "model", "Gradient boosting": "model", "EKF twin": "model",
+    "Gradient boosting (no feed log)": "model", "EKF twin (perturbed)": "model",
 }
 FAMILY_LABEL = {"lab": "lab FOS/TAC (industry practice)", "stat": "statistical monitoring",
                 "model": "diagnosis: rules, ML, state estimation"}
@@ -44,80 +45,116 @@ def load_study() -> dict:
         return pickle.load(f)
 
 
+def runs_at(st: dict, missing: float) -> list[ev.Run]:
+    return [ev.Run(**r) for r in st["runs"] if abs(r["missing"] - missing) < 1e-9]
+
+
 def tables(st: dict) -> dict:
-    det, fa = st["det"], st["fa"]
-    base = det[det["missing"] == MISSING[0]]
-    fbase = fa[fa["missing"] == MISSING[0]]
-    summ = ev.summary(base, fbase)
-    cls = pd.DataFrame([{"method": m, **ev.class_scores(base, m)} for m in CLASSIFIERS])
-    summ = summ.merge(cls[["method", "accuracy", "process_vs_sensor"]], on="method", how="left")
-    summ = summ.set_index("method").loc[METHODS].reset_index()
-    rob = pd.concat([ev.summary(det[det["missing"] == m], fa[fa["missing"] == m]).assign(lab_missing=m)
-                     for m in MISSING])
-    rob_cls = pd.DataFrame([{"method": c, "lab_missing": m, **ev.class_scores(det[det["missing"] == m], c)}
-                            for m in MISSING for c in CLASSIFIERS])
-    rob = rob.merge(rob_cls[["method", "lab_missing", "accuracy"]], on=["method", "lab_missing"], how="left")
-    byc = ev.by_class(base)
-    conf = {m: ev.confusion(base, m) for m in CLASSIFIERS}
-    return {"summary": summ, "robustness": rob, "by_class": byc, "confusion": conf,
+    base = runs_at(st, MISSING[0])
+    summ = ev.summary(base, METHODS, CLASSIFIERS)
+    var = ev.summary(base, VARIANTS, VARIANTS)
+    rob = pd.concat([ev.summary(runs_at(st, m), METHODS, CLASSIFIERS, boot=False).assign(lab_missing=m)
+                     for m in MISSING], ignore_index=True)
+    byc = ev.by_class(base, METHODS + VARIANTS)
+    conf = {m: ev.confusion(base, m) for m in CLASSIFIERS + VARIANTS}
+    curves = pd.concat([ev.threshold_curve(base, m) for m in METHODS + VARIANTS], ignore_index=True)
+    common = pd.DataFrame([ev.at_common_rate(curves[curves["method"] == m]) for m in METHODS + VARIANTS])
+    det = pd.concat([ev.detections(runs_at(st, mi), m) for mi in MISSING for m in METHODS]
+                    + [ev.detections(base, m) for m in VARIANTS], ignore_index=True)
+    fa = pd.concat([ev.run_stats(runs_at(st, mi), m).assign(method=m, missing=mi)
+                    for mi in MISSING for m in METHODS], ignore_index=True)
+    fa = fa[["method", "missing", "kind", "seed", "normal_year", "free_days", "onsets", "alarm_days",
+             "chance_windows", "chance_hits"]]
+    return {"summary": summ, "variants": var, "robustness": rob, "by_class": byc, "confusion": conf,
+            "curves": curves, "common": common, "det": det, "fa": fa,
             "unseen": st.get("unseen"), "truth": st["truth"]}
 
 
 def write_tables(t: dict) -> None:
     RESULTS.mkdir(exist_ok=True)
     t["summary"].to_csv(RESULTS / "method_summary.csv", index=False, float_format="%.4g")
+    t["variants"].to_csv(RESULTS / "variants.csv", index=False, float_format="%.4g")
     t["robustness"].to_csv(RESULTS / "robustness_lab.csv", index=False, float_format="%.4g")
     t["by_class"].to_csv(RESULTS / "method_by_class.csv", index=False, float_format="%.4g")
+    t["curves"].to_csv(RESULTS / "threshold_curves.csv", index=False, float_format="%.4g")
+    t["common"].to_csv(RESULTS / "common_false_alarm_rate.csv", index=False, float_format="%.4g")
+    t["det"].to_csv(RESULTS / "detections.csv", index=False, float_format="%.4g")
+    t["fa"].to_csv(RESULTS / "false_alarms.csv", index=False)
     long = pd.concat([c.stack().rename("n").reset_index().assign(method=m)
                       for m, c in t["confusion"].items()])
     long[["method", "true", "predicted", "n"]].to_csv(RESULTS / "confusion.csv", index=False)
 
 
 # --- figures ----------------------------------------------------------------------------------------
-def fig_tradeoff(summ: pd.DataFrame) -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(11, 4.2))
-    for ax, ycol, ylab in [(axes[0], "median_delay_d", "median detection delay [days after the cause]"),
-                           (axes[1], "before_yield_loss", "share of yield losses alarmed before they start")]:
-        _style(ax)
-        for _, r in summ.iterrows():
-            c = COLORS[FAMILY[r["method"]]]
-            ax.scatter(r["false_alarms_per_year"], r[ycol], s=60, color=c, edgecolor="white", lw=2, zorder=3)
-            # the two lab rules can sit at the same height next to each other: one label goes below its point
-            below = r["method"] == "FOS/TAC > 0.3" and ycol == "median_delay_d"
-            ax.annotate(r["method"], (r["false_alarms_per_year"], r[ycol]), xytext=(6, -12 if below else 4),
-                        textcoords="offset points", fontsize=8.5, color=INK2)
-        ax.margins(y=0.08)
-        ax.set_xlabel("false alarm episodes per year of normal operation", color=INK2, fontsize=9)
-        ax.set_ylabel(ylab, color=INK2, fontsize=9)
-    axes[1].set_ylim(-0.03, 1.05)
+def fig_tradeoff(summ: pd.DataFrame, common: pd.DataFrame) -> None:
+    fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.6), gridspec_kw={"width_ratios": [1.15, 1]})
+    ax = axes[0]
+    _style(ax)
+    for _, r in summ.iterrows():
+        c = COLORS[FAMILY[r["method"]]]
+        x = r["false_alarms_per_year"]
+        ax.plot([x, x], [r["chance"], r["detected_process"]], color=c, lw=2, alpha=0.6, zorder=2)
+        ax.scatter(x, r["chance"], s=34, facecolor="white", edgecolor=c, lw=1.5, zorder=3)
+        ax.scatter(x, r["detected_process"], s=60, color=c, edgecolor="white", lw=2, zorder=4)
+        # labels that would run into a neighbour's point or line go to the left of their point
+        left = r["method"] in ("Gradient boosting", "CUSUM yield", "FOS/TAC > 0.3")
+        ax.annotate(r["method"], (x, r["detected_process"]), xytext=(-6 if left else 6, 4),
+                    textcoords="offset points", fontsize=8.5, color=INK2, ha="right" if left else "left",
+                    zorder=5, bbox={"boxstyle": "round,pad=0.12", "fc": "white", "ec": "none", "alpha": 0.85})
+    ax.set_xlim(-1.8, max(summ["false_alarms_per_year"].max() * 1.3, 5))
+    ax.set_xticks([t for t in range(0, int(ax.get_xlim()[1]) + 1, 2)])
+    ax.set_ylim(-0.03, 1.05)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0%}"))
+    ax.set_xlabel("false alarms (alarm onsets) per year of normal operation", color=INK2, fontsize=9)
+    ax.set_ylabel(f"process upsets: alarm within {ev.WINDOW} days", color=INK2, fontsize=9)
+    ax.set_title("each method at its own threshold (open circle: chance)", fontsize=9.5, color=INK)
+    ax = axes[1]
+    _style(ax)
+    c = common.set_index("method").loc[METHODS].reset_index().sort_values("excess_process")
+    y = np.arange(len(c))
+    cols = [COLORS[FAMILY[m]] for m in c["method"]]
+    ax.barh(y, c["detected_process"], color=cols, alpha=0.85, height=0.62)
+    ax.barh(y, c["chance"], color="#d6d5cc", height=0.62)
+    for i, (_, r) in enumerate(c.iterrows()):
+        ax.text(r["detected_process"] + 0.015, i, f"{r['excess_process']:+.0%}", va="center", fontsize=8.5,
+                color=INK2)
+    ax.set_yticks(y, c["method"], fontsize=8.5)
+    ax.set_xlim(0, 1.12)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0%}"))
+    ax.set_xlabel(f"alarm within {ev.WINDOW} days (grey: chance; label: excess over chance)", color=INK2,
+                  fontsize=9)
+    ax.set_title(f"all methods at {ev.COMMON_RATE:.0f} false alarms per year", fontsize=9.5, color=INK)
     handles = [plt.Line2D([], [], marker="o", ls="", color=COLORS[k], label=v) for k, v in FAMILY_LABEL.items()]
     fig.legend(handles=handles, loc="lower center", ncol=3, frameon=False, fontsize=9)
-    fig.tight_layout(rect=(0, 0.08, 1, 1))
+    fig.tight_layout(rect=(0, 0.07, 1, 1))
     fig.savefig(IMG / "tradeoff.png", dpi=150)
     plt.close(fig)
 
 
-def fig_lead(det: pd.DataFrame) -> None:
-    d = det[(det["missing"] == MISSING[0]) & det["kind"].isin(PROCESS) & det["yield_loss_day"].notna()]
+def fig_lead(det: pd.DataFrame, summ: pd.DataFrame) -> None:
+    d = det[(det["missing"] == MISSING[0]) & det["kind"].isin(ev.LEAD_KINDS) & det["material_loss"]
+            & det["yield_loss_day"].notna()]
     fig, ax = plt.subplots(figsize=(10, 4.4))
     _style(ax)
     rng = np.random.default_rng(0)
+    top = max(float(np.nanmax(d["lead"].to_numpy(dtype=float))), 10.0) + 2
     for i, m in enumerate(METHODS):
         g = d[d["method"] == m]
         lead = g["lead"].to_numpy(dtype=float)
-        miss = (~g["detected"]).sum()
+        hit = int(g["before_loss"].astype(bool).sum())
         y = i + rng.uniform(-0.25, 0.25, len(lead))
-        ax.scatter(np.clip(lead, -40, 40), y, s=14, color=COLORS[FAMILY[m]], alpha=0.75, lw=0)
-        med = np.nanmedian(lead) if np.isfinite(lead).any() else np.nan
-        if np.isfinite(med):
+        ax.scatter(lead, y, s=14, color=COLORS[FAMILY[m]], alpha=0.75, lw=0)
+        if np.isfinite(lead).any():
+            med = np.nanmedian(lead)
             ax.plot([med, med], [i - 0.35, i + 0.35], color=INK, lw=2)
-        ax.text(42, i, f"{miss} missed", va="center", fontsize=8, color=MUTED)
-    ax.axvline(0, color=INK2, lw=1, ls="--")
+        ch = summ.set_index("method").loc[m, "chance_before_loss"]
+        ax.text(top + 1, i, f"{hit} of {len(g)} before the loss (chance {ch:.0%})", va="center", fontsize=8,
+                color=MUTED)
     ax.set_yticks(range(len(METHODS)), METHODS)
     ax.invert_yaxis()
-    ax.set_xlim(-42, 52)
-    ax.set_xlabel("days from the first alarm to the start of yield loss (positive = alarm came first)",
-                  color=INK2, fontsize=9)
+    ax.set_xlim(-0.5, top + 12)
+    ax.set_xlabel("ammonia inhibition: days from the first alarm to the start of yield loss", color=INK2,
+                  fontsize=9)
     fig.tight_layout()
     fig.savefig(IMG / "lead_time.png", dpi=150)
     plt.close(fig)
@@ -127,7 +164,8 @@ def fig_confusion(conf: dict) -> None:
     fig, axes = plt.subplots(1, 3, figsize=(13, 4.6))
     labels = CLASSES[1:]
     short = ["overload", "acidif.", "ammonia", "heating", "substrate", "CH4 drift", "flow stuck"]
-    for ax, (m, c) in zip(axes, conf.items()):
+    for ax, m in zip(axes, CLASSIFIERS):
+        c = conf[m]
         a = c.to_numpy(dtype=float)
         rows = a.sum(1, keepdims=True)
         share = np.divide(a, rows, out=np.zeros_like(a), where=rows > 0)
@@ -140,7 +178,7 @@ def fig_confusion(conf: dict) -> None:
         ax.set_xticks(range(len(labels)), short, rotation=45, ha="right", fontsize=8)
         ax.set_yticks(range(len(labels)), short, fontsize=8)
         acc = np.trace(a) / max(a.sum(), 1)
-        ax.set_title(f"{m}: {acc:.0%} of detected upsets named right", fontsize=9.5, color=INK)
+        ax.set_title(f"{m}: {acc:.0%} of {int(a.sum())} detections named right", fontsize=9.5, color=INK)
         ax.set_xlabel("named at the first alarm", fontsize=8.5, color=INK2)
     axes[0].set_ylabel("true upset", fontsize=8.5, color=INK2)
     fig.tight_layout()
@@ -151,8 +189,8 @@ def fig_confusion(conf: dict) -> None:
 def fig_robustness(rob: pd.DataFrame) -> None:
     ms = ["FOS/TAC +30 %", "Expert rules", "Gradient boosting", "EKF twin"]
     fig, axes = plt.subplots(1, 2, figsize=(11, 3.8))
-    for ax, col, lab in [(axes[0], "detected_process", "process upsets detected"),
-                         (axes[1], "median_delay_d", "median delay [days]")]:
+    for ax, col, lab in [(axes[0], "excess_process", f"process upsets: alarm within {ev.WINDOW} d, minus chance"),
+                         (axes[1], "false_alarms_per_year", "false alarms per year")]:
         _style(ax)
         for i, m in enumerate(ms):
             g = rob[rob["method"] == m].sort_values("lab_missing")
@@ -160,6 +198,7 @@ def fig_robustness(rob: pd.DataFrame) -> None:
                     color=["#eb6834", "#2a78d6", "#1baf7a", "#6250d6"][i])
         ax.set_xlabel("lab samples missing [%]", fontsize=9, color=INK2)
         ax.set_ylabel(lab, fontsize=9, color=INK2)
+    axes[0].yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0%}"))
     axes[0].legend(frameon=False, fontsize=8.5)
     fig.tight_layout()
     fig.savefig(IMG / "robustness.png", dpi=150)
@@ -185,8 +224,6 @@ def fig_replay(rep: dict) -> None:
     _style(ax)
     ft = f(rep["fos_tac"])
     ax.plot(t[np.isfinite(ft)], ft[np.isfinite(ft)], "o", color="#eb6834", ms=4, label="FOS/TAC (lab)")
-    ax2 = ax.twinx()
-    ax2.set_visible(False)
     ax.legend(frameon=False, fontsize=8, loc="upper left")
     ax = axes[3]
     _style(ax)
@@ -259,22 +296,25 @@ def write_real(res: dict) -> None:
 
 
 # --- dashboard data ---------------------------------------------------------------------------------
+def _records(df: pd.DataFrame, digits: int = 4) -> list[dict]:
+    return df.round(digits).replace({np.nan: None}).to_dict(orient="records")
+
+
 def dashboard(st: dict, t: dict) -> dict:
-    rob = t["robustness"].replace({np.nan: None})
-    byc = t["by_class"].replace({np.nan: None})
     real = json.loads((RESULTS / "real_data.json").read_text(encoding="utf-8")) \
         if (RESULTS / "real_data.json").exists() else None
     order = {k: i for i, k in enumerate(CLASSES)}
     replays = sorted(st["replays"], key=lambda r: order[r["kind"]])
-    truth = t["truth"].replace({np.nan: None})
     return {
-        "methods": METHODS, "family": FAMILY, "family_label": FAMILY_LABEL, "classifiers": CLASSIFIERS,
-        "classes": CLASSES, "labels": LABELS, "process": PROCESS, "sensor": SENSOR,
-        "robustness": rob.round(4).to_dict(orient="records"),
-        "by_class": byc.round(3).to_dict(orient="records"),
+        "methods": METHODS, "variants": VARIANTS, "family": FAMILY, "family_label": FAMILY_LABEL,
+        "classifiers": CLASSIFIERS, "classes": CLASSES, "labels": LABELS, "process": PROCESS,
+        "sensor": SENSOR, "window": ev.WINDOW, "common_rate": ev.COMMON_RATE, "lead_kinds": list(ev.LEAD_KINDS),
+        "summary": _records(t["summary"]), "variant_rows": _records(t["variants"]),
+        "robustness": _records(t["robustness"]), "common": _records(t["common"]),
+        "by_class": _records(t["by_class"], 3),
         "confusion": {m: c.to_numpy().tolist() for m, c in t["confusion"].items()},
-        "unseen": t["unseen"].replace({np.nan: None}).to_dict(orient="records") if t["unseen"] is not None else [],
-        "truth": truth.round(3).to_dict(orient="records"),
+        "unseen": _records(t["unseen"]) if t["unseen"] is not None else [],
+        "truth": _records(t["truth"], 3),
         "replays": replays,
         "real": real,
     }
@@ -285,8 +325,8 @@ def write_all() -> None:
     st = load_study()
     t = tables(st)
     write_tables(t)
-    fig_tradeoff(t["summary"])
-    fig_lead(st["det"])
+    fig_tradeoff(t["summary"], t["common"])
+    fig_lead(t["det"], t["summary"])
     fig_confusion(t["confusion"])
     fig_robustness(t["robustness"])
     for rep in st["replays"]:

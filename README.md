@@ -17,7 +17,8 @@ sets carry no record of what went wrong when. So the core is a **simulator with 
 Anaerobic Digestion Model No. 1 in its BSM2 implementation, verified against the published BSM2 steady state,
 set up as a maize silage and cattle slurry plant of about 0.5 MWel. Seven kinds of upset are injected with
 known start and known yield loss, the plant is watched through realistic sensors, and eight methods are
-compared on test runs none of them saw while being tuned. Open data from four small farm-scale digesters
+compared on test runs none of them saw while being tuned, each against what its own false alarms would
+"detect" by chance. Open data from four small farm-scale digesters
 serve for the one thing a simulator cannot provide: false alarms and plausibility on real measurements.
 
 It is the biogas counterpart of the outage studies in this portfolio
@@ -28,76 +29,115 @@ side.
 
 ## Key results
 
-All numbers are measured on the test set: 140 upsets (20 per type) and three normal years that no method
-saw while it was fitted or tuned (protocol in [Validation](#validation)). Of the 100 process upsets, 85 went
-on to lose yield; the lead time counts days from the first alarm to the start of that loss.
+All numbers are measured on the test set: 140 upsets (20 per type, each run with its own feed history)
+and three normal years that no method saw while it was fitted or tuned (protocol in
+[Validation](#validation)). One event rule counts both sides: an **alarm onset** is a day in alarm after a
+day without. An upset is detected if an onset falls **within 14 days** of the cause; **chance** is how often
+the same rule fires in a 14-day window of normal operation, where every onset is a coincidence; **excess**
+is the difference. Brackets: 95 % bootstrap intervals over test runs.
 
-**1. The lab routine is safe but late. FOS/TAC twice a week sees only the acid-forming upsets and mostly
-after the gas has already dropped.**
+**1. Scored against chance, the ranking changes.** A detector that is in alarm a third of the time
+"detects" a third of all upsets by coincidence. The first version of this study counted any alarm start
+within 60 days of the cause, without a chance level; there the CUSUM looked perfect (100 %), and EWMA and
+the expert rules nearly so. Within 14 days and against chance:
 
-| method (lab 10 % missing) | process upsets detected | sensor faults detected | median delay [d] | alarmed before yield loss | median lead [d] | false alarms per year | named right |
-|---|---|---|---|---|---|---|---|
-| FOS/TAC > 0.3 | 50 % | 0 % | 9 | 1 % | -2 | 0.0 | |
-| FOS/TAC +30 % (plant-specific trend) | 65 % | 5 % | 9 | 15 % | -1 | 0.5 | |
-| EWMA on specific methane yield | 92 % | 78 % | 7 | 44 % | 0 | 5.9 | |
-| CUSUM on specific methane yield | **100 %** | 95 % | 3 | 71 % | 2 | 10.6 | |
-| PCA T2/SPE on online signals | 97 % | 63 % | 3 | 75 % | 3 | 0.7 | |
-| Expert rules | 98 % | **100 %** | 2 | 81 % | 3 | 5.7 | 85 % |
-| Gradient boosting | **100 %** | 93 % | **1** | **96 %** | **4** | 1.2 | **97 %** |
-| EKF twin | **100 %** | **100 %** | 4 | 60 % | 1 | 1.8 | 96 % |
+| method (lab 10 % missing) | process upsets alarmed within 14 d | chance | excess | sensor faults | median delay [d] | false alarms per year | days in alarm | ammonia: alarmed before loss (chance) | ammonia: median lead [d] | named right |
+|---|---|---|---|---|---|---|---|---|---|---|
+| FOS/TAC > 0.3 | 27 % (21-33 %) | 0 % | +27 % | 0 % | 4 | 0.0 (0.0-0.1) | 0 % | 0 % (0 %) | - |  |
+| FOS/TAC +30 % (plant-specific trend) | 48 % (44-53 %) | 9 % | +39 % | 0 % | 5 | 2.1 (1.7-2.6) | 6 % | 5 % (8 %) | 2 |  |
+| EWMA on specific methane yield | 89 % (83-94 %) | 29 % | +60 % | 23 % | 5 | 7.8 (7.0-8.5) | 39 % | 90 % (26 %) | 3 |  |
+| CUSUM on specific methane yield | 29 % (20-38 %) | 14 % | +15 % | 13 % | 5 | 3.5 (2.8-4.2) | 76 % | 35 % (12 %) | 5 |  |
+| PCA T2/SPE on online signals | 54 % (50-59 %) | 2 % | +52 % | 8 % | 2 | 0.6 (0.2-1.0) | 0.2 % | 0 % (2 %) | - |  |
+| Expert rules | 82 % (75-89 %) | 29 % | +53 % | 55 % | 2 | 8.0 (7.1-8.8) | 42 % | 90 % (26 %) | 6 | 95 % |
+| Gradient boosting | **92 %** (86-97 %) | 6 % | **+86 %** | **88 %** | 2 | 2.1 (1.4-2.8) | 2 % | **100 %** (6 %) | **7** | **98 %** |
+| EKF twin | 89 % (83-95 %) | 15 % | +74 % | 68 % | 3 | 4.1 (3.4-5.0) | 10 % | 55 % (13 %) | 2 | 93 % |
 
-- FOS/TAC raises no false alarms, but it cannot see a heating failure, a poorer silage or a broken
-  instrument, and a sample every three or four days is simply too slow: for the ammonia upsets, which build
-  up over weeks, the absolute threshold of 0.3 is crossed a median **18 days** after the cause and **6 days
-  after** the yield loss began. The plant-specific trend rule (+30 % over the last 8 samples) is 5 days
-  faster and still mostly late.
-- **The best label-free detector is PCA on the online signals**: alarmed before the yield loss in 75 % of
-  the cases with 0.7 false alarms a year. The CUSUM on specific yield is faster on average but pays with
-  more than ten false alarms a year, because the silage dry matter the operator books drifts between clamps.
-- Gradient boosting looks best on every column, and the next point shows why that is optimistic.
+- **The yield charts are mostly alarm habit.** The specific methane yield wanders because the silage dry
+  matter the operator books drifts between clamps. The EWMA is in alarm on 39 % of normal days and gets 29 %
+  of the upsets by chance. The CUSUM, not restarted after a signal, sits in alarm on 76 % of normal days, so
+  an upset rarely starts a new alarm: 29 % detected against 14 % chance (restarted after every signal, as in
+  the first version, it raised a new alarm about every ten days instead). The expert rules inherit the
+  EWMA's habit (42 % of days in alarm, 8 false alarms a year).
+- **The lab routine is quiet and narrow.** FOS/TAC > 0.3 never fires by chance but sees only shock loads
+  and overloads (27 % of process upsets within 14 days); the plant-specific trend rule sees 48 % at 2.1
+  false alarms a year. Neither sees a heating failure, a poorer silage or an instrument, and neither warns
+  ahead of an ammonia loss (0 and 1 of 20).
+- **PCA is the quietest online method** (0.6 false alarms a year, in alarm on 0.2 % of normal days) and
+  catches heating failures, shock loads and overloads (median 1-8 days), but not ammonia or a poorer silage
+  within two weeks (1 and 0 of 20; it sees 84 % of all process upsets within 60 days).
+
+**2. At the same false-alarm rate.** Moving each detector's threshold until it raises at most 2 false
+alarms a year (read off its curve on the test runs - a fair comparison of separation, not a threshold a
+plant could set in advance):
+
+| method | alarmed within 14 d | chance | excess | sensor faults | false alarms per year | days in alarm |
+|---|---|---|---|---|---|---|
+| Gradient boosting | 94 % | 3 % | +91 % | 88 % | 0.8 | 1 % |
+| Expert rules | 79 % | 8 % | +71 % | 50 % | 1.8 | 3 % |
+| EKF twin | 76 % | 6 % | +70 % | 65 % | 1.9 | 2 % |
+| PCA T2/SPE | 74 % | 7 % | +67 % | 28 % | 1.9 | 2 % |
+| EWMA yield | 66 % | 9 % | +57 % | 2 % | 2.0 | 4 % |
+| FOS/TAC +30 % | 45 % | 7 % | +38 % | 0 % | 1.6 | 4 % |
+| FOS/TAC > 0.3 | 42 % | 7 % | +35 % | 0 % | 1.6 | 5 % |
+| CUSUM yield | 23 % | 8 % | +15 % | 5 % | 1.9 | 22 % |
+
+Held to this rate, the expert rules and the EWMA lose their alarm habit and keep or raise their excess;
+the CUSUM does not recover. The absolute lab rule reaches 42 % only with its limit lowered to 0.23.
 
 ![trade-off](docs/img/tradeoff.png)
 
-**2. The slow upset is where early warning pays.** Ammonia inhibition from an N-rich co-substrate builds up
-for a median 12 days before the 7-day methane falls 5 % short, and costs a median 17 % of the methane over
-the following three months. The online methods warn ahead of it: gradient boosting a median 10 days before
-the loss, the expert rules 8, PCA 6, CUSUM and EWMA 4; FOS/TAC is 2-6 days late. Shock loads, heating
-failures and poorer silage cost gas within 2-5 days, so there the useful number is the delay: a heating failure shows on
-the temperature probe, and every method that reads it (PCA, rules, gradient boosting, EKF) alarms within one
-or two days, 3-4 days before the yield loss; the yield charts, which do not, need 6-9 days.
+**3. Early warning pays for one upset type: ammonia.** Ammonia inhibition from an N-rich co-substrate builds
+up for a median 12.5 days before the 7-day methane falls 5 % short of the healthy twin, and costs a median
+17 % of the methane over the following three months. Gradient boosting alarms before the loss in all 20
+cases (chance 6 %), a median 7 days ahead; the expert rules and the EWMA in 18 of 20, but their chance is
+26 %; the EKF twin in 11 of 20 (chance 13 %), 2 days ahead; FOS/TAC and PCA not at all. The other process
+upsets have no loss to warn of in the same sense:
+
+- a **poorer silage** loses yield from the first day it is fed (the "loss" 4-5 days later is the 7-day mean
+  catching up) and costs a median 19 % of the methane, so the useful number is how fast it is found;
+- **overload, shock load and heating failure are mild in this plant**: they dip the 7-day methane for a few
+  days (median lowest 95 %, 94 % and 91 % of the healthy twin) and cost at most 1.5 % of the methane over 90
+  days (medians below 0.1 %, below 0.1 % and 0.6 %); half the overloads never reach the 5 % line. They are
+  the textbook upsets that stress the process (shock loads and overloads raise the acids to a median peak
+  of 3.6 and 2.7 g/L) and they test detection, not prevention of loss. A heating failure shows on the temperature probe, and every method that reads it alarms within 1-2
+  days.
 
 ![lead time](docs/img/lead_time.png)
 
-**3. Gradient boosting is only as good as its training upsets.** Retrained without one upset type and
-tested on that type, it still notices the large process upsets (ammonia and shock loads 100 %, heating
-90 %), but names them wrongly (19 of 20 ammonia upsets called "substrate change"), and it **misses the
-instrument faults it has never seen: 10 % of the CH4 analyser drifts, 30 % of the stuck flow meters**.
-A real plant has no labelled history of its rare failures.
+**4. Gradient boosting does not need the feed log, but it needs examples.** The harmless recipe changes of
+normal operation now overlap the upsets in size, and gradient boosting without any feed-log feature does as
+well as with it (96 % vs 92 % within 14 days, 98 % named right both), so its result does not come from
+reading the upset off the feed sizes. It does come from having seen every upset type in training:
+retrained without one type and tested on it, it misses **all overloads and all poorer silages, 18 of 20
+CH4 analyser drifts and 19 of 20 stuck flow meters**, and names the ammonia and heating upsets it still
+notices a "substrate change" (16 of 18 and 16 of 17). A real plant has no labelled history of its rare
+failures.
 
-**4. The EKF twin needs no examples of failures and separates instrument from process.** It estimates the
-CH4 analyser's bias alongside the process, so all 20 analyser drifts are named as such (the expert rules: 10
-of 20, the others mostly called a substrate change), and 99 % of its detections are on the right side of the
-process/sensor line. Its weakness is speed: its alarms wait for a clear loss of methanogenic activity or VFA
-build-up, so it is alarmed before the yield loss in 60 % of the cases. It also leans on the lab: with no
-FOS/TAC at all it names 83 % right instead of 96 % and raises 2.7 false alarms a year instead of 1.8.
+**5. The EKF twin needs no examples of failures and separates instrument from process,** with 99 % of its
+detections on the right side of the process/sensor line and 93 % named right, but it knows the plant too
+well here: its model is lumped from the true plant. With nine of its parameters off by about 20 % and
+re-zeroed on each run's first weeks, its VFA estimate crosses its limit far more often: 11 false alarms a
+year instead of 4.1, and an excess of +51 % (42-59 %) instead of +74 % (68-80 %). A filter for a real plant
+needs its model calibrated to that plant.
 
 ![confusion](docs/img/confusion.png)
 
-**5. Without the lab.** Losing half or all of the FOS/TAC samples changes nothing for the online methods,
-costs gradient boosting little (alarmed before loss 96 % -> 89 % with no lab at all) and the EKF twin some
-naming accuracy, and leaves the lab rules blind.
+**6. Without the lab.** Losing half or all of the FOS/TAC samples leaves the online methods and gradient
+boosting unchanged (95 % within 14 days with no lab at all), costs the EKF twin naming accuracy (93 % ->
+78 % named right with no lab), and leaves the lab rules blind.
 
 ![robustness](docs/img/robustness.png)
 
-**6. On real farm data the yield charts are not usable as they are.** On four small manure-fed digesters
+**7. On real farm data the yield charts are not usable as they are.** On four small manure-fed digesters
 (below) the EWMA on gas per kg manure, calibrated on each digester's own first eight weeks, is in alarm on
-37-85 % of the days; the CUSUM raises 7-22 alarm episodes a year. Gas output there is dominated by how the
-digester is operated. The one rule that transfers is the data-quality check: all 8 alarm episodes of the
-frozen-or-backwards meter rule on the two digesters with an operator log start within three days of a note
-about a repair, a closed valve or the meter.
+37-85 % of the days; the CUSUM goes into alarm once or twice and stays there (83-99 % of the days). Gas
+output there is dominated by how the digester is operated, the same failure the simulation shows. The one
+rule that transfers is the data-quality check: 11 of the 12 alarm onsets of the frozen-or-backwards meter
+rule on the two digesters with an operator log start within three days of a note about a repair, a closed
+valve or the meter.
 
-An example: the ammonia upset of test run 100 - true methane against the healthy twin, the sensors, the
-FOS/TAC samples, the EKF's VFA estimate and every method's alarms:
+An example: the ammonia upset of test run 101 - true methane against the healthy twin, the sensors, the
+FOS/TAC samples and every method's alarms:
 
 ![replay](docs/img/replay_ammonia.png)
 
@@ -211,12 +251,19 @@ t_{loss} = \min \Big\{ t \ge t_0 : \tfrac{1}{7} \sum_{s=t-6}^{t} r(s) < 0.95 \Bi
 Sensor faults never cause yield loss; the methods must notice them without calling them a process upset.
 
 **Harmless recipe changes are part of normal operation.** Every 6-17 weeks the operator changes the
-recipe without harm: 5-15 % of the silage oDM as poultry manure for 1-4 weeks, 5-15 t/d of sugar beet for
-1-2 days, or 8-20 % more silage for 2-6 weeks (in the five normal years these cost at most 2 % of methane
-over a week, VFA stay below 1.7 g COD/L). Without them every poultry manure entry in the feed log would mean
-"ammonia upset coming", and a method could name the upset from the feed log before the process shows
-anything - which is how a first version of this study looked, and why the changes were added (the
-whole study was then re-run; no method or threshold was changed between the two runs).
+recipe: 5-45 % of the silage oDM as poultry manure for 3 days to 4 weeks (the larger the share, the
+shorter: share times days at most 3.2), 5-50 t/d of sugar beet for 1-2 days, or 8-50 % more silage for 2-6
+weeks. Their sizes overlap the lower end of the upsets (40-90 % poultry manure, 40-90 t/d beet, silage x1.4
+to x2.0), so neither a person nor a model can tell an upset from a harmless change by the size of the feed
+change alone; what differs is how long it lasts and what the process does. None of them crosses the
+yield-loss line: against an uninhibited twin fed the same, the 7-day methane of the five normal years
+never falls below 95.9 % (a poultry share of 45 % for 10 days would cross it, hence the share-times-days
+cap). Without such changes every poultry manure
+entry in the feed log would mean "ammonia upset coming", and a method could name the upset from the feed
+log before the process shows anything - which is how a first version of this study looked. A second version
+added small changes (5-15 % poultry manure, 5-15 t/d beet, +8-20 % silage); a review found that ranges
+disjoint from the upsets still let a model separate them by size, so the ranges now overlap, and gradient
+boosting is also run without any feed-log feature to measure how much it leans on the log.
 
 ## Methods
 
@@ -225,7 +272,7 @@ whole study was then re-run; no method or threshold was changed between the two 
 | **FOS/TAC > 0.3** | lab | latest result above 0.3 (a common practice threshold) | no |
 | **FOS/TAC +30 %** | lab | latest result 30 % above the median of the 8 before (plant-specific trend) | no |
 | **EWMA yield** | gas, CH4, feed log | EWMA of the standardised 7-day specific methane yield outside ±L sigma | no |
-| **CUSUM yield** | gas, CH4, feed log | two-sided tabular CUSUM of the same | no |
+| **CUSUM yield** | gas, CH4, feed log | two-sided tabular CUSUM of the same, not restarted after a signal | no |
 | **PCA T2/SPE** | gas, CH4, pH, temperature, feed log | Hotelling T2 or SPE above the 99.5 % training quantile on 2 days | no |
 | **Expert rules** | everything | the morning checks of an operator, top to bottom | yes |
 | **Gradient boosting** | everything | P(normal) < 0.5 on 2 days | yes |
@@ -235,7 +282,14 @@ whole study was then re-run; no method or threshold was changed between the two 
 $`\mathrm{SMY}_t = \sum_{s=t-6}^{t} Q_s\, c_s \,/\, \sum_{s=t-6}^{t} m^{oDM}_s`$. Standardised with the mean and
 standard deviation of two normal training years, $`z_t`$; the EWMA $`e_t = \lambda z_t + (1-\lambda) e_{t-1}`$
 ($`\lambda = 0.2`$) alarms outside $`\pm L \sqrt{\lambda / (2-\lambda)}`$ with $`L = 3`$; the CUSUM sums
-$`C^{\pm}_t = \max(0, C^{\pm}_{t-1} \pm z_t - k)`$ with $`k = 0.5`$ and alarms above $`h = 5`$.
+$`C^{\pm}_t = \max(0, C^{\pm}_{t-1} \pm z_t - k)`$ with $`k = 0.5`$ and alarms above $`h = 5`$. It is not
+restarted after a signal, so a lasting shift is one alarm (a restart after every signal, as in the first
+version, raised a new alarm every few days of the same shift).
+
+Every detector also has a continuous **score** scaled so that its published threshold is 1 (for example
+$`|e_t|`$ over its limit, $`\max(C^+_t, C^-_t)/h`$, the larger of T2 and SPE over their limits,
+$`(1 - P_{normal})/0.5`$ for gradient boosting); moving the threshold on the score traces each method's
+false-alarm/detection curve, which is how all detectors are compared at one common false-alarm rate.
 
 **PCA** on eight standardised daily variables (specific yield, gas per oDM, CH4, pH, temperature and the
 7-day changes of CH4, pH and yield), components up to 90 % of the variance, fitted on the normal training
@@ -254,7 +308,9 @@ steady pH and FOS/TAC -> analyser drift, else a yield drop without VFA signs -> 
 **Gradient boosting** (`HistGradientBoostingClassifier`, balanced classes) on 60 daily features: levels,
 3/7/14-day changes, 7-day spread and deviation from the last month of the yield, gas, CH4, pH and temperature;
 the spread of the hourly flow; the latest FOS, TAC, FOS/TAC, TAN, their age and trend; the feed composition
-of the last 7 and 28 days. Trained on 2 normal years and 8 runs of every upset type.
+of the last 7 and 28 days. Trained on 2 normal years and 8 runs of every upset type, with fixed iterations
+(no early stopping) and one thread, so a refit is bit-identical. A check variant drops the six feed-log
+features (what and how much was fed, the oDM fed relative to last month) and keeps the rest.
 
 **EKF twin**: an extended Kalman filter on a reduced model of AM2 type (Bernard et al. 2001) with a hydrolysis
 step, whose parameters come from lumping the ADM1 plant at its nominal steady state (no fitting to any upset):
@@ -277,20 +333,37 @@ lab days through the same titration model. Alarms: VFA estimate above 1.6 times 
 $`m < -0.15`$ without VFA or $`s < 0.93`$ (substrate); $`|b| > 1.5`$ %-points (analyser); frozen flow; low
 temperature. The cause of a VFA alarm is named from the feed log as in the rules.
 
+The filter knows the plant better than it would in practice: its parameters are lumped from the true
+plant, it uses the true plant's titration model and the nominal substrate composition, so its only model
+error is structural (the reduced model). A check variant scales nine of its rate, yield and transfer
+parameters by random factors $`e^{N(0,\,0.2^2)}`$ (about ±20 %) and re-zeroes $`m`$, $`s`$, $`b`$ and the
+nominal VFA level on days 14-35 of each run, as one would commission a filter on a new plant.
+
 ## Validation
 
 - **Training**: 2 normal years (seeds 1001-1002) and 8 runs of every upset type (seeds 0-7): EWMA, CUSUM
   and PCA in-control statistics and the gradient boosting model. The rule and EKF thresholds are set by
-  hand; the code was debugged on a smoke run that included one test run per type (seed 100), and all
-  thresholds were fixed before the full test set was evaluated.
-- **Test**: 3 normal years (seeds 2001-2003) and 20 runs of every upset type (seeds 100-119), 140 upsets.
-  Every run starts from the steady state, runs 90-96 days of normal operation (with its own feed and silage
-  variation and sensor noise) and 90 days after the upset.
-- **Detection**: the first alarm that starts within 60 days after $`t_0`$ (an alarm already running at
-  $`t_0`$ does not count; for the classifiers a new diagnosis counts). **Lead time** $`t_{loss} - t_{alarm}`$
-  for the process upsets that went on to lose yield. **False alarms**: alarm episodes (alarm days less than a
-  week apart form one episode) after a 35-day warm-up in the normal years and before $`t_0`$ in every test
-  run, per year of normal operation.
+  hand; the code was debugged on a smoke run that included one run per type with seed 100, so seed 100 is
+  not in the test set.
+- **Test**: 3 normal years (seeds 2001-2003) and 20 runs of every upset type (seeds 101-120), 140 upsets.
+  Every run has its own feed history (feed and silage variation, harmless recipe changes) and its own
+  sensor noise; it starts from the steady state, runs 90-96 days of normal operation and 90 days after the
+  upset. Runs are therefore independent, and intervals come from a bootstrap over runs (1000 resamples
+  within each upset type).
+- **One event rule**: an **alarm onset** is a day in alarm after a day without. **Detected**: an onset
+  within 14 days from $`t_0`$ (an alarm already running at $`t_0`$ does not count). **False alarms**: onsets
+  per year on upset-free days after a 35-day warm-up, i.e. the normal years and the history before $`t_0`$
+  of every test run; **days in alarm**: the share of those days a method is in alarm.
+- **Chance**: the same detection rule applied at every possible fake $`t_0`$ on the upset-free days - the
+  share of 14-day windows of normal operation that contain an onset. A method in alarm half the time
+  "detects" many upsets by coincidence; **excess = detected - chance** is what it finds beyond its own alarm
+  habit.
+- **Common false-alarm rate**: each score threshold moved until the method raises at most 2 false alarms a
+  year on the test runs, read off its curve (a fair comparison of separation, not a threshold a plant could
+  set in advance).
+- **Lead time** $`t_{loss} - t_{alarm}`$ only where the upset costs a **material** share of methane - at
+  least 2 % of the healthy twin's production over the 90 days after $`t_0`$ - and the loss builds up after
+  the cause: the ammonia upsets. Chance for "alarmed before the loss" uses windows of the same length.
 - **Classification**: the class named in the first three days of the first alarm, against the truth.
 - **Missing lab**: every test run observed again with the same online data and 50 % and 100 % of the lab
   samples removed.
@@ -306,12 +379,12 @@ pH, VFA, TAN and FOS/TAC columns are empty and CH4 was measured once, so only th
 the data-quality rule apply. They are calibrated on each digester's first eight weeks after start-up, as
 one would commission them on a new plant.
 
-| digester | EWMA: episodes / year (days in alarm) | CUSUM: episodes / year | meter rule: episodes (near an operator note) |
+| digester | EWMA: alarm onsets / year (days in alarm) | CUSUM: alarm onsets / year (days in alarm) | meter rule: alarm onsets (near an operator note) |
 |---|---|---|---|
-| R1 flexible bag | 4.7 (58 %) | 8.2 | 4 (4) |
-| R2 flexible bag | 4.6 (84 %) | 6.9 | 4 (4) |
-| R3 fixed dome | 2.6 (81 %) | 18.0 | 3 (no log) |
-| R4 fixed dome | 6.4 (37 %) | 21.8 | 3 (no log) |
+| R1 flexible bag | 8.2 (58 %) | 1.2 (95 %) | 4 (4) |
+| R2 flexible bag | 5.8 (85 %) | 1.2 (99 %) | 8 (7) |
+| R3 fixed dome | 5.1 (81 %) | 1.3 (91 %) | 4 (no log) |
+| R4 fixed dome | 6.4 (37 %) | 2.6 (83 %) | 4 (no log) |
 
 Plausibility: the twin assumes methanogenic rates fall by half per 10 K. In these unheated digesters, at
 18-27 °C, the weekly gas per kg manure does not rise with temperature: the fitted sensitivity is
@@ -329,12 +402,18 @@ so the data can neither confirm nor refute the assumption.
 - **One digester, one recipe.** Real plants have a main and a secondary digester, mixing problems, foaming,
   floating layers, trace-element deficiencies, sulphide and desulphurisation - none of which is simulated.
 - **The upsets are the textbook ones**, each alone; real incidents overlap (a new silage clamp in winter
-  with a cold snap).
-- **The feed log helps a lot.** Rules, gradient boosting and the EKF name overload, shock load and ammonia
-  partly from what was fed. That is realistic - the operator knows the feed - but it means the
-  classification of those upsets is easier than detecting them.
+  with a cold snap). Three of the five process upsets (overload, shock load, heating failure) are mild in
+  this plant and cost under 1.5 % of the methane; only ammonia and a poorer silage cost a material share.
+- **The feed log helps the naming.** Rules and the EKF name overload, shock load and ammonia partly from
+  what was fed. That is realistic - the operator knows the feed - but it means the classification of those
+  upsets is easier than detecting them. Gradient boosting detects and names as well without the feed log.
 - **Gradient boosting has seen every upset type in training**, with severities from the same ranges; its
   numbers are an optimistic bound. The unseen-type experiment shows what remains without that help.
+- **The EKF twin knows the plant** (parameters lumped from the true plant, its titration model, the
+  nominal substrate); the perturbed variant shows the cost of a 20 % model error.
+- **The common-rate comparison reads thresholds off the test curves**: it compares how well the methods
+  separate upsets from normal operation; a plant setting a threshold in advance would land near, not on,
+  those points.
 - **The real data cannot validate detection.** The open farm-scale set has no pH, VFA or FOS/TAC and no
   documented process upsets; it checks false alarms and plausibility only.
 - **Lab error is idealised** as noise on the titration volumes; real FOS/TAC also depends on sample
@@ -354,7 +433,7 @@ through this twin and check which methods keep their false-alarm rate.
 
 ```bash
 pip install -e ".[dev]"
-pytest -q                                    # 13 tests, offline, about 30 s
+pytest -q                                    # 15 tests, offline, about a minute
 python -m biogas_twin verify                 # ADM1 against the BSM2 steady state
 python -m biogas_twin fetch                  # the Mendeley farm data, 12 MB, CC BY 4.0, checksum verified
 python -m biogas_twin study --workers 6      # 201 simulations + 429 evaluations, about an hour
@@ -371,9 +450,11 @@ src/biogas_twin/
   sensors.py     online sensors, the FOS/TAC titration model, lab, feed log, the daily table
   methods.py     FOS/TAC rules, EWMA/CUSUM, PCA, expert rules, gradient boosting
   am2.py         the reduced model, its calibration from ADM1, the EKF and its alarms
-  evaluate.py    detection, lead time, false alarms, confusion
+  evaluate.py    alarm onsets, detection against chance, false alarms, lead time, common-rate curves,
+                 bootstrap intervals, confusion
   study.py       the campaign; realdata.py the farm-data check; report.py figures and dashboard data
-tests/           13 tests: BSM2 verification, plant plausibility, titration, scenarios, methods, scores
+tests/           15 tests: BSM2 verification, plant plausibility, titration, scenarios, methods, scores,
+                 benign-change limits, a bit-identical gradient boosting refit
 ```
 
 ## Data, sources and licence

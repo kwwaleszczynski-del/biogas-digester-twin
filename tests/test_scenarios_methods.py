@@ -5,7 +5,16 @@ import pytest
 
 from biogas_twin import evaluate as ev
 from biogas_twin.am2 import EKF, ReducedModel, calibrate, feed_inputs
-from biogas_twin.methods import PCAMonitor, YieldCharts, fostac_relative
+from biogas_twin.methods import (
+    GBMClassifier,
+    PCAMonitor,
+    YieldCharts,
+    day_labels,
+    fostac_relative,
+    gbm_features,
+    persist2,
+    prepare,
+)
 from biogas_twin.plant import NOMINAL_FEED, T_SET, Plant
 from biogas_twin.realdata import _dates, _feed
 from biogas_twin.scenarios import Scenario, apply, draw, run, yield_loss_onset
@@ -99,15 +108,53 @@ def test_scores():
     alarm = np.zeros(100, bool)
     alarm[[10, 11, 12, 30, 60, 61]] = True
     assert list(ev.onsets(alarm)) == [10, 30, 60]
-    assert ev.episodes(alarm, 0, 100) == 3
-    assert ev.episodes(alarm, 20, 100) == 2
-    sc = Scenario("ammonia", seed=0, t0=50, days=100, severity=0.5, duration=50)
-    r = ev.detection(alarm, None, sc, yield_loss_day=70)
-    assert r["detected"] and r["delay"] == 10 and r["lead"] == 10 and r["before_loss"]
+    assert ev.first_onset(alarm, 50, 64) == 60
+    assert ev.first_onset(alarm, 11, 30) is None          # an alarm running at the start does not count
+    # chance: fake 14-day windows starting on days 35..36 (stop 50); none contains an onset
+    assert ev.window_hits(alarm, 35, 50, 14) == (0, 2)
+    assert ev.window_hits(alarm, 0, 40, 14) == (21, 27)    # starts 0..26; onsets 10 and 30
+    assert ev.free_counts(alarm, 0, 50) == (2, 4, 50)
     cls = np.array(["normal"] * 100, dtype=object)
-    cls[10:13] = "substrate"
-    cls[55:58] = "ammonia"
-    assert list(ev.class_onsets(cls)) == [10, 55]
+    cls[60:62] = "ammonia"
+    run_ = ev.Run(kind="ammonia", seed=0, missing=0.1, n=100, t0=50, loss_day=70, material=True,
+                  alarm={"m": alarm}, cls={"m": cls}, score={"m": alarm.astype(float) * 2})
+    r = ev.detections([run_], "m").iloc[0]
+    assert r["detected"] and r["delay"] == 10 and r["lead"] == 10 and r["before_loss"]
+    assert r["class"] == "ammonia" and r["chance_window"] == 20
+    late = ev.Run(**{**run_.__dict__, "t0": 62})
+    assert not ev.detections([late], "m").iloc[0]["detected"]
+
+
+def test_persistence_scores_and_benign_change_limits():
+    s = np.array([0.5, 1.2, 1.3, 0.9, 1.5, 2.0])
+    assert list(persist2(s) > 1) == [False, False, True, False, False, True]
+    from biogas_twin.plant import FEEDS, benign_changes
+    for seed in range(20):
+        feed = pd.DataFrame(0.0, index=np.arange(2000), columns=FEEDS)
+        feed["maize silage"] = 1.0
+        benign_changes(feed, np.full(2000, 0.33), np.random.default_rng(seed))
+        on = feed["poultry manure"].to_numpy() > 0
+        # every poultry episode: share x days stays at or below 3.2 (large shares only for days)
+        edges = np.flatnonzero(np.diff(np.concatenate([[0], on.astype(int), [0]])))
+        for a, b in zip(edges[::2], edges[1::2]):
+            share = 1 - feed["maize silage"].iloc[a]
+            assert share * (b - a) <= 3.2 + 1e-9
+        assert feed["sugar beet"].max() <= 50.0
+        assert feed["maize silage"].max() <= 1.5 + 1e-9
+
+
+def test_gradient_boosting_refit_is_identical(plant):
+    pl, xs = plant
+    frames, labels = [], []
+    for sc in (draw("normal", 1, pre=40, post=0),
+               Scenario("ammonia", seed=2, t0=20, days=40, severity=0.8, duration=20, params={"ramp": 2})):
+        res = run(sc, pl, xs)
+        x = prepare(observe(res, sc.seed))
+        frames.append(x)
+        labels.append(day_labels(sc, len(x)))
+    p1 = GBMClassifier().fit(frames, labels).model.predict_proba(gbm_features(frames[1]).to_numpy())
+    p2 = GBMClassifier().fit(frames, labels).model.predict_proba(gbm_features(frames[1]).to_numpy())
+    assert np.array_equal(p1, p2)
 
 
 def test_reduced_model_matches_adm1_and_ekf_stays_calm(plant):

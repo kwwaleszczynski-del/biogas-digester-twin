@@ -1,13 +1,13 @@
 method,true,predicted,n
 Expert rules,overload,overload,14
-Expert rules,overload,acidification,0
-Expert rules,overload,ammonia,1
+Expert rules,overload,acidification,1
+Expert rules,overload,ammonia,0
 Expert rules,overload,temperature,0
-Expert rules,overload,substrate,5
+Expert rules,overload,substrate,4
 Expert rules,overload,ch4_drift,0
 Expert rules,overload,flow_stuck,0
 Expert rules,acidification,overload,0
-Expert rules,acidification,acidification,20
+Expert rules,acidification,acidification,18
 Expert rules,acidification,ammonia,0
 Expert rules,acidification,temperature,0
 Expert rules,acidification,substrate,0
@@ -15,7 +15,7 @@ Expert rules,acidification,ch4_drift,0
 Expert rules,acidification,flow_stuck,0
 Expert rules,ammonia,overload,0
 Expert rules,ammonia,acidification,0
-Expert rules,ammonia,ammonia,20
+Expert rules,ammonia,ammonia,17
 Expert rules,ammonia,temperature,0
 Expert rules,ammonia,substrate,0
 Expert rules,ammonia,ch4_drift,0
@@ -23,23 +23,23 @@ Expert rules,ammonia,flow_stuck,0
 Expert rules,temperature,overload,0
 Expert rules,temperature,acidification,0
 Expert rules,temperature,ammonia,0
-Expert rules,temperature,temperature,20
+Expert rules,temperature,temperature,11
 Expert rules,temperature,substrate,0
 Expert rules,temperature,ch4_drift,0
 Expert rules,temperature,flow_stuck,0
 Expert rules,substrate,overload,0
-Expert rules,substrate,acidification,3
-Expert rules,substrate,ammonia,1
+Expert rules,substrate,acidification,0
+Expert rules,substrate,ammonia,0
 Expert rules,substrate,temperature,0
-Expert rules,substrate,substrate,13
-Expert rules,substrate,ch4_drift,1
+Expert rules,substrate,substrate,17
+Expert rules,substrate,ch4_drift,0
 Expert rules,substrate,flow_stuck,0
 Expert rules,ch4_drift,overload,0
-Expert rules,ch4_drift,acidification,1
-Expert rules,ch4_drift,ammonia,3
+Expert rules,ch4_drift,acidification,0
+Expert rules,ch4_drift,ammonia,0
 Expert rules,ch4_drift,temperature,0
-Expert rules,ch4_drift,substrate,6
-Expert rules,ch4_drift,ch4_drift,10
+Expert rules,ch4_drift,substrate,0
+Expert rules,ch4_drift,ch4_drift,8
 Expert rules,ch4_drift,flow_stuck,0
 Expert rules,flow_stuck,overload,0
 Expert rules,flow_stuck,acidification,0
@@ -47,8 +47,8 @@ Expert rules,flow_stuck,ammonia,0
 Expert rules,flow_stuck,temperature,0
 Expert rules,flow_stuck,substrate,0
 Expert rules,flow_stuck,ch4_drift,0
-Expert rules,flow_stuck,flow_stuck,20
-Gradient boosting,overload,overload,20
+Expert rules,flow_stuck,flow_stuck,14
+Gradient boosting,overload,overload,16
 Gradient boosting,overload,acidification,0
 Gradient boosting,overload,ammonia,0
 Gradient boosting,overload,temperature,0
@@ -56,7 +56,7 @@ Gradient boosting,overload,substrate,0
 Gradient boosting,overload,ch4_drift,0
 Gradient boosting,overload,flow_stuck,0
 Gradient boosting,acidification,overload,0
-Gradient boosting,acidification,acidification,20
+Gradient boosting,acidification,acidification,17
 Gradient boosting,acidification,ammonia,0
 Gradient boosting,acidification,temperature,0
 Gradient boosting,acidification,substrate,0
@@ -66,7 +66,7 @@ Gradient boosting,ammonia,overload,0
 Gradient boosting,ammonia,acidification,0
 Gradient boosting,ammonia,ammonia,19
 Gradient boosting,ammonia,temperature,0
-Gradient boosting,ammonia,substrate,1
+Gradient boosting,ammonia,substrate,0
 Gradient boosting,ammonia,ch4_drift,0
 Gradient boosting,ammonia,flow_stuck,0
 Gradient boosting,temperature,overload,0
@@ -85,10 +85,10 @@ Gradient boosting,substrate,ch4_drift,0
 Gradient boosting,substrate,flow_stuck,0
 Gradient boosting,ch4_drift,overload,1
 Gradient boosting,ch4_drift,acidification,0
-Gradient boosting,ch4_drift,ammonia,1
+Gradient boosting,ch4_drift,ammonia,0
 Gradient boosting,ch4_drift,temperature,0
 Gradient boosting,ch4_drift,substrate,1
-Gradient boosting,ch4_drift,ch4_drift,14
+Gradient boosting,ch4_drift,ch4_drift,13
 Gradient boosting,ch4_drift,flow_stuck,0
 Gradient boosting,flow_stuck,overload,0
 Gradient boosting,flow_stuck,acidification,0
@@ -97,8 +97,8 @@ Gradient boosting,flow_stuck,temperature,0
 Gradient boosting,flow_stuck,substrate,0
 Gradient boosting,flow_stuck,ch4_drift,0
 Gradient boosting,flow_stuck,flow_stuck,20
-EKF twin,overload,overload,18
-EKF twin,overload,acidification,0
+EKF twin,overload,overload,14
+EKF twin,overload,acidification,1
 EKF twin,overload,ammonia,1
 EKF twin,overload,temperature,0
 EKF twin,overload,substrate,0
@@ -112,10 +112,10 @@ EKF twin,acidification,substrate,0
 EKF twin,acidification,ch4_drift,0
 EKF twin,acidification,flow_stuck,0
 EKF twin,ammonia,overload,0
-EKF twin,ammonia,acidification,1
-EKF twin,ammonia,ammonia,17
+EKF twin,ammonia,acidification,0
+EKF twin,ammonia,ammonia,10
 EKF twin,ammonia,temperature,0
-EKF twin,ammonia,substrate,2
+EKF twin,ammonia,substrate,4
 EKF twin,ammonia,ch4_drift,0
 EKF twin,ammonia,flow_stuck,0
 EKF twin,temperature,overload,0
@@ -129,7 +129,7 @@ EKF twin,substrate,overload,1
 EKF twin,substrate,acidification,0
 EKF twin,substrate,ammonia,0
 EKF twin,substrate,temperature,0
-EKF twin,substrate,substrate,19
+EKF twin,substrate,substrate,17
 EKF twin,substrate,ch4_drift,0
 EKF twin,substrate,flow_stuck,0
 EKF twin,ch4_drift,overload,0
@@ -137,7 +137,7 @@ EKF twin,ch4_drift,acidification,0
 EKF twin,ch4_drift,ammonia,0
 EKF twin,ch4_drift,temperature,0
 EKF twin,ch4_drift,substrate,0
-EKF twin,ch4_drift,ch4_drift,20
+EKF twin,ch4_drift,ch4_drift,8
 EKF twin,ch4_drift,flow_stuck,0
 EKF twin,flow_stuck,overload,0
 EKF twin,flow_stuck,acidification,0
@@ -145,4 +145,102 @@ EKF twin,flow_stuck,ammonia,0
 EKF twin,flow_stuck,temperature,0
 EKF twin,flow_stuck,substrate,0
 EKF twin,flow_stuck,ch4_drift,0
-EKF twin,flow_stuck,flow_stuck,20
+EKF twin,flow_stuck,flow_stuck,19
+Gradient boosting (no feed log),overload,overload,17
+Gradient boosting (no feed log),overload,acidification,0
+Gradient boosting (no feed log),overload,ammonia,0
+Gradient boosting (no feed log),overload,temperature,0
+Gradient boosting (no feed log),overload,substrate,0
+Gradient boosting (no feed log),overload,ch4_drift,0
+Gradient boosting (no feed log),overload,flow_stuck,0
+Gradient boosting (no feed log),acidification,overload,0
+Gradient boosting (no feed log),acidification,acidification,20
+Gradient boosting (no feed log),acidification,ammonia,0
+Gradient boosting (no feed log),acidification,temperature,0
+Gradient boosting (no feed log),acidification,substrate,0
+Gradient boosting (no feed log),acidification,ch4_drift,0
+Gradient boosting (no feed log),acidification,flow_stuck,0
+Gradient boosting (no feed log),ammonia,overload,0
+Gradient boosting (no feed log),ammonia,acidification,0
+Gradient boosting (no feed log),ammonia,ammonia,18
+Gradient boosting (no feed log),ammonia,temperature,0
+Gradient boosting (no feed log),ammonia,substrate,1
+Gradient boosting (no feed log),ammonia,ch4_drift,0
+Gradient boosting (no feed log),ammonia,flow_stuck,0
+Gradient boosting (no feed log),temperature,overload,0
+Gradient boosting (no feed log),temperature,acidification,0
+Gradient boosting (no feed log),temperature,ammonia,0
+Gradient boosting (no feed log),temperature,temperature,20
+Gradient boosting (no feed log),temperature,substrate,0
+Gradient boosting (no feed log),temperature,ch4_drift,0
+Gradient boosting (no feed log),temperature,flow_stuck,0
+Gradient boosting (no feed log),substrate,overload,0
+Gradient boosting (no feed log),substrate,acidification,0
+Gradient boosting (no feed log),substrate,ammonia,1
+Gradient boosting (no feed log),substrate,temperature,0
+Gradient boosting (no feed log),substrate,substrate,19
+Gradient boosting (no feed log),substrate,ch4_drift,0
+Gradient boosting (no feed log),substrate,flow_stuck,0
+Gradient boosting (no feed log),ch4_drift,overload,0
+Gradient boosting (no feed log),ch4_drift,acidification,0
+Gradient boosting (no feed log),ch4_drift,ammonia,0
+Gradient boosting (no feed log),ch4_drift,temperature,0
+Gradient boosting (no feed log),ch4_drift,substrate,1
+Gradient boosting (no feed log),ch4_drift,ch4_drift,13
+Gradient boosting (no feed log),ch4_drift,flow_stuck,0
+Gradient boosting (no feed log),flow_stuck,overload,0
+Gradient boosting (no feed log),flow_stuck,acidification,0
+Gradient boosting (no feed log),flow_stuck,ammonia,0
+Gradient boosting (no feed log),flow_stuck,temperature,0
+Gradient boosting (no feed log),flow_stuck,substrate,0
+Gradient boosting (no feed log),flow_stuck,ch4_drift,0
+Gradient boosting (no feed log),flow_stuck,flow_stuck,20
+EKF twin (perturbed),overload,overload,12
+EKF twin (perturbed),overload,acidification,1
+EKF twin (perturbed),overload,ammonia,1
+EKF twin (perturbed),overload,temperature,0
+EKF twin (perturbed),overload,substrate,0
+EKF twin (perturbed),overload,ch4_drift,0
+EKF twin (perturbed),overload,flow_stuck,0
+EKF twin (perturbed),acidification,overload,0
+EKF twin (perturbed),acidification,acidification,17
+EKF twin (perturbed),acidification,ammonia,0
+EKF twin (perturbed),acidification,temperature,0
+EKF twin (perturbed),acidification,substrate,0
+EKF twin (perturbed),acidification,ch4_drift,1
+EKF twin (perturbed),acidification,flow_stuck,0
+EKF twin (perturbed),ammonia,overload,0
+EKF twin (perturbed),ammonia,acidification,0
+EKF twin (perturbed),ammonia,ammonia,13
+EKF twin (perturbed),ammonia,temperature,0
+EKF twin (perturbed),ammonia,substrate,2
+EKF twin (perturbed),ammonia,ch4_drift,1
+EKF twin (perturbed),ammonia,flow_stuck,0
+EKF twin (perturbed),temperature,overload,2
+EKF twin (perturbed),temperature,acidification,0
+EKF twin (perturbed),temperature,ammonia,0
+EKF twin (perturbed),temperature,temperature,16
+EKF twin (perturbed),temperature,substrate,0
+EKF twin (perturbed),temperature,ch4_drift,0
+EKF twin (perturbed),temperature,flow_stuck,0
+EKF twin (perturbed),substrate,overload,2
+EKF twin (perturbed),substrate,acidification,0
+EKF twin (perturbed),substrate,ammonia,0
+EKF twin (perturbed),substrate,temperature,0
+EKF twin (perturbed),substrate,substrate,13
+EKF twin (perturbed),substrate,ch4_drift,0
+EKF twin (perturbed),substrate,flow_stuck,0
+EKF twin (perturbed),ch4_drift,overload,4
+EKF twin (perturbed),ch4_drift,acidification,0
+EKF twin (perturbed),ch4_drift,ammonia,0
+EKF twin (perturbed),ch4_drift,temperature,0
+EKF twin (perturbed),ch4_drift,substrate,0
+EKF twin (perturbed),ch4_drift,ch4_drift,8
+EKF twin (perturbed),ch4_drift,flow_stuck,0
+EKF twin (perturbed),flow_stuck,overload,0
+EKF twin (perturbed),flow_stuck,acidification,0
+EKF twin (perturbed),flow_stuck,ammonia,0
+EKF twin (perturbed),flow_stuck,temperature,0
+EKF twin (perturbed),flow_stuck,substrate,0
+EKF twin (perturbed),flow_stuck,ch4_drift,0
+EKF twin (perturbed),flow_stuck,flow_stuck,11

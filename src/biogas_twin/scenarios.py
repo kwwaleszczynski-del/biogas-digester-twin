@@ -140,9 +140,26 @@ def yield_loss_onset(ch4: np.ndarray, ch4_healthy: np.ndarray, t0: int,
     return None
 
 
+def methane_lost(res: dict) -> float:
+    """Share of the healthy twin's methane lost from t0 to the end of the run, after removing the
+    offset between plant and twin over the 14 days before t0 (0 for sensor faults)."""
+    sc = res["scenario"]
+    if sc.kind not in PROCESS:
+        return 0.0
+    ch4, healthy = res["ch4_day"], res["ch4_healthy"]
+    offset = ch4[sc.t0 - 14:sc.t0].sum() / healthy[sc.t0 - 14:sc.t0].sum()
+    return float(1.0 - ch4[sc.t0:].sum() / (offset * healthy[sc.t0:].sum()))
+
+
+def history_seed(sc: Scenario) -> int:
+    """Seed of the run's normal-operation feed history: its own for every kind and seed, so that no
+    two runs share a history."""
+    return 7919 * sc.seed + CLASSES.index(sc.kind)
+
+
 def run(sc: Scenario, plant: Plant, x0: np.ndarray, base: Inputs | None = None) -> dict:
     """Simulate a scenario and its healthy twin; return true trajectories and ground truth."""
-    base = base if base is not None else nominal_inputs(sc.days, seed=sc.seed)
+    base = base if base is not None else nominal_inputs(sc.days, seed=history_seed(sc))
     inp = apply(sc, base)
     res = plant.run(inp, x0)
     onset = None

@@ -56,6 +56,7 @@ td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
 td.best { font-weight: 700; }
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 6px; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid2 > * { min-width: 0; }
 @media (max-width: 820px) { .grid2 { grid-template-columns: 1fr; } }
 .note { font-size: 0.82rem; color: var(--muted); }
 .truth { font-size: 0.88rem; color: var(--ink2); margin: 4px 0 8px; }
@@ -71,7 +72,8 @@ footer { margin-top: 40px; font-size: 0.82rem; color: var(--muted); }
 upset are injected with known ground truth - five process upsets and two sensor faults - and eight
 monitoring methods watch the plant through realistic sensors: online gas flow, CH4, pH and temperature with
 noise, drift and gaps, and a FOS/TAC titration twice a week. Everything below is measured on 140 upsets and
-three normal years that no method saw while it was tuned.
+three normal years that no method saw while it was tuned, and every detection rate is shown next to the rate
+the method's own false alarms reach by chance.
 Code and method: <a href="https://github.com/kwwaleszczynski-del/biogas-digester-twin">github.com/kwwaleszczynski-del/biogas-digester-twin</a>.</p>
 <div class="tiles" id="tiles"></div>
 
@@ -88,9 +90,13 @@ mark for the diagnosis the method gives.</p>
 
 <h2>2. Method comparison</h2>
 <p>Process upsets: overload, shock load, ammonia, heating failure, substrate change. Sensor faults: drifting
-CH4 analyser, frozen gas flow meter. A detection is an alarm that starts within 60 days after the cause;
-false alarms are alarm episodes in normal operation. <i>Before yield loss</i>: share of the process upsets
-that went on to lose yield and were alarmed before the loss began.</p>
+CH4 analyser, frozen gas flow meter. One event rule for everything: an <i>alarm onset</i> is a day in alarm
+after a day without. <i>Detected</i>: an onset within 14 days from the cause. <i>Chance</i>: the same rule
+applied at every date of normal operation, where any onset is a coincidence; <i>excess</i> = detected minus
+chance. <i>False alarms</i>: onsets per year of normal operation; <i>days in alarm</i>: the share of normal
+days a method is in alarm. <i>Ammonia, before loss</i>: share of the ammonia upsets alarmed before their
+yield loss began (the one upset type whose loss builds up after the cause). Brackets: 95 % bootstrap
+intervals over test runs.</p>
 <div class="controls">
   <label>Lab samples missing <select id="mc-lab">
     <option value="0.1">10 % (normal)</option><option value="0.5">50 %</option><option value="1">100 % (no lab)</option>
@@ -99,17 +105,24 @@ that went on to lose yield and were alarmed before the loss began.</p>
 <div class="legend" id="fam-legend"></div>
 <div class="card scroll"><table id="mc-table"></table></div>
 <div class="grid2" style="margin-top:14px">
-  <div class="card"><div id="mc-plot" class="plot" style="height:380px"></div></div>
-  <div class="card"><div id="mc-plot2" class="plot" style="height:380px"></div></div>
+  <div class="card"><div id="mc-plot" class="plot" style="height:400px"></div></div>
+  <div class="card"><div id="mc-plot2" class="plot" style="height:400px"></div></div>
 </div>
+<p class="note">Left: each method at its own threshold; the open circle is its chance level at the same
+false-alarm habit. Right: every detector's score threshold moved until it raises at most 2 false alarms a
+year on the test runs (lab 10 % missing), read off the curves: a fair comparison of how well each method
+separates upsets from normal operation, not a threshold a plant could set in advance.</p>
+<div class="card scroll" style="margin-top:14px"><p style="margin-top:0">Two checks (lab 10 % missing):
+gradient boosting without the feed log (what and how much was fed), and the EKF twin with its model
+parameters off by about 20 % and re-zeroed on each run's first weeks.</p><table id="var-table"></table></div>
 
 <h2>3. By upset type</h2>
 <div class="controls">
   <label>Metric <select id="bc-metric">
-    <option value="detected">detected [%]</option>
-    <option value="delay">median delay [days]</option>
-    <option value="before_loss">alarmed before yield loss [%]</option>
-    <option value="lead">median lead before yield loss [days]</option>
+    <option value="detected">detected within 14 days [%]</option>
+    <option value="median_delay_d">median delay [days]</option>
+    <option value="before_loss">alarmed before a material yield loss [%]</option>
+    <option value="median_lead_d">median lead before a material yield loss [days]</option>
   </select></label>
 </div>
 <div class="card"><div id="bc-plot" class="plot" style="height:430px"></div></div>
@@ -174,15 +187,15 @@ function famLegend(id) {
 const rowsAt = lab => D.robustness.filter(r => Math.abs(r.lab_missing - lab) < 1e-9);
 
 function tiles() {
-  const R = rowsAt(0.1);
-  const by = m => R.find(r => r.method === m);
-  const best = R.filter(r => r.before_yield_loss != null).sort((a, b) => b.before_yield_loss - a.before_yield_loss)[0];
+  const by = m => D.summary.find(r => r.method === m);
+  const C = D.common.filter(r => D.methods.includes(r.method) && r.excess_process != null);
+  const best = [...C].sort((a, b) => b.excess_process - a.excess_process)[0];
   const fos = by("FOS/TAC +30 %");
   const ekf = by("EKF twin"), gbm = by("Gradient boosting");
   const t = [
-    [pct(best.before_yield_loss), `of yield losses alarmed before they began by the best method (${best.method}, ${num(best.false_alarms_per_year)} false alarms/year)`],
-    [pct(fos.before_yield_loss), `the same for the FOS/TAC trend rule, the plant's lab routine`],
-    [pct(gbm.accuracy) + " / " + pct(ekf.accuracy), "upsets named right at the first alarm: gradient boosting / EKF twin"],
+    [pct(best.detected_process), `of process upsets alarmed within ${D.window} days by ${best.method} at ${num(D.common_rate, 0)} false alarms a year (chance ${pct(best.chance)})`],
+    [pct(fos.detected_process), `the same for the FOS/TAC trend rule, the plant's lab routine (chance ${pct(fos.chance)})`],
+    [pct(gbm.accuracy) + " / " + pct(ekf.accuracy), "detected upsets named right at the first alarm: gradient boosting / EKF twin"],
     ["2e-7", "largest relative deviation of the ADM1 implementation from the published BSM2 steady state"],
   ];
   document.getElementById("tiles").innerHTML = t.map(([v, l]) =>
@@ -253,45 +266,72 @@ function replay() {
     `<span><i style="background:${css("--ink")}"></i>cause</span><span><i style="background:${bad}"></i>yield loss starts</span>`;
 }
 
+const ci = (r, k) => r[k + "_lo"] == null ? "" : ` <span class="note">(${pct(r[k + "_lo"])}-${pct(r[k + "_hi"])})</span>`;
+const ciN = (r, k) => r[k + "_lo"] == null ? "" : ` <span class="note">(${num(r[k + "_lo"])}-${num(r[k + "_hi"])})</span>`;
+const COLS = [["detected_process", "process upsets detected", (r, k) => pct(r[k]) + ci(r, k)],
+  ["chance", "chance", (r, k) => pct(r[k])],
+  ["excess_process", "excess", (r, k) => pct(r[k]) + ci(r, k)],
+  ["detected_sensor", "sensor faults detected", (r, k) => pct(r[k])],
+  ["median_delay_d", "median delay [d]", (r, k) => num(r[k], 0)],
+  ["false_alarms_per_year", "false alarms / year", (r, k) => num(r[k], 1) + ciN(r, k)],
+  ["alarm_day_share", "days in alarm", (r, k) => pct(r[k])],
+  ["before_loss", "ammonia, before loss", (r, k) => pct(r[k])],
+  ["median_lead_d", "ammonia, median lead [d]", (r, k) => num(r[k], 0)],
+  ["accuracy", "named right", (r, k) => pct(r[k])]];
+const BEST = {detected_process: "max", excess_process: "max", detected_sensor: "max", median_delay_d: "min",
+  false_alarms_per_year: "min", alarm_day_share: "min", before_loss: "max", median_lead_d: "max", accuracy: "max"};
+function table(R, methods) {
+  const best = {};
+  COLS.forEach(([k]) => { const v = R.map(r => r[k]).filter(v => v != null);
+    best[k] = v.length && BEST[k] ? (BEST[k] === "max" ? Math.max(...v) : Math.min(...v)) : null; });
+  let h = "<tr><th>method</th>" + COLS.map(([, l]) => `<th class="n">${l}</th>`).join("") + "</tr>";
+  methods.forEach(m => {
+    const r = R.find(x => x.method === m);
+    if (!r) return;
+    h += `<tr><td><span class="dot" style="background:${famColor(m)}"></span>${m}</td>` +
+      COLS.map(([k, , f]) => `<td class="n${r[k] != null && r[k] === best[k] ? " best" : ""}">${f(r, k)}</td>`).join("") + "</tr>";
+  });
+  return h;
+}
+
 function comparison() {
   const lab = Number(document.getElementById("mc-lab").value);
-  const R = rowsAt(lab);
-  const cols = [["detected_process", "process upsets detected", pct], ["detected_sensor", "sensor faults detected", pct],
-    ["median_delay_d", "median delay [d]", v => num(v, 0)], ["before_yield_loss", "before yield loss", pct],
-    ["median_lead_d", "median lead [d]", v => num(v, 0)], ["false_alarms_per_year", "false alarms / year", v => num(v, 1)],
-    ["accuracy", "named right", pct]];
-  const bestOf = {detected_process: "max", detected_sensor: "max", median_delay_d: "min", before_yield_loss: "max",
-    median_lead_d: "max", false_alarms_per_year: "min", accuracy: "max"};
-  const best = {};
-  cols.forEach(([k]) => { const v = R.map(r => r[k]).filter(v => v != null);
-    best[k] = v.length ? (bestOf[k] === "max" ? Math.max(...v) : Math.min(...v)) : null; });
-  let h = "<tr><th>method</th>" + cols.map(([, l]) => `<th class="n">${l}</th>`).join("") + "</tr>";
-  D.methods.forEach(m => {
-    const r = R.find(x => x.method === m);
-    h += `<tr><td><span class="dot" style="background:${famColor(m)}"></span>${m}</td>` +
-      cols.map(([k, , f]) => `<td class="n${r[k] != null && r[k] === best[k] ? " best" : ""}">${f(r[k])}</td>`).join("") + "</tr>";
-  });
-  document.getElementById("mc-table").innerHTML = h;
-  // the two lab FOS/TAC rules sit next to each other near x = 0: their labels go to the right, apart in height
-  // on a phone, labels of points near either end of the x axis open inwards instead of running into the axis
+  // the 10 % table carries the bootstrap intervals; the other lab levels are point estimates
+  const R = Math.abs(lab - 0.1) < 1e-9 ? D.summary : rowsAt(lab);
+  document.getElementById("mc-table").innerHTML = table(R, D.methods);
+  // the two yield charts and the rules sit close together at the right: their labels open apart
+  const pos = {"FOS/TAC > 0.3": "bottom right", "FOS/TAC +30 %": "top right", "PCA T2/SPE": "top right",
+    "EWMA yield": "top left", "Expert rules": "middle right", "EKF twin": "bottom right"};
   const xmax = Math.max(...R.map(r => r.false_alarms_per_year)), narrow = window.innerWidth < 640;
   const edge = x => !narrow ? "top center" : x < 0.15 * xmax ? "top right" : x > 0.85 * xmax ? "top left" : "top center";
-  const pts = (yk, title, ylab, yfmt, pos = {}) => {
-    const T = D.methods.map(m => { const r = R.find(x => x.method === m);
-      return {x: [r.false_alarms_per_year], y: [r[yk]], mode: "markers+text", text: [m],
-        textposition: pos[m] || edge(r.false_alarms_per_year),
-        textfont: {size: 10, color: css("--ink2")}, marker: {size: 11, color: famColor(m), line: {color: css("--surface"), width: 2}},
-        hovertemplate: m + "<br>%{x:.1f} false alarms/year<br>" + ylab + ": %{y" + yfmt + "}<extra></extra>", showlegend: false}; });
-    return [T, layoutBase({margin: {l: 56, r: 16, t: 30, b: 50}, title: {text: title, font: {size: 13, color: css("--ink")}, x: 0.02},
-      xaxis: axis({title: {text: "false alarms per year", font: {size: 12}}, rangemode: "tozero"}),
-      yaxis: axis({title: {text: ylab, font: {size: 12}}})})];
-  };
-  Plotly.react("mc-plot", ...pts("median_delay_d", "Faster (low) vs fewer false alarms (left)", "median delay [days]", ":.0f",
-    {"FOS/TAC > 0.3": "bottom right", "FOS/TAC +30 %": "top right"}), CFG());
-  const [T2, L2] = pts("before_yield_loss", "Alarmed before yield loss (high)", "share before yield loss", ":.0%",
-    {"FOS/TAC > 0.3": "bottom right", "FOS/TAC +30 %": "top right"});
-  L2.yaxis.tickformat = ".0%"; L2.yaxis.range = [-0.12, 1.08];
-  Plotly.react("mc-plot2", T2, L2, CFG());
+  const T = [];
+  D.methods.forEach(m => { const r = R.find(x => x.method === m); const c = famColor(m);
+    T.push({x: [r.false_alarms_per_year, r.false_alarms_per_year], y: [r.chance, r.detected_process], mode: "lines",
+      line: {color: c, width: 2}, opacity: 0.5, hoverinfo: "skip", showlegend: false});
+    T.push({x: [r.false_alarms_per_year], y: [r.chance], mode: "markers", showlegend: false,
+      marker: {size: 8, color: css("--surface"), line: {color: c, width: 1.5}},
+      hovertemplate: m + "<br>chance %{y:.0%}<extra></extra>"});
+    T.push({x: [r.false_alarms_per_year], y: [r.detected_process], mode: "markers+text", text: [m], showlegend: false,
+      textposition: pos[m] || edge(r.false_alarms_per_year), textfont: {size: 10, color: css("--ink2")},
+      marker: {size: 11, color: c, line: {color: css("--surface"), width: 2}},
+      hovertemplate: m + "<br>%{x:.1f} false alarms/year<br>detected %{y:.0%}<extra></extra>"}); });
+  Plotly.react("mc-plot", T, layoutBase({margin: {l: 56, r: 16, t: 30, b: 50},
+    title: {text: "Detected vs chance (circle)", font: {size: 13, color: css("--ink")}, x: 0.02},
+    xaxis: axis({title: {text: "false alarms per year (own threshold)", font: {size: 12}}, range: [-0.4, (narrow ? 1.5 : 1.3) * xmax]}),
+    yaxis: axis({title: {text: `alarm within ${D.window} days`, font: {size: 12}}, tickformat: ".0%", range: [-0.05, 1.08]})}), CFG());
+  const C = D.common.filter(r => D.methods.includes(r.method) && r.detected_process != null)
+    .sort((a, b) => a.excess_process - b.excess_process);
+  const T2 = [{type: "bar", orientation: "h", y: C.map(r => r.method), x: C.map(r => r.chance), name: "chance",
+      marker: {color: css("--grid")}, hovertemplate: "%{y}: chance %{x:.0%}<extra></extra>"},
+    {type: "bar", orientation: "h", y: C.map(r => r.method), x: C.map(r => r.excess_process), name: "excess over chance",
+      marker: {color: C.map(r => famColor(r.method))}, text: C.map(r => "+" + pct(r.excess_process)), textposition: "outside",
+      cliponaxis: false, hovertemplate: "%{y}: excess %{x:.0%}<extra></extra>"}];
+  Plotly.react("mc-plot2", T2, layoutBase({barmode: "stack", showlegend: false, margin: {l: narrow ? 120 : 130, r: 30, t: 30, b: 50},
+    title: {text: `At ${num(D.common_rate, 0)} false alarms a year`, font: {size: 13, color: css("--ink")}, x: 0.02},
+    xaxis: axis({title: {text: `alarm within ${D.window} days (grey: chance)`, font: {size: 12}}, tickformat: ".0%", range: [0, 1.1]}),
+    yaxis: {tickfont: {size: 10}}}), CFG());
+  const V = [...D.variant_rows, ...D.summary.filter(r => ["Gradient boosting", "EKF twin"].includes(r.method))];
+  document.getElementById("var-table").innerHTML = table(V, ["Gradient boosting", "Gradient boosting (no feed log)", "EKF twin", "EKF twin (perturbed)"]);
 }
 
 function byClass() {
@@ -299,20 +339,19 @@ function byClass() {
   const kinds = D.classes.slice(1);
   const z = D.methods.map(m => kinds.map(k => { const r = D.by_class.find(x => x.method === m && x.kind === k);
     if (!r) return null; const v = r[metric]; return v == null ? null : (metric === "detected" || metric === "before_loss" ? 100 * v : v); }));
-  if (metric === "before_loss" || metric === "lead") {
-    kinds.forEach((k, j) => { if (D.sensor.includes(k)) z.forEach(row => row[j] = null); });
-  }
   const txt = z.map(r => r.map(v => v == null ? "" : (metric === "detected" || metric === "before_loss" ? Math.round(v) + "%" : Math.round(v))));
-  const lowGood = metric === "delay";
+  const lowGood = metric === "median_delay_d";
   const T = [{type: "heatmap", z, x: kinds.map(k => D.labels[k]), y: D.methods, text: txt, texttemplate: "%{text}",
     colorscale: lowGood ? [[0, css("--seq1")], [1, css("--seq0")]] : [[0, css("--seq0")], [1, css("--seq1")]],
     showscale: false, xgap: 2, ygap: 2, hovertemplate: "%{y} / %{x}: %{text}<extra></extra>",
-    zmin: metric === "lead" ? -20 : 0, zmax: metric === "lead" ? 20 : (metric === "delay" ? 30 : 100)}];
+    zmin: 0, zmax: metric === "median_lead_d" ? 20 : (metric === "median_delay_d" ? 14 : 100)}];
   const narrow = window.innerWidth < 600;  // on a phone the angled class names ran into each other
   Plotly.react("bc-plot", T, layoutBase({margin: {l: 130, r: 10, t: 10, b: narrow ? 170 : 110},
     xaxis: {tickangle: narrow ? -90 : -30, tickfont: {size: narrow ? 10 : 11}}, yaxis: {autorange: "reversed", tickfont: {size: 11}},
     font: {family: "system-ui, sans-serif", color: css("--ink2"), size: 11}}), CFG());
-  document.getElementById("bc-note").textContent = "20 test upsets per type. Lead time and before-loss only for upsets that went on to lose yield; sensor faults never do.";
+  const chance = D.methods.map(m => { const r = D.summary.find(x => x.method === m); return `${m} ${pct(r.chance)}`; }).join(", ");
+  document.getElementById("bc-note").textContent = "20 test upsets per type. Chance of an alarm onset in any 14-day window of normal operation: " + chance +
+    ". Before-loss and lead only where the upset costs at least 2 % of the methane: ammonia (the loss builds up after the cause) and a poorer silage (the loss starts with the first poorer feed). Overload, shock load and heating failure are mild in this plant (under 1.5 % of the methane over 90 days); sensor faults cost none.";
 }
 
 function confusion() {
@@ -361,8 +400,8 @@ function realData() {
     xaxis: axis(window.innerWidth < 640 ? {ticklabelmode: "period"} : {}),
     yaxis: axis({title: {text: "meter units per day", font: {size: 11}}, rangemode: "tozero"})}), CFG());
   const rows = D.real.table.filter(r => r.digester === name);
-  let h = "<tr><th>method</th><th class='n'>alarm episodes</th><th class='n'>per year</th><th class='n'>days in alarm</th><th class='n'>starting within 3 days of an operator note</th></tr>";
-  rows.forEach(r => h += `<tr><td>${r.method}</td><td class="n">${r.episodes}</td><td class="n">${num(r.per_year)}</td><td class="n">${pct(r.share_of_days_in_alarm)}</td><td class="n">${r.near_logged_event}</td></tr>`);
+  let h = "<tr><th>method</th><th class='n'>alarm onsets</th><th class='n'>per year</th><th class='n'>days in alarm</th><th class='n'>starting within 3 days of an operator note</th></tr>";
+  rows.forEach(r => h += `<tr><td>${r.method}</td><td class="n">${r.onsets}</td><td class="n">${num(r.per_year)}</td><td class="n">${pct(r.share_of_days_in_alarm)}</td><td class="n">${r.near_logged_event}</td></tr>`);
   document.getElementById("rd-table").innerHTML = h;
   const s = D.real.sensitivity[name];
   document.getElementById("rd-note").textContent = s
@@ -372,7 +411,7 @@ function realData() {
 
 function init() {
   fillSelect("rp-kind", D.replays.map(r => [r.kind, D.labels[r.kind]]), "ammonia");
-  fillSelect("cf-method", D.classifiers.map(m => [m, m]), "EKF twin");
+  fillSelect("cf-method", [...D.classifiers, ...D.variants].map(m => [m, m]), "EKF twin");
   if (D.real) fillSelect("rd-name", Object.keys(D.real.weekly).map(k => [k, k]), Object.keys(D.real.weekly)[1]);
   document.getElementById("rp-kind").onchange = replay;
   document.getElementById("mc-lab").onchange = comparison;

@@ -15,17 +15,21 @@ three slowly varying unknowns the filter estimates:
 
 The parameters come from lumping the ADM1 plant at its nominal steady state (no fitting to the test
 scenarios). Measurements: daily biogas, CH4 %, pH; FOS and TAC on lab days, through the same Nordmann
-titration model applied to the reduced state.
+titration model applied to the reduced state. The filter therefore knows the plant better than it would
+in practice: its only mismatch is structural (the reduced model), it uses the true plant's titration
+model and the nominal substrate composition. `perturbed` gives a filter with rate, yield and transfer
+parameters off by about 20 %, re-zeroed on the first weeks of each run, as the fairer test.
 """
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 import numpy as np
 import pandas as pd
 
 from .adm1 import IDX, Constants
+from .methods import persist2
 from .plant import NOMINAL_FEED, T_SET, Plant
 from .sensors import _acid_added, fos_tac
 from .substrates import SUBSTRATES, influent
@@ -338,20 +342,54 @@ class EKF:
         return pd.DataFrame(out)
 
 
-def ekf_alarm(est: pd.DataFrame, x: pd.DataFrame, s2_ref: float) -> tuple[np.ndarray, np.ndarray]:
-    """Alarms and classes from the filter's estimates (and the same feed log as the rules).
+def perturbed(p: RMParams, x0: np.ndarray, seed: int = 7, sd: float = 0.2) -> tuple[RMParams, np.ndarray]:
+    """The reduced model with its rate, yield and transfer parameters each scaled by a random factor
+    exp(N(0, sd)): a filter that does not know the plant exactly. Its own steady state under the
+    nominal feed is the new starting point."""
+    rng = np.random.default_rng(seed)
+    q = replace(p)
+    for name in ("k_h", "k2", "K2", "Y2", "kd", "c1", "n_N", "kH_factor", "ret"):
+        setattr(q, name, getattr(q, name) * float(np.exp(sd * rng.standard_normal())))
+    rm = ReducedModel(q)
+    u = feed_inputs(NOMINAL_FEED)
+    x = x0.copy()
+    for _ in range(400):
+        x = rm.step(x, u, T_SET, q.tan0)
+    return q, x
+
+
+COMMISSIONING = (14, 35)  # days whose median estimates a re-baselined filter takes as its normal
+
+
+def ekf_alarm(est: pd.DataFrame, x: pd.DataFrame, s2_ref: float,
+              rebaseline: bool = False) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Alarms, classes and score from the filter's estimates (and the same feed log as the rules).
 
     VFA accumulation: S2 above 1.6x its nominal level, or methanogenic activity down by more than
     26 % (m < -0.3); lost activity without VFA (m < -0.15, S2 < 1.2x) or degradability s < 0.93 is a
     poorer substrate; |b| above 1.5 %-points is the CH4 analyser; frozen hourly flow is the meter.
+    The score is the largest of these ratios to their limits, held on two days. With `rebaseline`
+    the estimates are taken relative to their median over the commissioning days (a filter that
+    starts from a wrong model is re-zeroed on the plant's first weeks).
     """
     n = len(est)
     m, s, b, S2 = est["m"].to_numpy(), est["s"].to_numpy(), est["b"].to_numpy(), est["S2"].to_numpy()
+    if rebaseline:
+        a, z = COMMISSIONING
+        m = m - np.median(m[a:z])
+        s = s / np.median(s[a:z])
+        b = b - np.median(b[a:z])
+        s2_ref = float(np.median(S2[a:z]))
     flat = (x["flow_sd"] < 1e-6).fillna(False).to_numpy()
-    cold = (x["temp_f"] < T_SET - 273.15 - 1.5).fillna(False).to_numpy()
-    vfa_up = (S2 > 1.6 * s2_ref) | (m < -0.3)
-    subst = (s < 0.93) | ((m < -0.15) & (S2 < 1.2 * s2_ref))
-    drift = np.abs(b) > 1.5
+    cold_k = (T_SET - 273.15 - x["temp_f"]).fillna(0.0).to_numpy() / 1.5
+    cold = cold_k > 1.0
+    vfa_k = np.maximum(S2 / (1.6 * s2_ref), -m / 0.3)
+    subst_k = np.maximum((1.0 - s) / 0.07, np.minimum(-m / 0.15, 1.2 * s2_ref / np.maximum(S2, 1e-9)))
+    drift_k = np.abs(b) / 1.5
+    vfa_up = vfa_k > 1.0
+    subst = subst_k > 1.0
+    drift = drift_k > 1.0
+    score = persist2(np.maximum.reduce([np.where(flat, 10.0, 0.0), cold_k, vfa_k, subst_k, drift_k]))
     poultry = x.get("feed_poultry manure", pd.Series(0.0, index=x.index)).rolling(14, min_periods=1).sum().to_numpy()
     beet = x.get("feed_sugar beet", pd.Series(0.0, index=x.index)).rolling(10, min_periods=1).sum().to_numpy()
     odm_rel = (x["odm7"] / x["odm7"].shift(7).rolling(28, min_periods=14).median()).to_numpy()
@@ -379,4 +417,4 @@ def ekf_alarm(est: pd.DataFrame, x: pd.DataFrame, s2_ref: float) -> tuple[np.nda
     alarm = raw & np.roll(raw, 1)
     alarm[0] = False
     cls[~alarm] = "normal"
-    return alarm, cls
+    return alarm, cls, score

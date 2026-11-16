@@ -10,8 +10,8 @@ Agricultural parameter set (assumptions on top of BSM2, each stated in the READM
 - first-order hydrolysis 0.25 1/d (the rate-limiting step for silage);
 - kinetics scale exp(theta (T - 35 C)): theta 0.035 1/K for hydrolysis, acidogenesis and decay,
   0.069 1/K (rates halve per 10 K) for acetogenesis and methanogenesis;
-- free-ammonia inhibition of acetoclastic methanogens for a culture adapted to ammonia:
-  K_I = 0.02 kmol N/m3 (280 mg NH3-N/L), Hill exponent 2.
+- free-ammonia inhibition of acetoclastic methanogens as in BSM2: K_I = 0.0018 kmol N/m3
+  (25 mg NH3-N/L), non-competitive form (Hill exponent 1).
 """
 from __future__ import annotations
 
@@ -61,10 +61,12 @@ def nominal_inputs(days: int, seed: int | None = None, variability: bool = True)
 
     Variation (seeded): silage mass +-3 % day to day, slurry +-12 % (barn cleaning), silage dry
     matter drifting between clamps (31-35 %), digester temperature +-0.2 K around the set point, and
-    every 6-17 weeks a harmless recipe change: 5-15 % of the silage oDM as poultry manure for 1-4
-    weeks, 5-15 t/d of sugar beet for 1-2 days, or 8-20 % more silage for 2-6 weeks. These keep the
-    yield within the normal band; they are there so that a method cannot call an upset from the
-    feed log alone.
+    every 6-17 weeks a harmless recipe change: 5-45 % of the silage oDM as poultry manure for 3 days
+    to 4 weeks (the larger the share, the shorter: share x days <= 3.2), 5-50 t/d of sugar beet for
+    1-2 days, or 8-50 % more silage for 2-6 weeks. Their sizes overlap the lower end of the upsets
+    (40-90 % poultry, 40-90 t/d beet, x1.4-2.0 silage), but none of them crosses the yield-loss
+    line of the healthy twin; they are there so that a method cannot call an upset from the size of
+    a feed change alone.
     """
     rng = np.random.default_rng(seed)
     feed = pd.DataFrame(0.0, index=np.arange(days), columns=FEEDS)
@@ -95,18 +97,18 @@ def benign_changes(feed: pd.DataFrame, dm: np.ndarray, rng: np.random.Generator)
     while d < days:
         kind = rng.choice(["poultry", "beet", "more"])
         if kind == "poultry":
-            dur = int(rng.integers(7, 29))
-            share = rng.uniform(0.05, 0.15)
+            share = rng.uniform(0.05, 0.45)
+            dur = int(rng.integers(3, min(29, int(3.2 / share) + 1)))
             idx = np.arange(d, min(d + dur, days))
             maize_odm = feed.loc[idx, "maize silage"].to_numpy() * dm[idx] * MAIZE_SILAGE.odm
             feed.loc[idx, "maize silage"] *= 1 - share
             feed.loc[idx, "poultry manure"] += share * maize_odm / (POULTRY_MANURE.dm * POULTRY_MANURE.odm)
         elif kind == "beet":
             dur = int(rng.integers(1, 3))
-            feed.loc[np.arange(d, min(d + dur, days)), "sugar beet"] += rng.uniform(5.0, 15.0)
+            feed.loc[np.arange(d, min(d + dur, days)), "sugar beet"] += rng.uniform(5.0, 50.0)
         else:
             dur = int(rng.integers(14, 43))
-            f = rng.uniform(1.08, 1.2)
+            f = rng.uniform(1.08, 1.5)
             idx = np.arange(d, min(d + dur, days))
             ramp = np.clip((idx - d + 1) / 3.0, 0, 1)
             feed.loc[idx, "maize silage"] *= 1 + (f - 1) * ramp

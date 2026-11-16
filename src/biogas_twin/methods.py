@@ -1,13 +1,17 @@
 """Detection and classification methods. Each works on the daily table of one run, causally.
 
-Detectors return a boolean alarm per day; classifiers also return a class per day. The in-control
-statistics (EWMA, CUSUM, PCA) and the gradient boosting model are fitted on training runs only.
+Every detector also returns a daily score scaled so that its published operating point alarms at
+score > 1; another threshold on the same score moves it along its false-alarm/detection curve (used
+to compare all detectors at one common false-alarm rate). Classifiers also return a class per day.
+The in-control statistics (EWMA, CUSUM, PCA) and the gradient boosting model are fitted on training
+runs only.
 """
 from __future__ import annotations
 
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import HistGradientBoostingClassifier
+from threadpoolctl import threadpool_limits
 
 from .plant import T_SET
 
@@ -33,27 +37,48 @@ def prepare(d: pd.DataFrame) -> pd.DataFrame:
     return x
 
 
+def persist2(score: np.ndarray) -> np.ndarray:
+    """Score of a two-consecutive-days rule: day t qualifies only if days t-1 and t both do."""
+    s = np.asarray(score, dtype=float)
+    out = np.minimum(s, np.concatenate([[0.0], s[:-1]]))
+    out[0] = 0.0
+    return out
+
+
 # --- 1. FOS/TAC thresholds (industry practice) ------------------------------------------------------
+def fostac_absolute_score(x: pd.DataFrame, limit: float = 0.3) -> np.ndarray:
+    """Latest lab FOS/TAC over `limit`, held until the next result."""
+    return (x["fos_tac_last"] / limit).fillna(0.0).to_numpy()
+
+
 def fostac_absolute(x: pd.DataFrame, limit: float = 0.3) -> np.ndarray:
     """Alarm from a lab result above `limit` until the next result."""
-    return (x["fos_tac_last"] > limit).to_numpy()
+    return fostac_absolute_score(x, limit) > 1.0
+
+
+def fostac_relative_score(x: pd.DataFrame, rise: float = 0.3, n_ref: int = 8) -> np.ndarray:
+    """Rise of the latest FOS/TAC over the median of the previous `n_ref` results, in units of
+    `rise`, held until the next result."""
+    lab = x.loc[x["fos_tac"].notna(), ["day", "fos_tac"]]
+    ref = lab["fos_tac"].shift(1).rolling(n_ref, min_periods=4).median()
+    rel = pd.Series((lab["fos_tac"].to_numpy() / ref.to_numpy() - 1.0) / rise, index=lab["day"])
+    out = pd.Series(np.nan, index=x["day"])
+    out.loc[rel.index] = rel.fillna(0.0)
+    return out.ffill().fillna(0.0).to_numpy()
 
 
 def fostac_relative(x: pd.DataFrame, rise: float = 0.3, n_ref: int = 8) -> np.ndarray:
     """Plant-specific: the latest FOS/TAC more than `rise` (30 %) above the median of the previous
     `n_ref` results."""
-    lab = x.loc[x["fos_tac"].notna(), ["day", "fos_tac"]]
-    ref = lab["fos_tac"].shift(1).rolling(n_ref, min_periods=4).median()
-    flag = pd.Series(lab["fos_tac"].to_numpy() > (1 + rise) * ref.to_numpy(), index=lab["day"])
-    out = pd.Series(np.nan, index=x["day"])
-    out.loc[flag.index] = flag.astype(float)
-    return out.ffill().fillna(0).astype(bool).to_numpy()
+    return fostac_relative_score(x, rise, n_ref) > 1.0
 
 
 # --- 2. EWMA and CUSUM on the specific methane yield ---------------------------------------------
 class YieldCharts:
     """Two-sided EWMA (lambda 0.2, L = 3) and tabular CUSUM (k = 0.5 sigma, h = 5 sigma) on the
-    7-day specific methane yield, in-control mean and sigma from normal training runs."""
+    7-day specific methane yield, in-control mean and sigma from normal training runs. The CUSUM is
+    not restarted after a signal: it stays in alarm while the shift lasts, so one shift is one alarm
+    (a restart would raise a new alarm every few days of the same shift)."""
 
     def __init__(self, lam: float = 0.2, L: float = 3.0, k: float = 0.5, h: float = 5.0):
         self.lam, self.L, self.k, self.h = lam, L, k, h
@@ -69,27 +94,31 @@ class YieldCharts:
     def z(self, x: pd.DataFrame) -> np.ndarray:
         return ((x["smy"] - self.mu) / self.sd).ffill().fillna(0.0).to_numpy()
 
-    def ewma(self, x: pd.DataFrame) -> np.ndarray:
+    def ewma_score(self, x: pd.DataFrame) -> np.ndarray:
         z = self.z(x)
         e = 0.0
         lim = self.L * np.sqrt(self.lam / (2 - self.lam))
-        out = np.zeros(len(z), dtype=bool)
+        out = np.zeros(len(z))
         for i, v in enumerate(z):
             e = self.lam * v + (1 - self.lam) * e
-            out[i] = abs(e) > lim
+            out[i] = abs(e) / lim
         return out
 
-    def cusum(self, x: pd.DataFrame) -> np.ndarray:
+    def ewma(self, x: pd.DataFrame) -> np.ndarray:
+        return self.ewma_score(x) > 1.0
+
+    def cusum_score(self, x: pd.DataFrame) -> np.ndarray:
         z = self.z(x)
         hi = lo = 0.0
-        out = np.zeros(len(z), dtype=bool)
+        out = np.zeros(len(z))
         for i, v in enumerate(z):
             hi = max(0.0, hi + v - self.k)
             lo = max(0.0, lo - v - self.k)
-            out[i] = hi > self.h or lo > self.h
-            if out[i]:  # restart after a signal, as a chart would be after an investigation
-                hi = lo = 0.0
+            out[i] = max(hi, lo) / self.h
         return out
+
+    def cusum(self, x: pd.DataFrame) -> np.ndarray:
+        return self.cusum_score(x) > 1.0
 
 
 # --- 3. PCA T2 / SPE --------------------------------------------------------------------------------
@@ -141,19 +170,21 @@ class PCAMonitor:
         Z = (F.to_numpy() - self.mu) / self.sd
         return self._stats(Z)
 
-    def alarm(self, x: pd.DataFrame) -> np.ndarray:
+    def score(self, x: pd.DataFrame) -> np.ndarray:
         t2, spe = self.scores(x)
-        raw = (t2 > self.t2_lim) | (spe > self.spe_lim)
-        out = raw & np.roll(raw, 1)
-        out[0] = False
-        return out
+        return persist2(np.maximum(t2 / self.t2_lim, spe / self.spe_lim))
+
+    def alarm(self, x: pd.DataFrame) -> np.ndarray:
+        return self.score(x) > 1.0
 
 
 # --- 4. Expert symptom rules (detector + classifier) -------------------------------------------------
-def rules(x: pd.DataFrame, charts: YieldCharts) -> tuple[np.ndarray, np.ndarray]:
+def rules(x: pd.DataFrame, charts: YieldCharts) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """The checks an experienced operator runs every morning, top to bottom.
 
-    Returns (alarm, class) per day. The feed log is part of the operator's knowledge.
+    Returns (alarm, class, score) per day. The feed log is part of the operator's knowledge. The
+    score is the largest of the symptom checks relative to its limit (frozen meter 10, cold digester,
+    EWMA, FOS/TAC rise, pH drop of 0.08, CH4 jump of 2 %-points), so alarm == score > 1.
     """
     n = len(x)
     cls = np.array(["normal"] * n, dtype=object)
@@ -161,10 +192,17 @@ def rules(x: pd.DataFrame, charts: YieldCharts) -> tuple[np.ndarray, np.ndarray]
     base_odm = feed_odm7.shift(7).rolling(28, min_periods=14).median()
     poultry = x.get("feed_poultry manure", pd.Series(0.0, index=x.index)).rolling(7, min_periods=1).sum()
     beet = x.get("feed_sugar beet", pd.Series(0.0, index=x.index)).rolling(10, min_periods=1).sum()
-    ewma = charts.ewma(x)
-    fostac_rel = fostac_relative(x)
+    ewma_k = charts.ewma_score(x)
+    ewma = ewma_k > 1.0
+    fostac_k = fostac_relative_score(x)
+    fostac_rel = fostac_k > 1.0
     ch4_ref = x["ch4_f"].shift(7).rolling(21, min_periods=7).median()
     pH_ref = x["pH_f"].shift(7).rolling(21, min_periods=7).median()
+    flat_k = np.where((x["flow_sd"] < 1e-6).fillna(False).to_numpy(), 10.0, 0.0)
+    cold_k = ((T_SET - 273.15 - x["temp_f"]) / 1.5).fillna(0.0).to_numpy()
+    pH_k = ((pH_ref - x["pH_f"]) / 0.08).fillna(0.0).to_numpy()
+    ch4_k = ((x["ch4_f"] - ch4_ref).abs() / 2.0).fillna(0.0).to_numpy()
+    score = np.maximum.reduce([flat_k, cold_k, ewma_k, fostac_k, pH_k, ch4_k])
     smy_ref = x["smy"].shift(7).rolling(21, min_periods=7).median()
     tan_hi = x["tan_last"] > 3.2
     for i in range(n):
@@ -194,11 +232,17 @@ def rules(x: pd.DataFrame, charts: YieldCharts) -> tuple[np.ndarray, np.ndarray]
             cls[i] = "overload"
         else:
             cls[i] = "substrate"
-    return cls != "normal", cls
+    return cls != "normal", cls, score
 
 
 # --- 5. Gradient boosting classifier ------------------------------------------------------------------
+FEED_FEATURES = ["f_poultry_manure_7", "f_poultry_manure_28", "f_sugar_beet_7", "f_sugar_beet_28",
+                 "silage_share", "odm_rel"]
+
+
 def gbm_features(x: pd.DataFrame) -> pd.DataFrame:
+    """Daily features. FEED_FEATURES come from the feed log (what and how much was fed); the yield
+    features divide by the logged oDM as every plant's KPI does."""
     f = pd.DataFrame(index=x.index)
     for c in ["smy", "gas_per_odm", "ch4_f", "pH_f", "temp_f"]:
         s = x[c]
@@ -227,33 +271,41 @@ def gbm_features(x: pd.DataFrame) -> pd.DataFrame:
 
 class GBMClassifier:
     """HistGradientBoosting on daily features; alarm when P(normal) < 0.5 on two consecutive days,
-    the class is the most likely upset at that day."""
+    the class is the most likely upset at that day. Fixed iterations (no early stopping) and one
+    thread, so that a refit gives the same model bit for bit. `feed_log=False` drops the features
+    that say what and how much was fed (the check for learning upsets from feed sizes)."""
 
-    def __init__(self, seed: int = 0):
+    def __init__(self, seed: int = 0, feed_log: bool = True):
+        self.feed_log = feed_log
         self.model = HistGradientBoostingClassifier(max_iter=300, learning_rate=0.08,
                                                     max_leaf_nodes=31, l2_regularization=1.0,
+                                                    early_stopping=False,
                                                     class_weight="balanced", random_state=seed)
 
     def fit(self, frames: list[pd.DataFrame], labels: list[np.ndarray]) -> "GBMClassifier":
         X = pd.concat([gbm_features(f) for f in frames])
+        if not self.feed_log:
+            X = X.drop(columns=[c for c in FEED_FEATURES if c in X])
         y = np.concatenate(labels)
         self.columns = list(X.columns)
-        self.model.fit(X.to_numpy(), y)
+        with threadpool_limits(1):
+            self.model.fit(X.to_numpy(), y)
         return self
 
     def predict(self, x: pd.DataFrame) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """(alarm, class, score): score = (1 - P(normal)) / 0.5, held on two days."""
         X = gbm_features(x).reindex(columns=self.columns)
-        P = self.model.predict_proba(X.to_numpy())
+        with threadpool_limits(1):
+            P = self.model.predict_proba(X.to_numpy())
         classes = list(self.model.classes_)
         p_norm = P[:, classes.index("normal")]
-        raw = p_norm < 0.5
-        alarm = raw & np.roll(raw, 1)
-        alarm[0] = False
+        score = persist2((1.0 - p_norm) / 0.5)
+        alarm = score > 1.0
         Pu = P.copy()
         Pu[:, classes.index("normal")] = -1
         cls = np.array([classes[j] for j in Pu.argmax(1)], dtype=object)
         cls[~alarm] = "normal"
-        return alarm, cls, P
+        return alarm, cls, score
 
 
 def day_labels(sc, n: int, temp: np.ndarray | None = None) -> np.ndarray:

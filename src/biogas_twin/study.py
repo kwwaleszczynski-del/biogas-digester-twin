@@ -1,7 +1,9 @@
 """The comparison: simulate training and test runs, observe them, fit, apply every method, score.
 
 Training: 2 normal years and 8 instances of every upset type (seeds 0-7).
-Test: 3 normal years and 20 instances of every upset type (seeds 100-119), never seen in fitting.
+Test: 3 normal years and 20 instances of every upset type (seeds 101-120), never seen in fitting or
+in setting thresholds (seed 100 was used in development runs and is left out). Every run has its own
+feed history.
 Every test run is observed three times with the same online data and 10 %, 50 % and 100 % of the
 lab samples missing (the robustness check).
 """
@@ -18,11 +20,11 @@ import numpy as np
 import pandas as pd
 
 from . import evaluate as ev
-from .am2 import EKF, ReducedModel, calibrate, ekf_alarm
-from .methods import (GBMClassifier, PCAMonitor, YieldCharts, day_labels, fostac_absolute,
-                      fostac_relative, prepare, rules)
+from .am2 import EKF, ReducedModel, calibrate, ekf_alarm, perturbed
+from .methods import (GBMClassifier, PCAMonitor, YieldCharts, day_labels, fostac_absolute_score,
+                      fostac_relative_score, prepare, rules)
 from .plant import Plant
-from .scenarios import CLASSES, PROCESS, SENSOR, draw, run
+from .scenarios import CLASSES, PROCESS, SENSOR, draw, methane_lost, run
 from .sensors import daily, feed_log, lab, online, vfa_mg_hac
 
 log = logging.getLogger(__name__)
@@ -33,12 +35,15 @@ RESULTS = ROOT / "results"
 
 KINDS = PROCESS + SENSOR
 TRAIN_NORMAL, TEST_NORMAL = [1001, 1002], [2001, 2002, 2003]
-TRAIN_SEEDS, TEST_SEEDS = range(0, 8), range(100, 120)
+TRAIN_SEEDS, TEST_SEEDS = range(0, 8), range(101, 121)
 PRE, POST = 90, 90
 MISSING = [0.1, 0.5, 1.0]
 METHODS = ["FOS/TAC > 0.3", "FOS/TAC +30 %", "EWMA yield", "CUSUM yield", "PCA T2/SPE",
            "Expert rules", "Gradient boosting", "EKF twin"]
 CLASSIFIERS = ["Expert rules", "Gradient boosting", "EKF twin"]
+# checks run on the 10 %-missing observation only: gradient boosting without the feed log, and a
+# filter whose model parameters are off by ~20 % and re-zeroed on each run's first weeks
+VARIANTS = ["Gradient boosting (no feed log)", "EKF twin (perturbed)"]
 
 _PLANT: dict = {}
 
@@ -48,7 +53,8 @@ def plant_state():
         pl = Plant()
         xs = pl.steady_state()
         p, x0 = calibrate(pl, xs)
-        _PLANT.update(plant=pl, xs=xs, rm=ReducedModel(p), x0=x0)
+        q, xq = perturbed(p, x0)
+        _PLANT.update(plant=pl, xs=xs, rm=ReducedModel(p), x0=x0, rm_pert=ReducedModel(q), x0_pert=xq)
     return _PLANT
 
 
@@ -102,6 +108,7 @@ class Fitted:
     charts: YieldCharts
     pca: PCAMonitor
     gbm: GBMClassifier
+    gbm_nofeed: GBMClassifier
     s2_ref: float
 
 
@@ -115,46 +122,55 @@ def fit(train: list[tuple[dict, pd.DataFrame]]) -> Fitted:
         frames.append(x)
         labels.append(day_labels(r["scenario"], len(x), r["inputs"].temperature))
     gbm = GBMClassifier().fit(frames, labels)
-    return Fitted(charts, pca, gbm, float(plant_state()["x0"][1]))
+    gbm_nofeed = GBMClassifier(feed_log=False).fit(frames, labels)
+    return Fitted(charts, pca, gbm, gbm_nofeed, float(plant_state()["x0"][1]))
 
 
-def apply_methods(d: pd.DataFrame, f: Fitted) -> tuple[dict, pd.DataFrame]:
+def _detector(score: np.ndarray) -> tuple[np.ndarray, None, np.ndarray]:
+    s = np.asarray(score, dtype=float)
+    return s > 1.0, None, s
+
+
+def apply_methods(d: pd.DataFrame, f: Fitted, variants: bool = False) -> tuple[dict, pd.DataFrame]:
+    """Every method on one run: {method: (alarm, class or None, score)} and the filter's estimates."""
     x = prepare(d)
     out = {
-        "FOS/TAC > 0.3": (fostac_absolute(x, 0.3), None),
-        "FOS/TAC +30 %": (fostac_relative(x), None),
-        "EWMA yield": (f.charts.ewma(x), None),
-        "CUSUM yield": (f.charts.cusum(x), None),
-        "PCA T2/SPE": (f.pca.alarm(x), None),
+        "FOS/TAC > 0.3": _detector(fostac_absolute_score(x, 0.3)),
+        "FOS/TAC +30 %": _detector(fostac_relative_score(x)),
+        "EWMA yield": _detector(f.charts.ewma_score(x)),
+        "CUSUM yield": _detector(f.charts.cusum_score(x)),
+        "PCA T2/SPE": _detector(f.pca.score(x)),
     }
     out["Expert rules"] = rules(x, f.charts)
-    a, c, _ = f.gbm.predict(x)
-    out["Gradient boosting"] = (a, c)
+    out["Gradient boosting"] = f.gbm.predict(x)
     st = plant_state()
     est = EKF(st["rm"], st["x0"]).run(d)
     out["EKF twin"] = ekf_alarm(est, x, f.s2_ref)
+    if variants:
+        out["Gradient boosting (no feed log)"] = f.gbm_nofeed.predict(x)
+        est_p = EKF(st["rm_pert"], st["x0_pert"]).run(d)
+        out["EKF twin (perturbed)"] = ekf_alarm(est_p, x, f.s2_ref, rebaseline=True)
     return out, est
 
 
 def evaluate_one(args: tuple) -> dict:
+    """Apply every method to one observed test run; keep the daily series for the scores."""
     kind, seed, missing, f = args
     res = load(kind, seed)
     d = observe(res, missing)
-    out, est = apply_methods(d, f)
+    out, est = apply_methods(d, f, variants=missing == MISSING[0])
     sc = res["scenario"]
-    det, fa = [], []
-    stop = sc.t0 if kind != "normal" else len(d)
-    for m, (alarm, cls) in out.items():
-        e, n = ev.false_alarms(alarm, stop)
-        fa.append({"method": m, "kind": kind, "seed": seed, "missing": missing, "episodes": e, "days": n})
-        if kind != "normal":
-            row = ev.detection(alarm, cls, sc, res["yield_loss_day"])
-            row.update(method=m, missing=missing)
-            det.append(row)
+    lost = methane_lost(res)
+    rec = {"kind": kind, "seed": seed, "missing": missing, "n": len(d),
+           "t0": int(sc.t0) if kind != "normal" else None, "loss_day": res["yield_loss_day"],
+           "material": bool(lost >= ev.MATERIAL),
+           "alarm": {m: np.asarray(a, dtype=bool) for m, (a, c, s) in out.items()},
+           "cls": {m: np.asarray(c, dtype=object) for m, (a, c, s) in out.items() if c is not None},
+           "score": {m: np.asarray(s, dtype=np.float32) for m, (a, c, s) in out.items()}}
     replay = None
-    if missing == 0.1 and seed in (TEST_SEEDS[0], TEST_NORMAL[0]):
+    if missing == MISSING[0] and seed in (TEST_SEEDS[0], TEST_NORMAL[0]):
         replay = replay_record(res, d, out, est)
-    return {"det": det, "fa": fa, "replay": replay}
+    return {"run": rec, "replay": replay}
 
 
 def replay_record(res: dict, d: pd.DataFrame, out: dict, est: pd.DataFrame) -> dict:
@@ -175,8 +191,8 @@ def replay_record(res: dict, d: pd.DataFrame, out: dict, est: pd.DataFrame) -> d
         "true_pH": r(true_pH, 3),
         "ekf_vfa": r(est["S2"] / 70.0 * 60.05e3, 0),
         "ekf_m": r(est["m"], 3), "ekf_s": r(est["s"], 3), "ekf_b": r(est["b"], 2),
-        "alarms": {m: [int(i) for i in np.where(np.asarray(a)[:n])[0]] for m, (a, c) in out.items()},
-        "classes": {m: [str(v) for v in np.asarray(c)[:n]] for m, (a, c) in out.items() if c is not None},
+        "alarms": {m: [int(i) for i in np.where(np.asarray(out[m][0])[:n])[0]] for m in METHODS},
+        "classes": {m: [str(v) for v in np.asarray(out[m][1])[:n]] for m in CLASSIFIERS},
     }
 
 
@@ -187,34 +203,45 @@ def run_study(workers: int = 6) -> dict:
     log.info("simulating %d runs (cached in %s)", len(all_specs), DATA / "sim")
     with ProcessPoolExecutor(workers) as ex:
         list(ex.map(simulate_one, all_specs))
+    train, f = train_and_fit()
+    jobs = evaluation_jobs(f)
+    results = []
+    with ProcessPoolExecutor(workers) as ex:
+        for i, r in enumerate(ex.map(evaluate_one, jobs, chunksize=2)):
+            results.append(r)
+            if i % 50 == 0:
+                log.info("evaluated %d/%d", i + 1, len(jobs))
+    return finish(train, f, results)
+
+
+def train_and_fit() -> tuple[list[tuple[dict, pd.DataFrame]], Fitted]:
     train = []
     for kind, seed in specs("train"):
         res = load(kind, seed)
         train.append((res, observe(res)))
     f = fit(train)
     log.info("fitted: SMY %.3f +- %.3f Nm3/kg oDM; PCA %d components", f.charts.mu, f.charts.sd, f.pca.k)
-    jobs = [(k, s, m, f) for m in MISSING for k, s in specs("test")]
-    det, fa, replays = [], [], []
-    with ProcessPoolExecutor(workers) as ex:
-        for i, r in enumerate(ex.map(evaluate_one, jobs, chunksize=2)):
-            det += r["det"]
-            fa += r["fa"]
-            if r["replay"]:
-                replays.append(r["replay"])
-            if i % 50 == 0:
-                log.info("evaluated %d/%d", i + 1, len(jobs))
-    det = pd.DataFrame(det)
-    fa = pd.DataFrame(fa)
+    return train, f
+
+
+def evaluation_jobs(f: Fitted) -> list[tuple]:
+    """Every test run at every lab-missing level, in a fixed order."""
+    return [(k, s, m, f) for m in MISSING for k, s in specs("test")]
+
+
+def finish(train: list[tuple[dict, pd.DataFrame]], f: Fitted, results: list[dict]) -> dict:
+    """Collect the evaluated runs (in job order), add the unseen-type experiment and the ground-truth
+    table, write them."""
+    runs = [r["run"] for r in results]
+    replays = [r["replay"] for r in results if r["replay"]]
     unseen = unseen_classes(train, f)
     truth = scenario_table()
     RESULTS.mkdir(exist_ok=True)
-    det.to_csv(RESULTS / "detections.csv", index=False)
-    fa.to_csv(RESULTS / "false_alarms.csv", index=False)
     truth.to_csv(RESULTS / "scenarios.csv", index=False)
     unseen.to_csv(RESULTS / "gbm_unseen_class.csv", index=False)
-    tables = {"det": det, "fa": fa, "truth": truth, "unseen": unseen, "replays": replays, "fitted": f}
+    tables = {"runs": runs, "truth": truth, "unseen": unseen, "replays": replays}
     with open(DATA / "study.pkl", "wb") as fh:
-        pickle.dump({k: v for k, v in tables.items() if k != "fitted"}, fh)
+        pickle.dump(tables, fh)
     return tables
 
 
@@ -236,14 +263,15 @@ def unseen_classes(train: list[tuple[dict, pd.DataFrame]], f: Fitted) -> pd.Data
         for (k, s), x in obs.items():
             if k != held:
                 continue
-            res = load(k, s)
-            a, c, _ = gbm.predict(x)
-            row = ev.detection(a, c, res["scenario"], res["yield_loss_day"])
-            seen = f.gbm.predict(x)
-            row_seen = ev.detection(seen[0], seen[1], res["scenario"], res["yield_loss_day"])
-            rows.append({"kind": k, "seed": s, "detected_unseen": row["detected"],
-                         "delay_unseen": row["delay"], "class_unseen": row["class"],
-                         "detected_seen": row_seen["detected"], "delay_seen": row_seen["delay"]})
+            t0 = load(k, s)["scenario"].t0
+            row = {"kind": k, "seed": s}
+            for tag, model in (("unseen", gbm), ("seen", f.gbm)):
+                a, c, _ = model.predict(x)
+                d = ev.first_onset(a, t0, t0 + ev.WINDOW)
+                row[f"detected_{tag}"] = d is not None
+                row[f"delay_{tag}"] = np.nan if d is None else d - t0
+                row[f"class_{tag}"] = None if d is None else ev.named_class(c, d)
+            rows.append(row)
     return pd.DataFrame(rows)
 
 
@@ -258,9 +286,11 @@ def scenario_table() -> pd.DataFrame:
         vfa = np.array([vfa_mg_hac(st.iloc[i]) for i in range(len(st))])
         ratio = res["ch4_day"] / np.maximum(res["ch4_healthy"], 1e-9)
         ratio = ratio / ratio[sc.t0 - 14:sc.t0].mean()
+        r7 = pd.Series(ratio).rolling(7, min_periods=1).mean().to_numpy()
+        lost = methane_lost(res)
         rows.append({"kind": kind, "seed": seed, "t0": sc.t0, "t_end": sc.t_end,
                      "severity": sc.severity, "yield_loss_day": res["yield_loss_day"],
                      "loss_after_d": (res["yield_loss_day"] - sc.t0) if res["yield_loss_day"] else np.nan,
-                     "max_vfa_mg_l": vfa.max(), "min_yield_ratio": ratio[sc.t0:].min(),
-                     "lost_ch4_share": 1 - res["ch4_day"][sc.t0:].sum() / res["ch4_healthy"][sc.t0:].sum()})
+                     "max_vfa_mg_l": vfa.max(), "min_yield_ratio_7d": r7[sc.t0:].min(),
+                     "lost_ch4_share": lost, "material_loss": bool(lost >= ev.MATERIAL)})
     return pd.DataFrame(rows)

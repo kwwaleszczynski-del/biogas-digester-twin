@@ -112,7 +112,7 @@ def start_day(d: pd.DataFrame) -> int:
 
 def monitor(d: pd.DataFrame, lam: float = 0.2, L: float = 3.0, k: float = 0.5, h: float = 5.0) -> dict:
     """The twin study's gas-based detectors, calibrated on the digester's own first 8 weeks after
-    start-up."""
+    start-up (the CUSUM, as in the study, is not restarted after a signal)."""
     feed7 = d["feed_kg"].rolling(7, min_periods=1).mean()
     sy = d["gas"].rolling(7, min_periods=4).mean() / feed7.where(feed7 > 0)  # gas per kg manure
     s0 = start_day(d)
@@ -128,8 +128,6 @@ def monitor(d: pd.DataFrame, lam: float = 0.2, L: float = 3.0, k: float = 0.5, h
         ewma[i] = abs(e) > lim
         hi, lo = max(0.0, hi + v - k), max(0.0, lo - v - k)
         cusum[i] = hi > h or lo > h
-        if cusum[i]:
-            hi = lo = 0.0
     out = {"EWMA yield": ewma, "CUSUM yield": cusum}
     # flat or backwards meter: the data-quality rule of the expert system
     flat = (d["gas"].fillna(-1) == 0) & (d["feed_kg"].rolling(3, min_periods=1).sum() > 0)
@@ -157,15 +155,9 @@ def temperature_sensitivity(d: pd.DataFrame, events: pd.Series) -> dict | None:
             "weeks": len(w), "temp_range": [float(w["temp"].min()), float(w["temp"].max())]}
 
 
-def episode_starts(alarm: np.ndarray, start: int) -> list[int]:
-    """First day of each alarm episode (no alarm in the week before) from `start` on."""
-    days = np.where(np.asarray(alarm, dtype=bool))[0]
-    out, last = [], -10 ** 9
-    for d in days:
-        if d - last > ev.EPISODE_GAP and d >= start:
-            out.append(int(d))
-        last = d
-    return out
+def alarm_starts(alarm: np.ndarray, start: int) -> list[int]:
+    """Alarm onsets (a day in alarm after a day without) from `start` on, the study's event rule."""
+    return [int(d) for d in ev.onsets(alarm) if d >= start]
 
 
 def check(root: Path) -> dict:
@@ -182,9 +174,9 @@ def check(root: Path) -> dict:
         ev_days = np.where(events.to_numpy())[0]
         n_days = len(d) - first
         for m, a in alarms.items():
-            starts = episode_starts(a, first)
+            starts = alarm_starts(a, first)
             near = sum(1 for o in starts if len(ev_days) and np.min(np.abs(ev_days - o)) <= 3)
-            rows.append({"digester": name, "method": m, "days": n_days, "episodes": len(starts),
+            rows.append({"digester": name, "method": m, "days": n_days, "onsets": len(starts),
                          "per_year": 365.0 * len(starts) / n_days,
                          "share_of_days_in_alarm": float(np.mean(a[first:])), "near_logged_event": near})
         sens[name] = temperature_sensitivity(d, events)
